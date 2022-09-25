@@ -9,19 +9,10 @@
 
     tools:context=".auth.HomeActivity">
 
-    <Button
-        android:id="@+id/btnJaTenhoConta"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Ja tenho conta"
-        >
-
-    </Button>
-
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Home"
+        android:text="@string/in_development"
         android:gravity="center"
         android:textColor="@color/white" />
 

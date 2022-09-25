@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Balancefy</string>
+    <string name="ou">OU</string>
+    <string name="entrar_com_email">Entrar com Email</string>
+    <string name="google">Google</string>
+    <string name="facebook">Facebook</string>
+    <string name="in_development">In development...</string>
 </resources>

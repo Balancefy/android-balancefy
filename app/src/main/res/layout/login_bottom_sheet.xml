@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_custom_dialog"
+    android:orientation="vertical"
+    android:padding="33dp">
+
+    <Button
+        android:layout_width="345dp"
+        android:layout_height="50dp"
+        android:fontFamily="@font/poppins_bold"
+        android:text="@string/entrar_com_email"
+        android:textAllCaps="false"
+        android:layout_gravity="center"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="30dp">
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="2dp"
+            android:layout_weight="1"
+            android:background="@color/white" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginRight="10dp"
+            android:gravity="center"
+            android:text="@string/ou"
+            android:textColor="@color/white"
+            android:textFontWeight="900"
+            android:textSize="16sp"
+            tools:targetApi="p" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="2dp"
+            android:layout_weight="1"
+            android:background="@color/white" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        >
+
+        <Button
+            style="@style/BottomSheetStyle"
+            android:backgroundTint="@null"
+            android:id="@+id/bt_facebook"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:fontFamily="@font/poppins_bold"
+            android:drawableLeft="@drawable/ic_facebook"
+            android:background="@drawable/bt_black_white"
+            android:text="@string/facebook"
+            android:layout_marginEnd="45dp"
+            android:textAllCaps="false" />
+
+        <Button
+            style="@style/BottomSheetStyle"
+            android:id="@+id/bt_google"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:fontFamily="@font/poppins_bold"
+            android:drawableLeft="@drawable/ic_google"
+            android:background="@drawable/bt_black_white"
+            android:text="@string/google"
+            android:textAllCaps="false" />
+
+    </LinearLayout>
+
+
+</LinearLayout>
