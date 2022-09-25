@@ -5,18 +5,39 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import com.balancefy.balancefyapp.R
+import com.balancefy.balancefyapp.databinding.ActivityIntroBinding
+import com.balancefy.balancefyapp.databinding.LoginBottomSheetBinding
+import com.google.android.material.bottomsheet.BottomSheetDialog
 
 class IntroActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityIntroBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_intro)
+        binding = ActivityIntroBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        binding.btnHasAcc.setOnClickListener{
+            showBottomSheetDialog()
+        }
     }
 
-    fun entrar(view: View) {
-        startActivity(Intent(this, LoginActivity::class.java))
+    private fun showBottomSheetDialog() {
+        val dialog = BottomSheetDialog(this, R.style.BottomSheetDialog)
+
+        val sheetBinding: LoginBottomSheetBinding =
+            LoginBottomSheetBinding.inflate(layoutInflater, null, false)
+
+        dialog.setContentView(sheetBinding.root)
+        dialog.show()
     }
 
     fun cadastrar(view: View) {
         startActivity(Intent(this, LoginActivity::class.java))
+    }
+
+    fun entrar(view: View) {
+        startActivity(Intent(this, HomeActivity::class.java))
     }
 }
