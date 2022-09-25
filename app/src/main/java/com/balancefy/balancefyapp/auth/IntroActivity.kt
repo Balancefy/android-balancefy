@@ -7,6 +7,7 @@ import android.view.View
 import com.balancefy.balancefyapp.R
 import com.balancefy.balancefyapp.databinding.ActivityIntroBinding
 import com.balancefy.balancefyapp.databinding.LoginBottomSheetBinding
+import com.balancefy.balancefyapp.frames.MainActivity
 import com.google.android.material.bottomsheet.BottomSheetDialog
 
 class IntroActivity : AppCompatActivity() {
@@ -38,6 +39,6 @@ class IntroActivity : AppCompatActivity() {
     }
 
     fun entrar(view: View) {
-        startActivity(Intent(this, HomeActivity::class.java))
+        startActivity(Intent(this, MainActivity::class.java))
     }
 }

@@ -5,4 +5,6 @@
     <string name="google">Google</string>
     <string name="facebook">Facebook</string>
     <string name="in_development">In development...</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

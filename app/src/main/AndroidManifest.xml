@@ -30,7 +30,7 @@
         </activity>
 
         <activity
-            android:name=".auth.HomeActivity"
+            android:name=".frames.MainActivity"
             android:exported="true">
         </activity>
     </application>
