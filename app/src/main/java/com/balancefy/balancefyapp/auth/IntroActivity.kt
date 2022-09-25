@@ -12,11 +12,11 @@ class IntroActivity : AppCompatActivity() {
         setContentView(R.layout.activity_intro)
     }
 
-    fun entrar(view: View) {
+    fun cadastrar(view: View) {
         startActivity(Intent(this, LoginActivity::class.java))
     }
 
-    fun cadastrar(view: View) {
-        startActivity(Intent(this, LoginActivity::class.java))
+    fun entrar(view: View) {
+        startActivity(Intent(this, HomeActivity::class.java))
     }
 }
