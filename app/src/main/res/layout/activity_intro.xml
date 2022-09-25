@@ -24,6 +24,7 @@
             >
 
             <Button
+                android:id="@+id/btnHasAcc"
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
                 android:layout_weight="1"

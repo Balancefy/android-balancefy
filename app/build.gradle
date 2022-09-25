@@ -6,6 +6,15 @@ plugins {
 android {
     compileSdk 32
 
+    viewBinding {
+        enabled = true
+    }
+
+    buildFeatures{
+        dataBinding = true
+        viewBinding = true
+    }
+
     defaultConfig {
         applicationId "com.balancefy.balancefyapp"
         minSdk 23
@@ -33,6 +42,7 @@ android {
 
 dependencies {
 
+    //nao atualize esse cara para 1.9.0 se n quiser tomar um errao :) #paz #xes
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.5.1'
     implementation 'com.google.android.material:material:1.6.1'
