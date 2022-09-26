@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="horizontal"
     android:background="@color/black_balancefy"
-    tools:context=".frames.MainActivity">
+    tools:context=".auth.MainActivity">
 
     <FrameLayout
         android:id="@+id/frame_layout"

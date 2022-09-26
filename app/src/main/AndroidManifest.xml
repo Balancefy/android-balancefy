@@ -22,16 +22,19 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
 
         <activity
             android:name=".auth.LoginActivity"
             android:exported="true">
+
         </activity>
 
         <activity
-            android:name=".frames.MainActivity"
+            android:name=".auth.MainActivity"
             android:exported="true">
+
         </activity>
     </application>
 

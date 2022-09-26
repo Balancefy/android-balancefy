@@ -1,10 +1,14 @@
-package com.balancefy.balancefyapp.frames
+package com.balancefy.balancefyapp.auth
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.balancefy.balancefyapp.R
 import com.balancefy.balancefyapp.databinding.ActivityMainBinding
+import com.balancefy.balancefyapp.frames.Forum
+import com.balancefy.balancefyapp.frames.Goal
+import com.balancefy.balancefyapp.frames.Home
+import com.balancefy.balancefyapp.frames.Rank
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
