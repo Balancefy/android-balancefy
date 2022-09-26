@@ -10,18 +10,16 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/background"
-        >
+        android:background="@drawable/background">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginBottom="50dp"
             android:gravity="bottom"
-            >
+            android:orientation="horizontal">
 
             <Button
                 android:id="@+id/btnHasAcc"
@@ -31,28 +29,24 @@
                 android:alpha="0.9"
                 android:backgroundTint="@color/black_balancefy"
                 android:elevation="10dp"
-                android:translationZ="10dp"
                 android:text="Já tenho conta"
                 android:textSize="14sp"
                 android:textStyle="bold"
-                android:onClick="cadastrar"
-                />
+                android:translationZ="10dp" />
 
             <Button
+                android:id="@+id/btnCreateAcc"
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
                 android:layout_marginLeft="20dp"
                 android:layout_weight="1"
                 android:elevation="10dp"
-                android:translationZ="10dp"
+                android:onClick="cadastrar"
                 android:text="Criar conta"
                 android:textSize="14sp"
                 android:textStyle="bold"
-                android:onClick="entrar"
-                />
+                android:translationZ="10dp" />
 
         </LinearLayout>
-
     </LinearLayout>
-
 </LinearLayout>

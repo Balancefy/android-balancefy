@@ -1,14 +1,18 @@
 package com.balancefy.balancefyapp.auth
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.view.WindowManager
+import androidx.appcompat.app.AppCompatActivity
 import com.balancefy.balancefyapp.R
 import com.balancefy.balancefyapp.databinding.ActivityIntroBinding
+import com.balancefy.balancefyapp.databinding.EmailBottomSheetBinding
 import com.balancefy.balancefyapp.databinding.LoginBottomSheetBinding
-import com.balancefy.balancefyapp.frames.MainActivity
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_EXPANDED
 import com.google.android.material.bottomsheet.BottomSheetDialog
+
 
 class IntroActivity : AppCompatActivity() {
 
@@ -27,10 +31,30 @@ class IntroActivity : AppCompatActivity() {
     private fun showBottomSheetDialog() {
         val dialog = BottomSheetDialog(this, R.style.BottomSheetDialog)
 
-        val sheetBinding: LoginBottomSheetBinding =
+        val sheetLoginBinding: LoginBottomSheetBinding =
             LoginBottomSheetBinding.inflate(layoutInflater, null, false)
 
-        dialog.setContentView(sheetBinding.root)
+        dialog.setContentView(sheetLoginBinding.root)
+        dialog.show()
+
+        sheetLoginBinding.btnEntrarComEmail.setOnClickListener{
+            dialog.dismiss()
+            showEmailSheetDialog()
+        }
+    }
+
+    private fun showEmailSheetDialog() {
+        val dialog = BottomSheetDialog(this, R.style.BottomSheetDialog).apply {
+            window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
+        }
+
+        dialog.behavior.skipCollapsed = true
+        dialog.behavior.state = STATE_EXPANDED
+
+        val sheetEmailBinding: EmailBottomSheetBinding =
+            EmailBottomSheetBinding.inflate(layoutInflater, null, false)
+
+        dialog.setContentView(sheetEmailBinding.root)
         dialog.show()
     }
 
