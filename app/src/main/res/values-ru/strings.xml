@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="ou">или</string>
+    <string name="entrar_com_email">Вход с помощью электронной почты</string>
+    <string name="google">Гугл</string>
+    <string name="facebook">Фейсбук</string>
+    <string name="in_development">В разработке...</string>
+    <string name="hello_blank_fragment">Привет</string>
+    <string name="email">Эл. адрес</string>
+    <string name="senha">пароль</string>
+    <string name="lembre_me">запомнить логин</string>
+    <string name="continuar">Продолжать</string>
+    <string name="app_name">Balancefy</string>
+    <string name="criar_conta">Завести аккаунт</string>
+    <string name="ja_tenho_conta">у меня уже есть аккаунт</string>
+    <string name="bem_vindo">Добро пожаловать</string>
+</resources>

@@ -88,7 +88,7 @@ class IntroActivity : AppCompatActivity() {
         val body = LoginRequestDto(email, password)
         println(body)
 
-        val requestAuth = Rest.getInstance().create(Auth::class.java)
+        val requestAuth = auth()
 
         requestAuth.login(body).enqueue(object : Callback<LoginResponseDto> {
             override fun onResponse(
@@ -102,8 +102,8 @@ class IntroActivity : AppCompatActivity() {
                         val editor = preferences.edit()
                         editor.putString("nameUser", data?.conta?.usuario?.nome)
                         editor.apply()
-
                         startActivity(Intent(baseContext, MainActivity::class.java))
+
                     }
                 }
             }
@@ -112,6 +112,12 @@ class IntroActivity : AppCompatActivity() {
                 Toast.makeText(baseContext, t.message, Toast.LENGTH_SHORT).show()
             }
         })
+
+    }
+
+    private fun auth(): Auth? {
+        val requestAuth = Rest.getInstance().create(Auth::class.java)
+        return requestAuth
     }
 
     fun cadastrar(view: View) {

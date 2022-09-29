@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="ou">O</string>
+    <string name="entrar_com_email">Entrar con email</string>
+    <string name="google">Lacuca</string>
+    <string name="facebook">racha</string>
+    <string name="in_development">En desarrollo...</string>
+    <string name="hello_blank_fragment">Hola</string>
+    <string name="email">Email</string>
+    <string name="senha">Clave</string>
+    <string name="lembre_me">Recuerda login</string>
+    <string name="continuar">Seguir</string>
+    <string name="app_name">Balancefy</string>
+    <string name="criar_conta">Crea cuenta</string>
+    <string name="ja_tenho_conta">ya tengo cuenta</string>
+    <string name="bem_vindo">Bienvenido</string>
+</resources>

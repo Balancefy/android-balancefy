@@ -29,7 +29,7 @@
                 android:alpha="0.9"
                 android:backgroundTint="@color/black_balancefy"
                 android:elevation="10dp"
-                android:text="Já tenho conta"
+                android:text="@string/ja_tenho_conta"
                 android:textSize="14sp"
                 android:textStyle="bold"
                 android:translationZ="10dp" />
@@ -42,7 +42,7 @@
                 android:layout_weight="1"
                 android:elevation="10dp"
                 android:onClick="cadastrar"
-                android:text="Criar conta"
+                android:text="@string/criar_conta"
                 android:textSize="14sp"
                 android:textStyle="bold"
                 android:translationZ="10dp" />
