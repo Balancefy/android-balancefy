@@ -115,7 +115,7 @@ class IntroActivity : AppCompatActivity() {
 
     }
 
-    private fun auth(): Auth? {
+    fun auth(): Auth? {
         val requestAuth = Rest.getInstance().create(Auth::class.java)
         return requestAuth
     }
