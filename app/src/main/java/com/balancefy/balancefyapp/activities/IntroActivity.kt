@@ -1,4 +1,4 @@
-package com.balancefy.balancefyapp.auth
+package com.balancefy.balancefyapp.activities
 
 import android.content.Intent
 import android.content.SharedPreferences
@@ -46,6 +46,10 @@ class IntroActivity : AppCompatActivity() {
         binding.btnHasAcc.setOnClickListener {
             showBottomSheetDialog()
         }
+
+        binding.btnCreateAcc.setOnClickListener {
+            changeScreen()
+        }
     }
 
     private fun showBottomSheetDialog() {
@@ -57,7 +61,7 @@ class IntroActivity : AppCompatActivity() {
         dialog.setContentView(sheetLoginBinding.root)
         dialog.show()
 
-        sheetLoginBinding.btnEntrarComEmail.setOnClickListener {
+        sheetLoginBinding.btnLoginWithEmail.setOnClickListener {
             showEmailSheetDialog()
         }
     }
@@ -76,21 +80,18 @@ class IntroActivity : AppCompatActivity() {
         dialog.setContentView(sheetEmailBinding.root)
         dialog.show()
 
-        sheetEmailBinding.btnLoginContinuar.setOnClickListener {
+        sheetEmailBinding.btnLogIn.setOnClickListener {
             authentication()
         }
     }
 
     private fun authentication() {
         val email = sheetEmailBinding.etLoginEmail.text.toString()
-        val password = sheetEmailBinding.etLoginSenha.text.toString()
+        val password = sheetEmailBinding.etLoginPassword.text.toString()
 
         val body = LoginRequestDto(email, password)
-        println(body)
 
-        val requestAuth = auth()
-
-        requestAuth.login(body).enqueue(object : Callback<LoginResponseDto> {
+        Rest.getAuthInstance().login(body).enqueue(object : Callback<LoginResponseDto> {
             override fun onResponse(
                 call: Call<LoginResponseDto>,
                 response: Response<LoginResponseDto>
@@ -100,7 +101,7 @@ class IntroActivity : AppCompatActivity() {
                     400 -> Toast.makeText(baseContext, "Senha ou Email Inválido", Toast.LENGTH_SHORT).show()
                     200 -> {
                         val editor = preferences.edit()
-                        editor.putString("nameUser", data?.conta?.usuario?.nome)
+                        editor.putString("nameUser", data?.account?.user?.name)
                         editor.apply()
                         startActivity(Intent(baseContext, MainActivity::class.java))
 
@@ -114,13 +115,7 @@ class IntroActivity : AppCompatActivity() {
         })
 
     }
-
-    fun auth(): Auth? {
-        val requestAuth = Rest.getInstance().create(Auth::class.java)
-        return requestAuth
-    }
-
-    fun cadastrar(view: View) {
-        startActivity(Intent(this, LoginActivity::class.java))
+    fun changeScreen() {
+        startActivity(Intent(this, RegisterActivity::class.java))
     }
 }

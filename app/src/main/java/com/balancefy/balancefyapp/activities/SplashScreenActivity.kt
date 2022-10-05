@@ -1,4 +1,4 @@
-package com.balancefy.balancefyapp.auth
+package com.balancefy.balancefyapp.activities
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity

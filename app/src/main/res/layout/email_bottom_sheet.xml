@@ -32,11 +32,11 @@
             android:layout_width="345dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
-            android:hint="@string/senha"
+            android:hint="@string/password"
             android:textColorHint="@color/white">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/et_login_senha"
+                android:id="@+id/et_login_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
@@ -62,7 +62,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="@string/lembre_me"
+                android:text="@string/reminde_me"
                 android:textColor="@color/white"
                 android:textSize="18sp">
 
@@ -72,12 +72,12 @@
         </LinearLayout>
 
         <Button
-            android:id="@+id/btnLoginContinuar"
+            android:id="@+id/btn_log_in"
             android:layout_width="345dp"
             android:layout_height="50dp"
             android:layout_gravity="center"
             android:layout_marginTop="40dp"
-            android:text="@string/continuar"
+            android:text="@string/next"
             android:textAllCaps="false"
             android:onClick="entrar"/>
 
