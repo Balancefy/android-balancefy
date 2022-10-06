@@ -24,12 +24,11 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun changeScreen() {
-        startActivity(Intent(this, RegisterStep2Activity::class.java))
         if(validateFields()) {
             val editor = preferences.edit()
-            editor.putString("name", "${binding.etName.text.toString()} ${binding.etLastName.text.toString()}")
-            editor.putString("email", binding.etEmail.text.toString())
-            editor.putString("pass", binding.etPassword.text.toString())
+            editor.putString("name", "${binding.etName.text.toString().trim()} ${binding.etLastName.text.toString().trim()}")
+            editor.putString("email", binding.etEmail.text.toString().trim())
+            editor.putString("pass", binding.etPassword.text.toString().trim())
             editor.apply()
             startActivity(Intent(this, RegisterStep2Activity::class.java))
         }

@@ -38,4 +38,6 @@
     <string name="error_terms">Aceite os termos e condições para continuar</string>
     <string name="error_empty_field">Campo não pode ser vazio</string>
     <string name="error_different_pass">Senhas devem ser iguais</string>
+    <string name="select_date">Selecione data</string>
+    <string name="register_error">Falha ao cadastrar. Tente novamente mais tarde!</string>
 </resources>

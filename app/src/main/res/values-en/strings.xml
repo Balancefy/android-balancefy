@@ -39,4 +39,6 @@
     <string name="error_terms">Accept the terms and conditions to continue</string>
     <string name="error_empty_field">Field cannot be empty</string>
     <string name="error_different_pass">Passwords must be the same</string>
+    <string name="select_date">Select date</string>
+    <string name="register_error">Failed to register. Try again later!</string>
 </resources>

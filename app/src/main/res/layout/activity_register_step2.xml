@@ -43,24 +43,24 @@
         android:textStyle="bold"
         />
 
-    <com.google.android.material.textfield.TextInputLayout
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+    <TextView
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/birth_date"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_birth_date"
+        style="?attr/materialButtonOutlinedStyle"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:hint="@string/birth_date"
-        android:layout_marginTop="20dp"
-        android:textColorHint="@color/white">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/et_birth_date"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="date"
-            android:textColor="@color/white">
-
-        </com.google.android.material.textfield.TextInputEditText>
-
-    </com.google.android.material.textfield.TextInputLayout>
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        app:strokeColor="@color/grey"
+        android:text="@string/select_date"/>
 
     <com.google.android.material.textfield.TextInputLayout
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
