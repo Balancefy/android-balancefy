@@ -18,17 +18,10 @@
         tools:targetApi="31">
         <activity
             android:name=".activities.SplashScreenActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:exported="true"></activity>
         <activity
             android:name=".activities.IntroActivity"
-            android:exported="true">
-        </activity>
+            android:exported="true"></activity>
         <activity
             android:name=".activities.MainActivity"
             android:exported="true"></activity>
@@ -38,6 +31,17 @@
         <activity
             android:name=".activities.RegisterStep2Activity"
             android:exported="true"></activity>
+        <activity
+            android:name=".activities.HomeTestActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+
     </application>
 
 </manifest>
