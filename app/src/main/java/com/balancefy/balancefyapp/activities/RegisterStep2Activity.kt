@@ -32,6 +32,7 @@ class RegisterStep2Activity : AppCompatActivity() {
     private lateinit var binding: ActivityRegisterStep2Binding
     lateinit var preferences : SharedPreferences
     private var date: Long? = null
+    private var interestsSelected: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -85,6 +86,7 @@ class RegisterStep2Activity : AppCompatActivity() {
 
         val datePicker = MaterialDatePicker.Builder.datePicker()
             .setTitleText(getString(R.string.birth_date))
+            .setTheme(R.style.ThemeOverlay_App_MaterialCalendar)
             .setCalendarConstraints(constrains)
             .build()
 
@@ -101,9 +103,11 @@ class RegisterStep2Activity : AppCompatActivity() {
         if(btn.strokeColor.equals(getColorStateList(R.color.green_balancefy))) {
             btn.strokeColor = getColorStateList(R.color.white).withAlpha(24)
             btn.setTextColor(getColor(R.color.white))
+            interestsSelected--
         } else {
             btn.strokeColor = getColorStateList(R.color.green_balancefy)
             btn.setTextColor(getColor(R.color.green_balancefy))
+            interestsSelected++
         }
     }
 
@@ -169,6 +173,10 @@ class RegisterStep2Activity : AppCompatActivity() {
             }
             !binding.cbAgreement.isChecked -> {
                 Toast.makeText(baseContext, getString(R.string.error_terms), Toast.LENGTH_SHORT).show()
+                false
+            }
+            interestsSelected < 3 -> {
+                Toast.makeText(baseContext, getString(R.string.error_less_interests), Toast.LENGTH_SHORT).show()
                 false
             }
             else -> true

@@ -40,4 +40,9 @@
     <string name="error_different_pass">Senhas devem ser iguais</string>
     <string name="select_date">Selecione data</string>
     <string name="register_error">Falha ao cadastrar. Tente novamente mais tarde!</string>
+    <string name="password_requirments">- Mínimo de 6 caracteres\n- Mínimo de um caractere especial\n- Mínimo de uma letra maiúscula\n- Mínimo de uma letra minúscula</string>
+    <string name="password_requirments_title">Restrições de Senha</string>
+    <string name="error_invalid_pass">Senha não atende os requisitos</string>
+    <string name="error_invalid_field">Campo inválido</string>
+    <string name="error_less_interests">Selecione ao menos 3 interesses</string>
 </resources>

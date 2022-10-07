@@ -1,31 +1,41 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-<!-- Base application theme. -->
-<style name="Theme.Balancefy" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-    <!-- Primary brand color. -->
-    <item name="colorPrimary">@color/green_balancefy</item>
-    <item name="colorPrimaryVariant">@color/black_balancefy</item>
-    <item name="colorOnPrimary">@color/white</item>
-    <!-- Secondary brand color. -->
-    <item name="colorSecondary">@color/teal_200</item>
-    <item name="colorSecondaryVariant">@color/teal_700</item>
-    <item name="colorOnSecondary">@color/white</item>
-    <item name="colorOnSurface">@color/white</item>
-    <!-- Status bar color. -->
-    <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
-    <item name="android:icon" tools:targetApi="l">@color/white</item>
-    <!-- Customize your theme here. -->
-    <item name="fontFamily">@font/font</item>
-</style>
+    <style name="Theme.Balancefy" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/green_balancefy</item>
+        <item name="colorPrimaryVariant">@color/black_balancefy</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/teal_200</item>
+        <item name="colorSecondaryVariant">@color/teal_700</item>
+        <item name="colorOnSecondary">@color/white</item>
+        <item name="colorOnSurface">@color/white</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <item name="android:icon" tools:targetApi="l">@color/white</item>
+        <!-- Customize your theme here. -->
+        <item name="fontFamily">@font/font</item>
+    </style>
 
-<style name="BottomSheetDialog" parent="Theme.Design.BottomSheetDialog">
-    <item name="bottomSheetStyle">@style/BottomSheetStyle</item>
-</style>
+    <style name="BottomSheetDialog" parent="Theme.Design.BottomSheetDialog">
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:windowSoftInputMode">adjustResize</item>
+        <item name="bottomSheetStyle">@style/BottomSheetStyle</item>
+    </style>
 
-<style name="BottomSheetStyle" parent="Widget.Design.BottomSheet.Modal">
-    <item name="android:background">@android:color/transparent</item>
-</style>
+    <style name="BottomSheetStyle" parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@android:color/transparent</item>
+    </style>
 
-<style name="BtnBlackWhiteStyle" parent="Theme.Balancefy">
-    <item name="backgroundTint">@null</item>
-</style>
+    <style name="BtnBlackWhiteStyle" parent="Theme.Balancefy">
+        <item name="backgroundTint">@null</item>
+    </style>
+
+    <!--    Style for DatePicker   -->
+
+    <style name="ThemeOverlay.App.MaterialCalendar" parent="ThemeOverlay.MaterialComponents.MaterialCalendar">
+        <item name="colorPrimary">@color/green_balancefy</item>
+        <item name="colorOnSurface">@color/green_balancefy</item>
+        <item name="android:backgroundTint">@color/black_balancefy</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
 </resources>
