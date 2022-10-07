@@ -41,7 +41,7 @@
                 android:layout_marginLeft="20dp"
                 android:layout_weight="1"
                 android:elevation="10dp"
-                android:text="@string/create_account_button"
+                android:text="@string/bu"
                 android:textSize="14sp"
                 android:textStyle="bold"
                 android:translationZ="10dp" />

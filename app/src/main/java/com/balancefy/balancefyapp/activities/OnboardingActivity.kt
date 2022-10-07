@@ -16,9 +16,9 @@ class OnboardingActivity : AppCompatActivity() {
 
         setContentView(binding.root)
 
-        binding.btn.setOnClickListener {
-            startActivity(Intent(baseContext, RegisterActivity::class.java))
-        }
+//        binding.btn.setOnClickListener {
+//            startActivity(Intent(baseContext, RegisterActivity::class.java))
+//        }
     }
 
 

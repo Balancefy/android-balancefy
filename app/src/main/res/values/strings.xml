@@ -38,4 +38,14 @@
     <string name="error_terms">Aceite os termos e condições para continuar</string>
     <string name="error_empty_field">Campo não pode ser vazio</string>
     <string name="error_different_pass">Senhas devem ser iguais</string>
+    <string name="lug">Arraste para começar</string>
+    <string name="title">Controle suas despesas e receitas</string>
+    <string name="first_text">Acompanhe todos os seus gastos \n e seus ganhos no App</string>
+    <string name="second_text">Todos os seus gastos com descrição e \n informações detalhadas de cada transação</string>
+    <string name="title_2">Planeje seus \n Objetivos e Metas</string>
+    <string name="subtitle_2">Gerencie suas metas e objetivos \n por etapas</string>
+    <string name="title_3">Compartilhe suas ideias \n com outros usuários</string>
+    <string name="subtitle_3">Adicione comentários e tópicos \n para compartilhar sua experiência \n com outros usuários</string>
+    <string name="start_button">Começar</string>
+
 </resources>
