@@ -12,8 +12,8 @@
 
         <com.google.android.material.textfield.TextInputLayout
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="345dp"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
             android:hint="@string/email"
             android:textColorHint="@color/white">
 
@@ -29,54 +29,38 @@
 
         <com.google.android.material.textfield.TextInputLayout
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="345dp"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
             android:layout_marginTop="30dp"
-            android:hint="@string/senha"
+            android:hint="@string/password"
             android:textColorHint="@color/white">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/et_login_senha"
+                android:id="@+id/et_login_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/white">
+                android:textColor="@color/white"
+                android:inputType="textPassword">
 
             </com.google.android.material.textfield.TextInputEditText>
 
         </com.google.android.material.textfield.TextInputLayout>
 
-        <LinearLayout
+        <com.google.android.material.checkbox.MaterialCheckBox
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp">
-
-            <com.google.android.material.checkbox.MaterialCheckBox
-                android:layout_width="30dp"
-                android:layout_height="30dp">
-
-            </com.google.android.material.checkbox.MaterialCheckBox>
-
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="@string/lembre_me"
-                android:textColor="@color/white"
-                android:textSize="18sp">
-
-            </TextView>
-
-
-        </LinearLayout>
+            android:text="@string/reminde_me"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:layout_marginTop="24dp"/>
 
         <Button
-            android:id="@+id/btnLoginContinuar"
+            android:id="@+id/btn_log_in"
             android:layout_width="345dp"
             android:layout_height="50dp"
             android:layout_gravity="center"
-            android:layout_marginTop="40dp"
-            android:text="@string/continuar"
+            android:layout_marginTop="30dp"
+            android:text="@string/next"
             android:textAllCaps="false"
             android:onClick="entrar"/>
 

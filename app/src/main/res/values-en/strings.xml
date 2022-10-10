@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="ou">OR</string>
+    <string name="login_with_email">Sign in with email</string>
+    <string name="google">Google</string>
+    <string name="facebook">Facebook</string>
+    <string name="in_development">In development...</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="reminde_me">Remember login</string>
+    <string name="next">Next</string>
+    <string name="app_name">Balancefy</string>
+    <string name="create_account_button">Create Account</string>
+    <string name="already_has_account">Has account</string>
+    <string name="welcome">Welcome</string>
+    <string name="create_account_title">Create an Account</string>
+    <string name="create_account_sub_title">"Create your account, register your goals! "</string>
+    <string name="name">Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="birth_date">Birth Date</string>
+    <string name="incoming">Incoming</string>
+    <string name="end">Confirm</string>
+    <string name="agreement">" I agree with"</string>
+    <string name="interests_subtitle">" Select at least 3 topics of interest"</string>
+    <string name="interests">Interests</string>
+    <string name="interests_travel">Travel</string>
+    <string name="interests_retirement">Retirement</string>
+    <string name="interests_investments">Investments</string>
+    <string name="interests_properties">Properties</string>
+    <string name="interests_exchange">Exchange</string>
+    <string name="interests_vehicles">Vehicles</string>
+    <string name="personal_information">Personal Information</string>
+    <string name="terms_title">Terms and Conditions</string>
+    <string name="agree">I agree</string>
+    <string name="disagree">I disagreee</string>
+    <string name="terms_text">I agree to share my image, name and experience points in the community</string>
+    <string name="error_message_birth_date">Birth Date can not be empty</string>
+    <string name="error_terms">Accept the terms and conditions to continue</string>
+    <string name="error_empty_field">Field cannot be empty</string>
+    <string name="error_different_pass">Passwords must be the same</string>
+    <string name="select_date">Select date</string>
+    <string name="register_error">Failed to register. Try again later!</string>
+</resources>
