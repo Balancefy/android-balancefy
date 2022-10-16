@@ -10,5 +10,6 @@
     <color name="grey">#61FFFFFF</color>
     <color name="black_balancefy">#131515</color>
     <color name="green_balancefy">#7DE2D1</color>
+    <color name="gray_line">#757575</color>
 
 </resources>

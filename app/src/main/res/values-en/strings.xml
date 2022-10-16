@@ -41,4 +41,10 @@
     <string name="error_different_pass">Passwords must be the same</string>
     <string name="select_date">Select date</string>
     <string name="register_error">Failed to register. Try again later!</string>
+    <string name="password_requirments">x</string>
+    <string name="password_requirments_title">x</string>
+    <string name="error_invalid_pass">x</string>
+    <string name="error_invalid_field">x</string>
+    <string name="error_less_interests">x</string>
+    <string name="profile">Profile</string>
 </resources>
