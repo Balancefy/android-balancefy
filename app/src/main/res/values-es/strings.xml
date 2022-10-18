@@ -4,7 +4,7 @@
     <string name="login_with_email">Entrar con email</string>
     <string name="google">Google</string>
     <string name="facebook">Facebook</string>
-    <string name="in_development">En desarrollo...</string>
+    <string name="in_development">En desarrollo…</string>
     <string name="email">Email</string>
     <string name="password">Clave</string>
     <string name="reminde_me">Recuerda login</string>
@@ -47,4 +47,10 @@
     <string name="error_invalid_field">x</string>
     <string name="error_less_interests">x</string>
     <string name="profile">Perfil</string>
+    <string name="perfil_em_analise">Perfil: Bajo Análisis</string>
+    <string name="perfil">Perfil</string>
+    <string name="profile_setting">profile_setting</string>
+    <string name="nome_usuario">" Nombre de usuario"</string>
+    <string name="imagem_de_fundo_do_usuario">" imagen de fondo del usuario"</string>
+    <string name="imagem_de_perfil_do_usuario">" foto de perfil de usuario"</string>
 </resources>

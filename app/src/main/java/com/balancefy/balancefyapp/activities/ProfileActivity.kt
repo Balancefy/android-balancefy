@@ -18,5 +18,11 @@ class ProfileActivity : AppCompatActivity() {
 
         setContentView(R.layout.activity_profile)
 
+        preferences = getSharedPreferences("Auth", MODE_PRIVATE)
+
+        val lastUser = preferences.getString("nameUser", null)
+
+        binding.nameProfile.text = lastUser
+
     }
 }

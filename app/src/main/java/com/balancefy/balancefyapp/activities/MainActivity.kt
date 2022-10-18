@@ -23,6 +23,13 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         replaceFragment(Home())
 
+        binding.topAppBar.setOnMenuItemClickListener(){
+            when(it.itemId){
+                R.id.bt_profile_setting -> startActivity(Intent(this, ProfileActivity::class.java))
+            }
+            true
+        }
+
         binding.bottomNavigation.setOnItemSelectedListener {
             when (it.itemId) {
                 R.id.home -> replaceFragment(Home())
