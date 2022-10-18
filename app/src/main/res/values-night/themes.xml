@@ -1,5 +1,5 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <style name="Theme.Balancefy" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="Theme.Balancefy" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/green_balancefy</item>
         <item name="colorPrimaryVariant">@color/black_balancefy</item>

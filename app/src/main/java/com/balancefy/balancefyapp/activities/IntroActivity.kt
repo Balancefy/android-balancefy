@@ -35,19 +35,21 @@ class IntroActivity : AppCompatActivity() {
 
         setContentView(binding.root)
 
-        val lastUser = preferences.getString("nameUser", null)
+        startActivity(Intent(baseContext, MainActivity::class.java))
 
-        if (lastUser != null) {
-            startActivity(Intent(baseContext, MainActivity::class.java))
-        }
-
-        binding.btnHasAcc.setOnClickListener {
-            showBottomSheetDialog()
-        }
-
-        binding.btnCreateAcc.setOnClickListener {
-            changeScreen()
-        }
+//        val lastUser = preferences.getString("nameUser", null)
+//
+//        if (lastUser != null) {
+//            startActivity(Intent(baseContext, MainActivity::class.java))
+//        }
+//
+//        binding.btnHasAcc.setOnClickListener {
+//            showBottomSheetDialog()
+//        }
+//
+//        binding.btnCreateAcc.setOnClickListener {
+//            changeScreen()
+//        }
     }
 
     private fun showBottomSheetDialog() {
@@ -102,7 +104,6 @@ class IntroActivity : AppCompatActivity() {
                         editor.putString("nameUser", data?.account?.user?.name)
                         editor.apply()
                         startActivity(Intent(baseContext, MainActivity::class.java))
-
                     }
                 }
             }

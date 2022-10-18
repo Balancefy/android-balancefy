@@ -4,16 +4,20 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
+import androidx.navigation.NavController
+import androidx.navigation.NavDirections
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.navigateUp
+import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.ui.setupWithNavController
 import com.balancefy.balancefyapp.R
 import com.balancefy.balancefyapp.databinding.ActivityMainBinding
-import com.balancefy.balancefyapp.frames.Forum
-import com.balancefy.balancefyapp.frames.Goal
 import com.balancefy.balancefyapp.frames.Home
-import com.balancefy.balancefyapp.frames.Rank
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
+    private lateinit var navController: NavController
     lateinit var preferences : SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -21,7 +25,6 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         preferences = getSharedPreferences("Auth", MODE_PRIVATE)
         setContentView(binding.root)
-        replaceFragment(Home())
 
         binding.topAppBar.setOnMenuItemClickListener(){
             when(it.itemId){
@@ -29,23 +32,6 @@ class MainActivity : AppCompatActivity() {
             }
             true
         }
-
-        binding.bottomNavigation.setOnItemSelectedListener {
-            when (it.itemId) {
-                R.id.home -> replaceFragment(Home())
-                R.id.forum -> replaceFragment(Forum())
-                R.id.goal -> replaceFragment(Goal())
-                R.id.rank -> replaceFragment(Rank())
-            }
-            true
-        }
-    }
-
-    private fun replaceFragment(fragment: Fragment) {
-        val fragmentManager = supportFragmentManager
-        val fragmentTransaction = fragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.frame_layout, fragment)
-        fragmentTransaction.commit()
     }
 
     fun logOut() {

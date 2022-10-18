@@ -52,4 +52,9 @@
     <string name="nome_usuario">Nome Usuario</string>
     <string name="imagem_de_fundo_do_usuario">imagem de fundo do usuario</string>
     <string name="imagem_de_perfil_do_usuario">imagem de perfil do usuario</string>
+    <string name="money">R$</string>
+    <string name="description_home">Home</string>
+    <string name="description_forum">Forum</string>
+    <string name="description_goal">Objetivo</string>
+    <string name="description_rank">Rank</string>
 </resources>

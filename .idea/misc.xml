@@ -15,19 +15,32 @@
         <entry key="..\:/Users/Bianca/Downloads/android-balancefy/app/src/main/res/layout/activity_main.xml" value="0.33" />
         <entry key="..\:/Users/Bianca/Downloads/android-balancefy/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.214" />
         <entry key="..\:/Users/Bianca/Downloads/android-balancefy/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.3635" />
+        <entry key="..\:/Users/Bianca/Downloads/balancefy/android-balancefy/app/src/main/res/drawable/ic_forum.xml" value="0.2965" />
+        <entry key="..\:/Users/Bianca/Downloads/balancefy/android-balancefy/app/src/main/res/drawable/ic_goal.xml" value="0.2965" />
+        <entry key="..\:/Users/Bianca/Downloads/balancefy/android-balancefy/app/src/main/res/drawable/ic_home_black_24dp.xml" value="0.2965" />
+        <entry key="..\:/Users/Bianca/Downloads/balancefy/android-balancefy/app/src/main/res/drawable/ic_notifications_black_24dp.xml" value="0.2965" />
         <entry key="..\:/Users/Bianca/Downloads/balancefy/android-balancefy/app/src/main/res/layout/activity_cadastro.xml" value="0.358695652173913" />
-        <entry key="..\:/Users/Bianca/Downloads/balancefy/android-balancefy/app/src/main/res/layout/activity_intro.xml" value="0.358695652173913" />
-        <entry key="..\:/Users/Bianca/Downloads/balancefy/android-balancefy/app/src/main/res/layout/activity_main.xml" value="0.358695652173913" />
+        <entry key="..\:/Users/Bianca/Downloads/balancefy/android-balancefy/app/src/main/res/layout/activity_goal.xml" value="0.1" />
+        <entry key="..\:/Users/Bianca/Downloads/balancefy/android-balancefy/app/src/main/res/layout/activity_home.xml" value="0.1" />
+        <entry key="..\:/Users/Bianca/Downloads/balancefy/android-balancefy/app/src/main/res/layout/activity_intro.xml" value="0.33" />
+        <entry key="..\:/Users/Bianca/Downloads/balancefy/android-balancefy/app/src/main/res/layout/activity_main.xml" value="0.22" />
+        <entry key="..\:/Users/Bianca/Downloads/balancefy/android-balancefy/app/src/main/res/layout/activity_main2.xml" value="0.25" />
         <entry key="..\:/Users/Bianca/Downloads/balancefy/android-balancefy/app/src/main/res/layout/activity_register.xml" value="0.358695652173913" />
-        <entry key="..\:/Users/Bianca/Downloads/balancefy/android-balancefy/app/src/main/res/layout/activity_register_step2.xml" value="0.358695652173913" />
+        <entry key="..\:/Users/Bianca/Downloads/balancefy/android-balancefy/app/src/main/res/layout/activity_register_step2.xml" value="0.32664756446991405" />
+        <entry key="..\:/Users/Bianca/Downloads/balancefy/android-balancefy/app/src/main/res/layout/activity_splash_screen.xml" value="0.3625" />
+        <entry key="..\:/Users/Bianca/Downloads/balancefy/android-balancefy/app/src/main/res/layout/activity_teste.xml" value="0.33" />
         <entry key="..\:/Users/Bianca/Downloads/balancefy/android-balancefy/app/src/main/res/layout/agreement_bottom_sheet.xml" value="0.358695652173913" />
+        <entry key="..\:/Users/Bianca/Downloads/balancefy/android-balancefy/app/src/main/res/layout/button_shape.xml" value="0.3614583333333333" />
         <entry key="..\:/Users/Bianca/Downloads/balancefy/android-balancefy/app/src/main/res/layout/email_bottom_sheet.xml" value="0.358695652173913" />
         <entry key="..\:/Users/Bianca/Downloads/balancefy/android-balancefy/app/src/main/res/layout/fragment_forum.xml" value="0.14722222222222223" />
-        <entry key="..\:/Users/Bianca/Downloads/balancefy/android-balancefy/app/src/main/res/layout/fragment_goal.xml" value="0.14722222222222223" />
+        <entry key="..\:/Users/Bianca/Downloads/balancefy/android-balancefy/app/src/main/res/layout/fragment_goal.xml" value="0.33" />
         <entry key="..\:/Users/Bianca/Downloads/balancefy/android-balancefy/app/src/main/res/layout/fragment_home.xml" value="0.14722222222222223" />
+        <entry key="..\:/Users/Bianca/Downloads/balancefy/android-balancefy/app/src/main/res/layout/fragment_rank.xml" value="0.3625" />
         <entry key="..\:/Users/Bianca/Downloads/balancefy/android-balancefy/app/src/main/res/layout/login_bottom_sheet.xml" value="0.358695652173913" />
         <entry key="..\:/Users/Bianca/Downloads/balancefy/android-balancefy/app/src/main/res/layout/password_requirments_bottom_sheet.xml" value="0.358695652173913" />
         <entry key="..\:/Users/Wesley/Desktop/balancefy/android-balancefy/app/src/main/res/drawable/background_profile_img.xml" value="0.1495" />
+        <entry key="..\:/Users/Bianca/Downloads/balancefy/android-balancefy/app/src/main/res/menu/actions_menu.xml" value="0.1" />
+        <entry key="..\:/Users/Bianca/Downloads/balancefy/android-balancefy/app/src/main/res/menu/menu.xml" value="0.1" />
         <entry key="..\:/Users/Wesley/Desktop/balancefy/android-balancefy/app/src/main/res/drawable/bg_bottom_sheet_dialog.xml" value="0.191" />
         <entry key="..\:/Users/Wesley/Desktop/balancefy/android-balancefy/app/src/main/res/drawable/bg_custom_dialog.xml" value="0.3275" />
         <entry key="..\:/Users/Wesley/Desktop/balancefy/android-balancefy/app/src/main/res/drawable/bt_black_white.xml" value="0.3635" />
