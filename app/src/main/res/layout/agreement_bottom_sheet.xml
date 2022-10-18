@@ -1,4 +1,5 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/bg_bottom_sheet_dialog"
@@ -29,7 +30,7 @@
             android:orientation="horizontal"
             android:layout_marginTop="20dp">
 
-            <com.google.android.material.button.MaterialButton
+            <Button
                 android:id="@+id/btn_disagree"
                 style="?attr/materialButtonOutlinedStyle"
                 android:layout_width="0dp"
@@ -37,6 +38,7 @@
                 android:layout_height="60dp"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
+                app:cornerRadius="15dp"
                 android:text="@string/disagree" />
 
             <Button
@@ -47,6 +49,7 @@
                 android:layout_marginLeft="10dp"
                 android:text="@string/agree"
                 android:textStyle="bold"
+                app:cornerRadius="15dp"
                 android:textAllCaps="false" />
 
         </LinearLayout>

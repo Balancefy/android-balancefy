@@ -1,60 +1,35 @@
 package com.balancefy.balancefyapp.frames
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.balancefy.balancefyapp.R
+import com.balancefy.balancefyapp.databinding.FragmentGoalBinding
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+class Goal : Fragment(R.layout.fragment_goal) {
 
-/**
- * A simple [Fragment] subclass.
- * Use the [Goal.newInstance] factory method to
- * create an instance of this fragment.
- */
-class Goal : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
+    private lateinit var binding: FragmentGoalBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_goal, container, false)
+        binding = FragmentGoalBinding.inflate(layoutInflater, container, false)
+
+        binding.bottomMenu.setOnMenuItemClickListener {
+            when (it.itemId) {
+                R.id.home_fragment -> findNavController().navigate(R.id.action_goal_to_home)
+                R.id.forum_fragment -> findNavController().navigate(R.id.action_goal_to_forum)
+                R.id.goal_fragment -> true
+                R.id.rank_fragment -> findNavController().navigate(R.id.action_goal_to_rank)
+            }
+            true
+        }
+
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment Goal.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            Goal().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
-    }
 }

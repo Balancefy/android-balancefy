@@ -41,4 +41,14 @@
     <string name="error_different_pass">Las contraseñas deben ser las mismas</string>
     <string name="select_date">Selecione data</string>
     <string name="register_error">Fallo el registro. ¡Inténtalo de nuevo más tarde!</string>
+    <string name="password_requirments_title">" Restricciones de contraseña"</string>
+    <string name="password_requirments">- Mínimo de 6 caracteres - Mínimo de un carácter especial - Mínimo de una letra mayúscula - Mínimo de una letra minúscula</string>
+    <string name="error_invalid_field">" Campo inválido"</string>
+    <string name="error_invalid_pass">" La contraseña no cumple los requisitos"</string>
+    <string name="money">R$</string>
+    <string name="description_forum">Foro</string>
+    <string name="description_goal">Objetivo</string>
+    <string name="description_rank">Rank</string>
+    <string name="error_less_interests">" Selecciona al menos 3 intereses"</string>
+    <string name="description_home">Hogar</string>
 </resources>
