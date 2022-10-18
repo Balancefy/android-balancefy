@@ -41,4 +41,14 @@
     <string name="error_different_pass">Passwords must be the same</string>
     <string name="select_date">Select date</string>
     <string name="register_error">Failed to register. Try again later!</string>
+    <string name="error_invalid_field">Invalid Field</string>
+    <string name="money">R$</string>
+    <string name="password_requirments">" - Minimum of 6 characters - Minimum of one special character - Minimum of one uppercase letter - Minimum of one lowercase letter"</string>
+    <string name="password_requirments_title">" Password Restrictions"</string>
+    <string name="description_home">Home</string>
+    <string name="description_rank">Rank</string>
+    <string name="description_goal">Goal</string>
+    <string name="description_forum">Forum</string>
+    <string name="error_invalid_pass">Password does not meet requirements</string>
+    <string name="error_less_interests">" Please select at least 3 interests"</string>
 </resources>

@@ -101,8 +101,8 @@ class RegisterStep2Activity : AppCompatActivity() {
 
     private fun changeColor(btn: MaterialButton) {
         if(btn.strokeColor.equals(getColorStateList(R.color.green_balancefy))) {
-            btn.strokeColor = getColorStateList(R.color.white).withAlpha(24)
-            btn.setTextColor(getColor(R.color.white))
+            btn.strokeColor = getColorStateList(R.color.grey).withAlpha(24)
+            btn.setTextColor(getColor(R.color.grey))
             interestsSelected--
         } else {
             btn.strokeColor = getColorStateList(R.color.green_balancefy)
