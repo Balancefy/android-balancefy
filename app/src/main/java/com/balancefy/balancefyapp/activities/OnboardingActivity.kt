@@ -33,6 +33,10 @@ class OnboardingActivity : AppCompatActivity() {
             )
         )
 
+//        binding.btn_start.setOnClickListener {
+//            startActivity(Intent(baseContext, IntroActivity::class.java))
+//        }
+
 
     }
 
