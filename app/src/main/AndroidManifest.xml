@@ -43,6 +43,10 @@
             android:name=".activities.RegisterStep2Activity"
             android:exported="true"/>
 
+        <activity
+            android:name=".activities.OnboardingActivity"
+            android:exported="true"/>
+
     </application>
 
 </manifest>

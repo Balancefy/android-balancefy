@@ -13,7 +13,7 @@
         android:id="@+id/background_profile"
         android:layout_width="match_parent"
         android:layout_height="260dp"
-        android:contentDescription="@string/imagem_de_fundo_do_usuario"
+        android:contentDescription="@string/background_user_image"
         android:src="@drawable/fundo_perfil" />
 
     <LinearLayout
@@ -34,7 +34,7 @@
                 android:layout_height="150dp"
                 android:layout_gravity="center"
                 android:background="@drawable/bg_profile_image"
-                android:contentDescription="@string/imagem_de_perfil_do_usuario"
+                android:contentDescription="@string/background_avatar_image"
                 android:src="@drawable/ic_account" />
 
         </androidx.cardview.widget.CardView>
@@ -43,7 +43,7 @@
             android:id="@+id/name_profile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/nome_usuario"
+            android:text="@string/user_name"
             android:textAlignment="center"
             android:textColor="@color/white"
             android:textSize="24sp"
@@ -53,7 +53,7 @@
             android:id="@+id/type_profile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/perfil_em_analise"
+            android:text="@string/profile_under_analysis"
             android:textAlignment="center"
             android:textColor="@color/green_balancefy"
             android:textSize="18sp"

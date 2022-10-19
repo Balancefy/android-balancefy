@@ -10,6 +10,7 @@ import com.balancefy.balancefyapp.R
 import com.balancefy.balancefyapp.databinding.ActivityIntroBinding
 import com.balancefy.balancefyapp.databinding.EmailBottomSheetBinding
 import com.balancefy.balancefyapp.databinding.LoginBottomSheetBinding
+import com.balancefy.balancefyapp.fragments.OnboardingFragment1
 import com.balancefy.balancefyapp.models.request.LoginRequestDto
 import com.balancefy.balancefyapp.models.response.LoginResponseDto
 import com.balancefy.balancefyapp.rest.Rest
@@ -35,6 +36,10 @@ class IntroActivity : AppCompatActivity() {
 
         setContentView(binding.root)
 
+        val firstLogin = preferences.getBoolean("firstLogin", true)
+
+        validateFirstLogin(firstLogin)
+
         val lastUser = preferences.getString("nameUser", null)
 
         if (lastUser != null) {
@@ -47,6 +52,12 @@ class IntroActivity : AppCompatActivity() {
 
         binding.btnCreateAcc.setOnClickListener {
             changeScreen()
+        }
+    }
+
+    private fun validateFirstLogin(firstLogin: Boolean) {
+        if (firstLogin) {
+            startActivity(Intent(baseContext, OnboardingActivity::class.java))
         }
     }
 
