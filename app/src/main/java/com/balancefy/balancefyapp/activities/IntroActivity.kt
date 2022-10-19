@@ -35,8 +35,6 @@ class IntroActivity : AppCompatActivity() {
 
         setContentView(binding.root)
 
-        startActivity(Intent(baseContext, MainActivity::class.java))
-
         val lastUser = preferences.getString("nameUser", null)
 
         if (lastUser != null) {
@@ -107,7 +105,6 @@ class IntroActivity : AppCompatActivity() {
                     }
                 }
             }
-
             override fun onFailure(call: Call<LoginResponseDto>, t: Throwable) {
                 Toast.makeText(baseContext, t.message, Toast.LENGTH_SHORT).show()
             }

@@ -61,4 +61,10 @@
     <string name="description_profile">Perfil</string>
     <string name="no_posts">x</string>
     <string name="last_transaction">"Últimas Transacciones "</string>
+    <string name="ltimas_movimenta_es">"Últimas Transacciones "</string>
+    <string name="user_logout">user_logout</string>
+    <string name="icon_menu">icon menu</string>
+    <string name="icon_transcation">icon_transcation</string>
+    <string name="icon_comment">icon_comment</string>
+    <string name="icon_goal">icon_goal</string>
 </resources>

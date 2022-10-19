@@ -43,6 +43,10 @@ class MainActivity : AppCompatActivity() {
         binding.fabMenu.setOnClickListener {
             onFabMenuClicked()
         }
+
+        binding.topAppBar.setNavigationOnClickListener {
+            logOut()
+        }
 //
 //        binding.fabGoals.setOnClickListener {
 //            TODO("Not yet implemented")

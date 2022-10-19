@@ -7,6 +7,11 @@
     android:background="@color/black_balancefy"
     tools:context=".activities.MainActivity">
 
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragmentContainerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -26,16 +31,13 @@
                 app:menu="@menu/top_menu"
                 android:elevation="0dp"
                 app:titleCentered="true"
-                app:titleTextColor="@color/white"/>
-
+                app:titleTextColor="@color/white"
+                app:titleMarginTop="18dp"
+                app:navigationIcon="@drawable/ic_user_logout"/>
         </com.google.android.material.appbar.AppBarLayout>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/fragmentContainerView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/layout_menu"
@@ -60,6 +62,7 @@
             android:backgroundTint="@color/green_balancefy"
             app:srcCompat="@drawable/ic_add"
             android:clickable="true"
+            android:contentDescription="@string/icon_menu"
             android:focusable="true"/>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
@@ -67,11 +70,11 @@
         android:id="@+id/ll_menu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="right"
+        android:layout_gravity="end"
         android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@+id/layout_menu"
         android:visibility="invisible"
-        android:layout_marginRight="16dp"
+        android:layout_marginEnd="16dp"
         app:layout_constraintRight_toRightOf="parent">
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -83,6 +86,7 @@
             android:clickable="true"
             android:focusable="true"
             app:layout_anchor="@id/fab_menu"
+            android:contentDescription="@string/icon_transcation"
             app:srcCompat="@drawable/ic_transaction" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -93,6 +97,7 @@
             android:layout_marginBottom="10dp"
             app:srcCompat="@drawable/ic_comment"
             android:clickable="true"
+            android:contentDescription="@string/icon_comment"
             android:focusable="true"/>
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -104,6 +109,7 @@
             android:clickable="true"
             android:focusable="true"
             android:foregroundTint="@color/black_balancefy"
+            android:contentDescription="@string/icon_goal"
             app:srcCompat="@drawable/ic_goal" />
     </LinearLayout>
 
