@@ -60,4 +60,5 @@
     <string name="description_home">Hogar</string>
     <string name="description_profile">Perfil</string>
     <string name="no_posts">x</string>
+    <string name="ltimas_movimenta_es">"Últimas Transacciones "</string>
 </resources>
