@@ -58,4 +58,6 @@
     <string name="description_rank">Rank</string>
     <string name="error_less_interests">" Selecciona al menos 3 intereses"</string>
     <string name="description_home">Hogar</string>
+    <string name="description_profile">Perfil</string>
+    <string name="no_posts">x</string>
 </resources>

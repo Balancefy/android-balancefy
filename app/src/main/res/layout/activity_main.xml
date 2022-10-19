@@ -10,38 +10,44 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragmentContainerView"
-        android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:defaultNavHost="true"
-        app:navGraph="@navigation/navigation" />
-    <FrameLayout
-        android:id="@+id/frame_layout"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="match_parent"/>
 
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:showDividers="beginning"
+        android:background="@color/black_balancefy">
 
-        <com.google.android.material.appbar.AppBarLayout
+        <com.google.android.material.appbar.MaterialToolbar
+            android:paddingTop="15dp"
+            android:id="@+id/topAppBar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:showDividers="beginning"
-            android:background="@color/black_balancefy">
+            app:menu="@menu/top_menu"
+            android:elevation="0dp"
+            app:titleCentered="true"
+            app:titleTextColor="@color/white"/>
 
-            <com.google.android.material.appbar.MaterialToolbar
-                android:id="@+id/topAppBar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:menu="@menu/top_menu"
-                android:elevation="0dp"
-                app:title="" />
-        </com.google.android.material.appbar.AppBarLayout>
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+
+
+    <com.google.android.material.bottomappbar.BottomAppBar
+        android:id="@+id/bottom_menu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:backgroundTint="@color/black_balancefy"
+        style="@style/Widget.Material3.BottomAppBar"
+        app:fabAlignmentMode="end"
+        app:menu="@menu/menu"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
+        app:layout_anchor="@id/bottom_menu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/green_balancefy"
+        app:srcCompat="@drawable/ic_add" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

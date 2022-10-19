@@ -5,81 +5,57 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black_balancefy"
-    tools:context=".frames.Goal">
+    tools:context=".frames.GoalFragment">
 
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
-        android:layout_height="match_parent"
-        android:layout_width="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Objetivos"
+            android:textFontWeight="800"
+            android:textAlignment="center"
+            android:textSize="16sp"
+            android:textColor="@color/white"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="20dp">
+            android:orientation="horizontal"
+            android:paddingTop="20dp">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="Ativo"
+                android:textFontWeight="800"
+                android:textSize="16sp"
+                android:textAlignment="center"
+                android:textColor="@color/green_balancefy"/>
 
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:text="Objetivos"
+                android:text="Finalizado"
+                android:textSize="16sp"
                 android:textFontWeight="800"
                 android:textAlignment="center"
-                android:textSize="16sp"
                 android:textColor="@color/white"/>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingTop="20dp">
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:text="Ativo"
-                    android:textFontWeight="800"
-                    android:textSize="16sp"
-                    android:textAlignment="center"
-                    android:textColor="@color/green_balancefy"/>
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:text="Finalizado"
-                    android:textSize="16sp"
-                    android:textFontWeight="800"
-                    android:textAlignment="center"
-                    android:textColor="@color/white"/>
-            </LinearLayout>
-
-            <TextView
-                android:layout_marginTop="50dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Não há objetivos ativos no momento"
-                android:textAlignment="center"
-                android:textColor="@color/grey"/>
-
         </LinearLayout>
 
-        <com.google.android.material.bottomappbar.BottomAppBar
-            android:id="@+id/bottom_menu"
+        <TextView
+            android:layout_marginTop="50dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:backgroundTint="@color/black_balancefy"
-            style="@style/Widget.Material3.BottomAppBar"
-            app:fabAlignmentMode="end"
-            app:menu="@menu/menu"/>
+            android:text="Não há objetivos ativos no momento"
+            android:textAlignment="center"
+            android:textColor="@color/grey"/>
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab"
-            app:layout_anchor="@id/bottom_menu"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/green_balancefy"
-            app:srcCompat="@drawable/ic_add" />
-
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+    </LinearLayout>
 
 </FrameLayout>

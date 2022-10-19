@@ -5,36 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black_balancefy"
-    tools:context=".frames.Home">
+    tools:context=".frames.HomeFragment">
 
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
-        android:layout_height="match_parent"
-        android:layout_width="match_parent">
-
-        <TextView
-            android:id="@+id/display_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/welcome"
-            android:textColor="@color/white"
-            android:layout_gravity="center"/>
-
-        <com.google.android.material.bottomappbar.BottomAppBar
-            android:id="@+id/bottom_menu"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:backgroundTint="@color/black_balancefy"
-            style="@style/Widget.Material3.BottomAppBar"
-            app:fabAlignmentMode="end"
-            app:menu="@menu/menu"/>
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            app:layout_anchor="@id/bottom_menu"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/green_balancefy"
-            app:srcCompat="@drawable/ic_add" />
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+    <TextView
+        android:id="@+id/display_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/in_development"
+        android:textColor="@color/white"
+        android:layout_gravity="center"/>
 
 </FrameLayout>

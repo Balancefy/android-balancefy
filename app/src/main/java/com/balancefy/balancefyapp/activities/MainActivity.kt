@@ -4,16 +4,11 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.os.bundleOf
 import androidx.navigation.NavController
-import androidx.navigation.NavDirections
-import androidx.navigation.findNavController
-import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.navigateUp
-import androidx.navigation.ui.setupActionBarWithNavController
-import androidx.navigation.ui.setupWithNavController
 import com.balancefy.balancefyapp.R
 import com.balancefy.balancefyapp.databinding.ActivityMainBinding
-import com.balancefy.balancefyapp.frames.Home
+import com.balancefy.balancefyapp.frames.*
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -27,11 +22,60 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.topAppBar.setOnMenuItemClickListener(){
-            when(it.itemId){
-                R.id.bt_profile_setting -> startActivity(Intent(this, ProfileActivity::class.java))
-            }
+            swapFragment(it.itemId)
             true
         }
+
+        binding.bottomMenu.setOnMenuItemClickListener {
+            swapFragment(it.itemId)
+            true
+        }
+        initHome()
+    }
+
+    private fun initHome() {
+        supportFragmentManager.beginTransaction().add(
+            binding.fragmentContainerView.id,
+            HomeFragment()
+        ).commit()
+
+        binding.topAppBar.title =  getString(R.string.description_home)
+    }
+
+    fun swapFragment(fragmentId : Int){
+        val transaction = supportFragmentManager.beginTransaction()
+        val container = binding.fragmentContainerView.id
+        val bundle = bundleOf(
+            "nameUser" to preferences.getString("nameUser", null)
+        )
+
+        val fragment = when(fragmentId){
+            R.id.home_fragment -> {
+                binding.topAppBar.title =  getString(R.string.description_home)
+                HomeFragment()
+            }
+            R.id.goal_fragment -> {
+                binding.topAppBar.title =  getString(R.string.description_goal)
+                GoalFragment()
+            }
+            R.id.forum_fragment -> {
+                binding.topAppBar.title =  getString(R.string.description_forum)
+                ForumFragment()
+            }
+            R.id.rank_fragment -> {
+                binding.topAppBar.title =  getString(R.string.description_rank)
+                RankFragment()
+            }
+            R.id.profile_fragment -> {
+                binding.topAppBar.title =  getString(R.string.description_profile)
+                ProfileFragment()
+            }
+            else -> return
+        }
+
+        fragment.arguments = bundle
+
+        transaction.replace(container, fragment).commit()
     }
 
     fun logOut() {

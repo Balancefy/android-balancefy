@@ -57,4 +57,6 @@
     <string name="description_forum">Forum</string>
     <string name="description_goal">Objetivo</string>
     <string name="description_rank">Rank</string>
+    <string name="description_profile">Perfil</string>
+    <string name="no_posts">Sem postagens no momento</string>
 </resources>

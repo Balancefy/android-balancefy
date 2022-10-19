@@ -58,4 +58,6 @@
     <string name="description_forum">Forum</string>
     <string name="error_invalid_pass">Password does not meet requirements</string>
     <string name="error_less_interests">" Please select at least 3 interests"</string>
+    <string name="description_profile">Profile</string>
+    <string name="no_posts">There are no Posts at the moment</string>
 </resources>
