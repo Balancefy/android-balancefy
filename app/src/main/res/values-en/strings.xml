@@ -67,4 +67,9 @@
     <string name="icon_transcation">icon_transcation</string>
     <string name="icon_comment">icon_comment</string>
     <string name="icon_goal">icon_goal</string>
+    <string name="password_requirments_value">*</string>
+    <string name="bom_dia">"Good morning, "</string>
+    <string name="descricao_saldo_atual">Current account balance</string>
+    <string name="descricao_receita_atual">Total amount of revenue</string>
+    <string name="descricao_despesa_atual">Current amount of expenses</string>
 </resources>

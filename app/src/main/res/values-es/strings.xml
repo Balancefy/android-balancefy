@@ -67,4 +67,9 @@
     <string name="icon_transcation">icon_transcation</string>
     <string name="icon_comment">icon_comment</string>
     <string name="icon_goal">icon_goal</string>
+    <string name="bom_dia">"Buenos dias, "</string>
+    <string name="descricao_saldo_atual">Saldo de la cuenta corriente</string>
+    <string name="descricao_receita_atual">Cantidad total de ingresos</string>
+    <string name="descricao_despesa_atual">Importe actual de los gastos</string>
+    <string name="password_requirments_value">*</string>
 </resources>

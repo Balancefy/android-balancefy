@@ -5,12 +5,251 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black_balancefy"
-    android:paddingTop="50dp"
-    tools:context=".frames.HomeFragment">
+    tools:context=".frames.HomeFragment"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/textHelloUser"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/bom_dia"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="100dp"
+            android:textColor="@color/white"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/nameUser"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:layout_marginTop="100dp"
+            android:layout_marginStart="2dp"
+            android:textColor="@color/white"
+            android:textFontWeight="900"
+            android:textSize="12sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:layout_marginTop="150dp">
+        
+        <ProgressBar
+            android:id="@+id/ProgressBar"
+            android:layout_width="170dp"
+            android:layout_height="180dp"
+            android:layout_marginLeft="-80dp"
+            style="?android:attr/progressBarStyleLarge"
+            android:indeterminateDrawable="@drawable/progress_bar_bg"
+            android:progress="0" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="false"
+            android:layout_marginStart="30dp"
+            android:scrollbars="none"
+            >
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:orientation="vertical"
+                >
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/card_saldo_atual"
+                    android:layout_width="250dp"
+                    android:layout_height="100dp"
+                    android:layout_marginTop="35dp"
+                    android:layout_marginBottom="25dp"
+                    android:backgroundTint="@color/grey_balancefy"
+                    android:checkable="true"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:minHeight="150dp"
+                    >
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginHorizontal="30dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/descricao_saldo_atual"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/descricao_saldo_atual"
+                            android:layout_marginTop="30dp"
+                            android:textColor="@color/white"
+                            android:textFontWeight="900"
+                            android:textSize="10sp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/money"
+                                android:layout_marginTop="5dp"
+                                android:textColor="@color/white"
+                                android:textFontWeight="900"
+                                android:textSize="18sp" />
+
+                            <TextView
+                                android:id="@+id/saldo_atual"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="5dp"
+                                android:text="00,00"
+                                android:layout_marginTop="5dp"
+                                android:textColor="@color/green_balancefy"
+                                android:textFontWeight="900"
+                                android:textSize="18sp" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/card_receita_atual"
+                    android:layout_width="250dp"
+                    android:layout_height="100dp"
+                    android:layout_marginBottom="25dp"
+                    android:backgroundTint="@color/grey_balancefy"
+                    android:checkable="true"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:minHeight="150dp"
+                    >
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginHorizontal="30dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/descricao_receita_atual"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/descricao_receita_atual"
+                            android:layout_marginTop="30dp"
+                            android:textColor="@color/white"
+                            android:textFontWeight="900"
+                            android:textSize="10sp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/money"
+                                android:layout_marginTop="5dp"
+                                android:textColor="@color/white"
+                                android:textFontWeight="900"
+                                android:textSize="18sp" />
+
+                            <TextView
+                                android:id="@+id/receita_atual"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="5dp"
+                                android:text="00,00"
+                                android:layout_marginTop="5dp"
+                                android:textColor="@color/green_money"
+                                android:textFontWeight="900"
+                                android:textSize="18sp" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/card_despesa_atual"
+                    android:layout_width="250dp"
+                    android:layout_height="100dp"
+                    android:layout_marginBottom="25dp"
+                    android:backgroundTint="@color/grey_balancefy"
+                    android:checkable="true"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:minHeight="150dp"
+                    android:paddingTop="50dp"
+                    tools:context=".frames.HomeFragment">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginHorizontal="30dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/descricao_despesa_atual"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/descricao_despesa_atual"
+                            android:layout_marginTop="30dp"
+                            android:textColor="@color/white"
+                            android:textFontWeight="900"
+                            android:textSize="10sp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/money"
+                                android:layout_marginTop="5dp"
+                                android:textColor="@color/white"
+                                android:textFontWeight="900"
+                                android:textSize="18sp" />
+
+                            <TextView
+                                android:id="@+id/despesa_atual"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="5dp"
+                                android:text="200,00"
+                                android:layout_marginTop="5dp"
+                                android:textColor="@color/red_balancefy"
+                                android:textFontWeight="900"
+                                android:textSize="18sp" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+            </LinearLayout>
+
+        </ScrollView>
+
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="370dp"
         android:orientation="vertical">
         <TextView
             android:layout_width="wrap_content"
