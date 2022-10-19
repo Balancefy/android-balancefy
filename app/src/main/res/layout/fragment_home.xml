@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black_balancefy"
+    android:paddingTop="50dp"
     tools:context=".frames.HomeFragment">
 
     <LinearLayout
@@ -16,7 +17,6 @@
             android:layout_height="wrap_content"
             android:text="@string/last_transaction"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="50dp"
             android:textColor="@color/white"
             android:textFontWeight="900"
             android:textSize="12sp" />
