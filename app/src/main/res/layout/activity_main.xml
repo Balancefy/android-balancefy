@@ -86,7 +86,7 @@
             android:clickable="true"
             android:focusable="true"
             app:layout_anchor="@id/fab_menu"
-            android:contentDescription="@string/icon_transcation"
+            android:contentDescription="@string/icon_transaction"
             app:srcCompat="@drawable/ic_transaction" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
