@@ -3,6 +3,9 @@ package com.balancefy.balancefyapp.activities
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.view.View
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
 import androidx.navigation.NavController
@@ -12,14 +15,20 @@ import com.balancefy.balancefyapp.frames.*
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
-    private lateinit var navController: NavController
     lateinit var preferences : SharedPreferences
+
+    private val fromBottom: Animation by lazy { AnimationUtils.loadAnimation(this, R.anim.from_bottom_anim) }
+    private val toBottom: Animation by lazy { AnimationUtils.loadAnimation(this, R.anim.to_bottom_anim) }
+
+    private var clicked = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         preferences = getSharedPreferences("Auth", MODE_PRIVATE)
         setContentView(binding.root)
+
+        initHome()
 
         binding.topAppBar.setOnMenuItemClickListener(){
             swapFragment(it.itemId)
@@ -30,7 +39,22 @@ class MainActivity : AppCompatActivity() {
             swapFragment(it.itemId)
             true
         }
-        initHome()
+
+        binding.fabMenu.setOnClickListener {
+            onFabMenuClicked()
+        }
+//
+//        binding.fabGoals.setOnClickListener {
+//            TODO("Not yet implemented")
+//        }
+//
+//        binding.fabPosts.setOnClickListener {
+//            TODO("Not yet implemented")
+//        }
+//
+//        binding.fabTransaction.setOnClickListener {
+//            TODO("Not yet implemented")
+//        }
     }
 
     private fun initHome() {
@@ -76,6 +100,29 @@ class MainActivity : AppCompatActivity() {
         fragment.arguments = bundle
 
         transaction.replace(container, fragment).commit()
+    }
+
+    private fun onFabMenuClicked() {
+        setVisibility()
+        setAnimation()
+
+        clicked = !clicked
+    }
+
+    private fun setVisibility() {
+        if (!clicked) {
+            binding.llMenu.visibility = View.VISIBLE
+        } else {
+            binding.llMenu.visibility = View.GONE
+        }
+    }
+
+    private fun setAnimation() {
+        if (!clicked) {
+            binding.llMenu.startAnimation(fromBottom)
+        } else {
+            binding.llMenu.startAnimation(toBottom)
+        }
     }
 
     fun logOut() {
