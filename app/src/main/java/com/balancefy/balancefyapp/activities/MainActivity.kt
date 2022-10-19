@@ -25,6 +25,13 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         preferences = getSharedPreferences("Auth", MODE_PRIVATE)
         setContentView(binding.root)
+
+        binding.topAppBar.setOnMenuItemClickListener(){
+            when(it.itemId){
+                R.id.bt_profile_setting -> startActivity(Intent(this, ProfileActivity::class.java))
+            }
+            true
+        }
     }
 
     fun logOut() {
