@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/black_balancefy"
     android:orientation="vertical"
-    tools:context=".activities.ProfileActivity">
+    tools:context=".frames.ProfileFragment">
 
     <TextView
         android:layout_width="match_parent"
@@ -77,4 +77,10 @@
             android:layout_marginEnd="20sp"
             android:background="@color/gray_line" />
     </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/no_posts"
+        android:layout_gravity="center"/>
 </LinearLayout>

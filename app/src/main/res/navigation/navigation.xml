@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/home_fragment"
-        android:name="com.balancefy.balancefyapp.frames.Home"
+        android:name="com.balancefy.balancefyapp.frames.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
         <action
@@ -22,7 +22,7 @@
     </fragment>
     <fragment
         android:id="@+id/goal_fragment"
-        android:name="com.balancefy.balancefyapp.frames.Goal"
+        android:name="com.balancefy.balancefyapp.frames.GoalFragment"
         android:label="fragment_goal"
         tools:layout="@layout/fragment_goal" >
         <action
@@ -37,7 +37,7 @@
     </fragment>
     <fragment
         android:id="@+id/forum_fragment"
-        android:name="com.balancefy.balancefyapp.frames.Forum"
+        android:name="com.balancefy.balancefyapp.frames.ForumFragment"
         android:label="fragment_forum"
         tools:layout="@layout/fragment_forum" >
         <action
@@ -52,7 +52,7 @@
     </fragment>
     <fragment
         android:id="@+id/rank_fragment"
-        android:name="com.balancefy.balancefyapp.frames.Rank"
+        android:name="com.balancefy.balancefyapp.frames.RankFragment"
         android:label="fragment_rank"
         tools:layout="@layout/fragment_rank" >
         <action

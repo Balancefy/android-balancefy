@@ -29,11 +29,11 @@
 
         <activity
             android:name=".activities.IntroActivity"
-            android:exported="true" />
+            android:exported="true"/>
 
         <activity
             android:name=".activities.MainActivity"
-            android:exported="true" />
+            android:exported="true"/>
 
         <activity
             android:name=".activities.RegisterActivity"
@@ -43,9 +43,6 @@
             android:name=".activities.RegisterStep2Activity"
             android:exported="true"/>
 
-        <activity
-            android:name=".activities.ProfileActivity"
-            android:exported="true"/>
     </application>
 
 </manifest>
