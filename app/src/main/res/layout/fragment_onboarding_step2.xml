@@ -3,8 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black_balancefy"
-    tools:context=".activities.OnboardingActivity">
+    android:background="@color/black_balancefy">
 
     <LinearLayout
         android:layout_width="match_parent"
