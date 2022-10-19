@@ -14,7 +14,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/ltimas_movimenta_es"
+            android:text="@string/last_transaction"
             android:layout_marginStart="20dp"
             android:layout_marginTop="50dp"
             android:textColor="@color/white"
@@ -33,6 +33,7 @@
                 >
 
                 <com.google.android.material.card.MaterialCardView
+                    style="?attr/materialCardViewFilledStyle"
                     android:layout_width="160dp"
                     android:layout_height="wrap_content"
                     android:backgroundTint="@color/grey_balancefy"
@@ -142,6 +143,7 @@
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
                 <com.google.android.material.card.MaterialCardView
+                    style="?attr/materialCardViewFilledStyle"
                     android:layout_width="160dp"
                     android:layout_height="wrap_content"
                     android:backgroundTint="@color/grey_balancefy"
@@ -251,6 +253,7 @@
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
                 <com.google.android.material.card.MaterialCardView
+                    style="?attr/materialCardViewFilledStyle"
                     android:layout_width="160dp"
                     android:layout_height="wrap_content"
                     android:backgroundTint="@color/grey_balancefy"
