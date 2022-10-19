@@ -3,7 +3,6 @@ package com.balancefy.balancefyapp.activities
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.view.View
 import android.view.WindowManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -14,7 +13,6 @@ import com.balancefy.balancefyapp.databinding.LoginBottomSheetBinding
 import com.balancefy.balancefyapp.models.request.LoginRequestDto
 import com.balancefy.balancefyapp.models.response.LoginResponseDto
 import com.balancefy.balancefyapp.rest.Rest
-import com.balancefy.balancefyapp.services.Auth
 import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_EXPANDED
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import retrofit2.Call
@@ -104,11 +102,9 @@ class IntroActivity : AppCompatActivity() {
                         editor.putString("nameUser", data?.account?.user?.name)
                         editor.apply()
                         startActivity(Intent(baseContext, MainActivity::class.java))
-
                     }
                 }
             }
-
             override fun onFailure(call: Call<LoginResponseDto>, t: Throwable) {
                 Toast.makeText(baseContext, t.message, Toast.LENGTH_SHORT).show()
             }

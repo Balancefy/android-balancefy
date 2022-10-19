@@ -1,10 +1,10 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.Balancefy" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="Theme.Balancefy" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/green_balancefy</item>
-        <item name="colorPrimaryVariant">@color/black_balancefy</item>
         <item name="colorOnPrimary">@color/white</item>
+        <item name="colorOnPrimaryContainer">@color/black_balancefy</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
         <item name="colorSecondaryVariant">@color/teal_700</item>
@@ -29,5 +29,14 @@
 
     <style name="BtnBlackWhiteStyle" parent="Theme.Balancefy">
         <item name="backgroundTint">@null</item>
+    </style>
+
+    <!--    Style for DatePicker   -->
+
+    <style name="ThemeOverlay.App.MaterialCalendar" parent="ThemeOverlay.MaterialComponents.MaterialCalendar">
+        <item name="colorPrimary">@color/green_balancefy</item>
+        <item name="colorOnSurface">@color/green_balancefy</item>
+        <item name="android:backgroundTint">@color/black_balancefy</item>
+        <item name="android:textColor">@color/white</item>
     </style>
 </resources>

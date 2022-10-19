@@ -7,7 +7,13 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="grey">#61FFFFFF</color>
     <color name="black_balancefy">#131515</color>
     <color name="green_balancefy">#7DE2D1</color>
+    <color name="grey_balancefy">#242526</color>
+    <color name="light_grey_balancefy">#4B4B4B</color>
+    <color name="lighter_grey_balancefy">#969696</color>
+    <color name="red_balancefy">#F45959</color>
+    <color name="gray_line">#757575</color>
 
 </resources>

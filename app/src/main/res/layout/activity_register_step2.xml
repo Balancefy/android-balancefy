@@ -43,27 +43,30 @@
         android:textStyle="bold"
         />
 
-    <com.google.android.material.textfield.TextInputLayout
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+    <TextView
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/birth_date"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        />
+
+    <Button
+        android:id="@+id/btn_birth_date"
+        android:layout_marginTop="10dp"
+        style="?attr/materialButtonOutlinedStyle"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:hint="@string/birth_date"
-        android:layout_marginTop="20dp"
-        android:textColorHint="@color/white">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/et_birth_date"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="date"
-            android:textColor="@color/white">
-
-        </com.google.android.material.textfield.TextInputEditText>
-
-    </com.google.android.material.textfield.TextInputLayout>
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        app:strokeColor="@color/grey"
+        app:cornerRadius="5dp"
+        android:text="@string/select_date"/>
 
     <com.google.android.material.textfield.TextInputLayout
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        app:prefixText="@string/money"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:hint="@string/incoming"
@@ -108,7 +111,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp">
+            android:layout_marginTop="15dp">
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_travel"
@@ -118,6 +121,8 @@
                 android:textAllCaps="false"
                 android:textColor="@color/white"
                 android:text="@string/interests_travel"
+                app:strokeColor="@color/grey"
+                app:cornerRadius="5dp"
                 android:layout_weight="1"/>
 
             <com.google.android.material.button.MaterialButton
@@ -128,7 +133,9 @@
                 android:layout_height="60dp"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
+                app:strokeColor="@color/grey"
                 android:text="@string/interests_retirement"
+                app:cornerRadius="5dp"
                 android:layout_weight="2"/>
 
         </LinearLayout>
@@ -144,7 +151,9 @@
                 android:layout_height="60dp"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
+                app:strokeColor="@color/grey"
                 android:text="@string/interests_investments"
+                app:cornerRadius="5dp"
                 android:layout_weight="3"/>
 
             <com.google.android.material.button.MaterialButton
@@ -155,7 +164,9 @@
                 android:layout_height="60dp"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
+                app:strokeColor="@color/grey"
                 android:text="@string/interests_properties"
+                app:cornerRadius="5dp"
                 android:layout_weight="1"/>
 
         </LinearLayout>
@@ -171,7 +182,9 @@
                 android:layout_height="60dp"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
+                app:strokeColor="@color/grey"
                 android:text="@string/interests_exchange"
+                app:cornerRadius="5dp"
                 android:layout_weight="2"/>
 
             <com.google.android.material.button.MaterialButton
@@ -182,7 +195,9 @@
                 android:layout_height="60dp"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
+                app:strokeColor="@color/grey"
                 android:text="@string/interests_vehicles"
+                app:cornerRadius="5dp"
                 android:layout_weight="1"/>
 
         </LinearLayout>
@@ -222,6 +237,7 @@
         android:layout_height="60dp"
         android:text="@string/end"
         android:textStyle="bold"
-        android:textAllCaps="false" />
+        android:textAllCaps="false"
+        app:cornerRadius="15dp" />
 
 </LinearLayout>

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
@@ -107,19 +108,23 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/et_layout_pass"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:hint="@string/password"
         android:textColorHint="@color/white"
         android:layout_marginTop="20dp"
-        >
+        app:endIconMode="custom"
+        app:endIconDrawable="@drawable/ic_attention"
+        app:endIconContentDescription="@string/password_requirments_title">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/et_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/white">
+            android:textColor="@color/white"
+            android:inputType="textPassword">
 
         </com.google.android.material.textfield.TextInputEditText>
 
@@ -132,13 +137,14 @@
         android:hint="@string/confirm_password"
         android:textColorHint="@color/white"
         android:layout_marginTop="20dp"
-        >
+        android:inputType="textPassword">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/et_confirm_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/white">
+            android:textColor="@color/white"
+            android:inputType="textPassword">
 
         </com.google.android.material.textfield.TextInputEditText>
 
@@ -149,6 +155,7 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_marginTop="40dp"
+        app:cornerRadius="15dp"
         android:text="@string/next"
         android:textStyle="bold"
         android:textAllCaps="false"/>

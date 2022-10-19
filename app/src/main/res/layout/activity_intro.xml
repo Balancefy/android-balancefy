@@ -23,28 +23,33 @@
 
             <Button
                 android:id="@+id/btnHasAcc"
-                android:layout_width="match_parent"
+                style="Widget.Material3.Button.ElevatedButton"
+                android:layout_width="0dp"
                 android:layout_height="70dp"
                 android:layout_weight="1"
                 android:alpha="0.9"
                 android:backgroundTint="@color/black_balancefy"
-                android:elevation="10dp"
                 android:text="@string/already_has_account"
+                android:textColor="@color/white"
                 android:textSize="14sp"
                 android:textStyle="bold"
-                android:translationZ="10dp" />
+                app:cornerRadius="15dp"
+                />
 
             <Button
                 android:id="@+id/btnCreateAcc"
-                android:layout_width="match_parent"
+                style="@style/Widget.Material3.Button.ElevatedButton"
+                android:layout_width="0dp"
                 android:layout_height="70dp"
-                android:layout_marginLeft="20dp"
+                android:layout_marginStart="20dp"
                 android:layout_weight="1"
-                android:elevation="10dp"
-                android:text="@string/bu"
+                android:text="@string/create_account_button"
+                android:textColor="@color/white"
                 android:textSize="14sp"
                 android:textStyle="bold"
-                android:translationZ="10dp" />
+                app:backgroundTint="@color/green_balancefy"
+                app:cornerRadius="15dp"
+                />
 
         </LinearLayout>
     </LinearLayout>

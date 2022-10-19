@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black_balancefy"
+    android:orientation="vertical"
+    android:paddingTop="70dp"
+    tools:context=".frames.ProfileFragment">
+
+    <ImageView
+        android:id="@+id/background_profile"
+        android:layout_width="match_parent"
+        android:layout_height="260dp"
+        android:contentDescription="@string/imagem_de_fundo_do_usuario"
+        android:src="@drawable/fundo_perfil" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="230dp"
+        android:layout_marginTop="-85dp"
+        android:orientation="vertical">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="125dp"
+            android:layout_height="125dp"
+            android:layout_gravity="center"
+            app:cardCornerRadius="65dp">
+
+            <ImageView
+                android:id="@+id/avatar_profile"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_gravity="center"
+                android:background="@drawable/bg_profile_image"
+                android:contentDescription="@string/imagem_de_perfil_do_usuario"
+                android:src="@drawable/ic_account" />
+
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/name_profile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/nome_usuario"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/type_profile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/perfil_em_analise"
+            android:textAlignment="center"
+            android:textColor="@color/green_balancefy"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginStart="20sp"
+            android:layout_marginTop="5sp"
+            android:layout_marginEnd="20sp"
+            android:background="@color/gray_line" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/no_posts"
+        android:layout_gravity="center"/>
+</LinearLayout>
