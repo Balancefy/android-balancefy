@@ -45,4 +45,5 @@
     <string name="error_invalid_pass">Senha não atende os requisitos</string>
     <string name="error_invalid_field">Campo inválido</string>
     <string name="error_less_interests">Selecione ao menos 3 interesses</string>
+    <string name="ltimas_movimenta_es">Últimas Movimentações</string>
 </resources>

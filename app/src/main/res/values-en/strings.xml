@@ -41,4 +41,6 @@
     <string name="error_different_pass">Passwords must be the same</string>
     <string name="select_date">Select date</string>
     <string name="register_error">Failed to register. Try again later!</string>
+    <string name="ltimas_movimenta_es">Last Transactions</string>
+    <string name="password_requirments">*</string>
 </resources>

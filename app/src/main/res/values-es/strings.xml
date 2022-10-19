@@ -41,4 +41,5 @@
     <string name="error_different_pass">Las contraseñas deben ser las mismas</string>
     <string name="select_date">Selecione data</string>
     <string name="register_error">Fallo el registro. ¡Inténtalo de nuevo más tarde!</string>
+    <string name="ltimas_movimenta_es">"Últimas Transacciones "</string>
 </resources>
