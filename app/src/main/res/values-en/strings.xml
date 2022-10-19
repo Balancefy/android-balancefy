@@ -74,4 +74,9 @@
     <string name="onboarding_title2">Plan your Goals and objectives</string>
     <string name="onboarding_title3">Share your ideas  with other users</string>
     <string name="onboarding_first_text3">Add comments and topics  to share your experience  with other users</string>
+    <string name="password_requirments_value">*</string>
+    <string name="bom_dia">"Good morning, "</string>
+    <string name="descricao_saldo_atual">Current account balance</string>
+    <string name="descricao_receita_atual">Total amount of revenue</string>
+    <string name="descricao_despesa_atual">Current amount of expenses</string>
 </resources>
