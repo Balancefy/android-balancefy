@@ -48,7 +48,7 @@
         <entry key="..\:/Users/ellen/OneDrive - Digital School - BandTec/Documents/Balancefy/android-balancefy/app/src/main/res/layout/activity_main.xml" value="0.19701086956521738" />
         <entry key="..\:/Users/ellen/OneDrive - Digital School - BandTec/Documents/Balancefy/android-balancefy/app/src/main/res/layout/activity_onboarding.xml" value="0.22" />
         <entry key="..\:/Users/ellen/OneDrive - Digital School - BandTec/Documents/Balancefy/android-balancefy/app/src/main/res/layout/activity_onboarding_first.xml" value="0.25" />
-        <entry key="..\:/Users/ellen/OneDrive - Digital School - BandTec/Documents/Balancefy/android-balancefy/app/src/main/res/layout/activity_onboarding_step2.xml" value="0.18" />
+        <entry key="..\:/Users/ellen/OneDrive - Digital School - BandTec/Documents/Balancefy/android-balancefy/app/src/main/res/layout/activity_onboarding_step2.xml" value="0.1" />
         <entry key="..\:/Users/ellen/OneDrive - Digital School - BandTec/Documents/Balancefy/android-balancefy/app/src/main/res/layout/activity_onboarding_step3.xml" value="0.19701086956521738" />
         <entry key="..\:/Users/ellen/OneDrive - Digital School - BandTec/Documents/Balancefy/android-balancefy/app/src/main/res/layout/activity_register.xml" value="0.22" />
         <entry key="..\:/Users/ellen/OneDrive - Digital School - BandTec/Documents/Balancefy/android-balancefy/app/src/main/res/layout/activity_register_step2.xml" value="0.22" />
@@ -57,6 +57,7 @@
         <entry key="..\:/Users/ellen/OneDrive - Digital School - BandTec/Documents/Balancefy/android-balancefy/app/src/main/res/layout/fragment_home.xml" value="0.18" />
         <entry key="..\:/Users/ellen/OneDrive - Digital School - BandTec/Documents/Balancefy/android-balancefy/app/src/main/res/layout/fragment_rank.xml" value="0.10055724417426545" />
         <entry key="..\:/Users/ellen/OneDrive - Digital School - BandTec/Documents/Balancefy/android-balancefy/app/src/main/res/layout/login_bottom_sheet.xml" value="0.10055724417426545" />
+        <entry key="..\:/Users/ellen/OneDrive - Digital School - BandTec/Documents/Balancefy/android-balancefy/app/src/main/res/layout/onboarding_container.xml" value="0.18229166666666666" />
       </map>
     </option>
   </component>
