@@ -63,10 +63,10 @@
     <string name="icon_transaction">icon_transcation</string>
     <string name="icon_comment">icon_comment</string>
     <string name="icon_goal">icon_goal</string>
-    <string name="bom_dia">Bom dia, </string>
-    <string name="descricao_saldo_atual">Saldo atual em conta</string>
-    <string name="descricao_receita_atual">Valor total de receita</string>
-    <string name="descricao_despesa_atual">Valor atual de despesas</string>
+    <string name="greetings">Bom dia, </string>
+    <string name="description_current_balance">Saldo atual em conta</string>
+    <string name="description_total_incoming">Valor total de receita</string>
+    <string name="description_amount_expenses">Valor atual de despesas</string>
     <string name="password_requirments_value">*</string>
     <string name="onboarding_start">Arraste para começar</string>
     <string name="onboarding_title1">Controle suas despesas e receitas</string>

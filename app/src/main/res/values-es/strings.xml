@@ -74,9 +74,9 @@
     <string name="onboarding_title2">" Planea tu  Metas y objetivos"</string>
     <string name="onboarding_title3">Comparte tus ideas  con otros usuarios</string>
     <string name="onboarding_first_text3">Agregar comentarios y temas  para compartir tu experiencia  con otros usuarios</string>
-    <string name="bom_dia">"Buenos dias, "</string>
-    <string name="descricao_saldo_atual">Saldo de la cuenta corriente</string>
-    <string name="descricao_receita_atual">Cantidad total de ingresos</string>
-    <string name="descricao_despesa_atual">Importe actual de los gastos</string>
+    <string name="greetings">"Buenos dias, "</string>
+    <string name="description_current_balance">Saldo de la cuenta corriente</string>
+    <string name="description_total_incoming">Cantidad total de ingresos</string>
+    <string name="description_amount_expenses">Importe actual de los gastos</string>
     <string name="password_requirments_value">*</string>
 </resources>
