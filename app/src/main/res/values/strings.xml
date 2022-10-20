@@ -13,7 +13,7 @@
     <string name="create_account_button">Criar Conta</string>
     <string name="welcome">Bem Vindo</string>
     <string name="create_account_title">Crie uma Conta</string>
-    <string name="create_account_sub_title">Crie sua conta, cadastra suas metas!</string>
+    <string name="create_account_subtitle">Crie sua conta, cadastra suas metas!</string>
     <string name="name">Nome</string>
     <string name="last_name">Sobrenome</string>
     <string name="confirm_password">Confirmar Senha</string>
@@ -78,5 +78,7 @@
     <string name="onboarding_first_text3">Adicione comentários e tópicos \n para compartilhar sua experiência \n com outros usuários</string>
     <string name="onboarding_start_button">Começar</string>
     <string name="description_image_onboarding">Exemplo de Objetivo</string>
+    <string name="personal_information_subtitle">Conte-nos um pouco mais sobre você</string>
+    <string name="dot">.</string>
 
 </resources>

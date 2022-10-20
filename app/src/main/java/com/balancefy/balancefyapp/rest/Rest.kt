@@ -7,7 +7,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object Rest {
-    private val baseURL = "http://54.164.8.226:8080"
+    private val baseURL = "https://api-balancefy.ddns.net/"
 
     fun getInstance(): Retrofit {
         return Retrofit

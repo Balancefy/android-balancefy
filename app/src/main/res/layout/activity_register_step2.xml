@@ -26,7 +26,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="."
+            android:text="@string/dot"
             android:textColor="@color/green_balancefy"
             android:textSize="25sp"
             android:textStyle="bold"
@@ -36,7 +36,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/create_account_sub_title"
+        android:text="@string/personal_information_subtitle"
         android:textColor="@color/white"
         android:alpha="0.4"
         android:textSize="12sp"
@@ -129,7 +129,7 @@
                 android:id="@+id/btn_retirement"
                 style="?attr/materialButtonOutlinedStyle"
                 android:layout_width="wrap_content"
-                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
                 android:layout_height="60dp"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
@@ -160,7 +160,7 @@
                 android:id="@+id/btn_properties"
                 style="?attr/materialButtonOutlinedStyle"
                 android:layout_width="wrap_content"
-                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
                 android:layout_height="60dp"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
@@ -191,7 +191,7 @@
                 android:id="@+id/btn_vehicles"
                 style="?attr/materialButtonOutlinedStyle"
                 android:layout_width="wrap_content"
-                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
                 android:layout_height="60dp"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
@@ -227,7 +227,7 @@
             android:layout_height="wrap_content"
             android:text="@string/terms_title"
             android:textColor="@color/green_balancefy"
-            android:layout_marginLeft="5dp"
+            android:layout_marginStart="5dp"
             />
     </LinearLayout>
 

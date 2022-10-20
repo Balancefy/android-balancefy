@@ -70,7 +70,7 @@ class MainActivity : AppCompatActivity() {
         binding.topAppBar.title =  getString(R.string.description_home)
     }
 
-    fun swapFragment(fragmentId : Int){
+    private fun swapFragment(fragmentId : Int){
         val transaction = supportFragmentManager.beginTransaction()
         val container = binding.fragmentContainerView.id
         val bundle = bundleOf(

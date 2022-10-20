@@ -14,7 +14,7 @@
     <string name="already_has_account">ya tengo cuenta</string>
     <string name="welcome">Bienvenido</string>
     <string name="create_account_title">Crea una cuenta</string>
-    <string name="create_account_sub_title">¡Crea tu cuenta, registra tus objetivos!</string>
+    <string name="create_account_subtitle">¡Crea tu cuenta, registra tus objetivos!</string>
     <string name="name">Nombre</string>
     <string name="last_name">Apellido</string>
     <string name="confirm_password">Confirmar seña</string>
@@ -74,9 +74,11 @@
     <string name="onboarding_title2">" Planea tu  Metas y objetivos"</string>
     <string name="onboarding_title3">Comparte tus ideas  con otros usuarios</string>
     <string name="onboarding_first_text3">Agregar comentarios y temas  para compartir tu experiencia  con otros usuarios</string>
-    <string name="greetings">"Buenos dias, "</string>
+    <string name="greetings">"Buenos días, "</string>
     <string name="description_current_balance">Saldo de la cuenta corriente</string>
     <string name="description_total_incoming">Cantidad total de ingresos</string>
     <string name="description_amount_expenses">Importe actual de los gastos</string>
     <string name="password_requirments_value">*</string>
+    <string name="personal_information_subtitle">Cuéntanos un poco más sobre ti</string>
+    <string name="dot">.</string>
 </resources>

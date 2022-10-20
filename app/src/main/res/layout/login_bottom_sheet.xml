@@ -64,7 +64,7 @@
                 android:layout_weight="1"
                 android:layout_width="0dp"
                 android:layout_height="50dp"
-                android:layout_marginEnd="45dp"
+                android:layout_marginEnd="25dp"
                 android:background="@drawable/bt_black_white"
                 android:backgroundTint="@null"
                 android:drawableLeft="@drawable/ic_facebook"

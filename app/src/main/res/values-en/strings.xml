@@ -14,7 +14,7 @@
     <string name="already_has_account">Has account</string>
     <string name="welcome">Welcome</string>
     <string name="create_account_title">Create an Account</string>
-    <string name="create_account_sub_title">"Create your account, register your goals! "</string>
+    <string name="create_account_subtitle">"Create your account, register your goals! "</string>
     <string name="name">Name</string>
     <string name="last_name">Last Name</string>
     <string name="confirm_password">Confirm Password</string>
@@ -69,7 +69,7 @@
     <string name="onboarding_start_button">Start</string>
     <string name="onboarding_first_text1">" Track all your spending and earnings on the App"</string>
     <string name="onboarding_second_text1">" All your expenses with description and  detailed information of each transaction"</string>
-    <string name="description_image_onboarding">Goal Exemple</string>
+    <string name="description_image_onboarding">Goal Example</string>
     <string name="onboarding_first_text2">Manage your goals and objectives in stages</string>
     <string name="onboarding_title2">Plan your Goals and objectives</string>
     <string name="onboarding_title3">Share your ideas  with other users</string>
@@ -79,4 +79,6 @@
     <string name="description_current_balance">Current account balance</string>
     <string name="description_total_incoming">Total amount of revenue</string>
     <string name="description_amount_expenses">Current amount of expenses</string>
+    <string name="personal_information_subtitle">Tell us a little more about yourself</string>
+    <string name="dot">.</string>
 </resources>
