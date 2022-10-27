@@ -4,8 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.balancefy.balancefyapp.adapter.TopicPostsProfileAdapter
 import com.balancefy.balancefyapp.databinding.FragmentProfileBinding
+import com.balancefy.balancefyapp.models.request.TopicoRequestDto
 
 class ProfileFragment : Fragment() {
     private lateinit var binding: FragmentProfileBinding
@@ -14,12 +18,46 @@ class ProfileFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentProfileBinding.inflate(inflater)
+        recyclerViewConfiguration()
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding.nameProfile.text = arguments?.getString("nameUser") ?: "Ze ninguem"
+    }
+
+    private fun recyclerViewConfiguration() {
+        val testPost = listOf(
+            TopicoRequestDto(
+                1,
+                "Economizar Dinheiro",
+                "Como vocës fazem para não gastar o dinheiro assim que ele cai na conta?\n" +
+                    "Preciso economizar dinheiro, mas tenho muita dificuldade em lidar com gastos."),
+            TopicoRequestDto(
+                2,
+                "Economizar Dinheiro",
+                "Como vocës fazem para não gastar o dinheiro assim que ele cai na conta?\n" +
+                        "Preciso economizar dinheiro, mas tenho muita dificuldade em lidar com gastos."),
+            TopicoRequestDto(
+                3,
+                "Economizar Dinheiro",
+                "Como vocës fazem para não gastar o dinheiro assim que ele cai na conta?\n" +
+                        "Preciso economizar dinheiro, mas tenho muita dificuldade em lidar com gastos.")
+        )
+
+        val recyclerContainer = binding.recyclerContainer
+        recyclerContainer.layoutManager = LinearLayoutManager(context)
+
+        recyclerContainer.adapter = TopicPostsProfileAdapter(
+            testPost
+        ) { message ->
+            showMessageTest(message)
+        }
+    }
+
+    private fun showMessageTest(message : String) {
+        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
     }
 }
