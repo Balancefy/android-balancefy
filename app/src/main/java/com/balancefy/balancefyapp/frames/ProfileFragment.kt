@@ -7,9 +7,14 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.balancefy.balancefyapp.R
 import com.balancefy.balancefyapp.adapter.TopicPostsProfileAdapter
 import com.balancefy.balancefyapp.databinding.FragmentProfileBinding
-import com.balancefy.balancefyapp.models.request.TopicoRequestDto
+import com.balancefy.balancefyapp.models.response.*
+import com.balancefy.balancefyapp.rest.Rest
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class ProfileFragment : Fragment() {
     private lateinit var binding: FragmentProfileBinding
@@ -20,44 +25,60 @@ class ProfileFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentProfileBinding.inflate(inflater)
-        recyclerViewConfiguration()
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        //TODO atualizar background e profile image do usuario
         binding.nameProfile.text = arguments?.getString("nameUser") ?: "Ze ninguem"
+        recyclerViewConfiguration()
+
     }
 
     private fun recyclerViewConfiguration() {
-        val testPost = listOf(
-            TopicoRequestDto(
-                1,
-                "Economizar Dinheiro",
-                "Como vocës fazem para não gastar o dinheiro assim que ele cai na conta?\n" +
-                    "Preciso economizar dinheiro, mas tenho muita dificuldade em lidar com gastos."),
-            TopicoRequestDto(
-                2,
-                "Economizar Dinheiro",
-                "Como vocës fazem para não gastar o dinheiro assim que ele cai na conta?\n" +
-                        "Preciso economizar dinheiro, mas tenho muita dificuldade em lidar com gastos."),
-            TopicoRequestDto(
-                3,
-                "Economizar Dinheiro",
-                "Como vocës fazem para não gastar o dinheiro assim que ele cai na conta?\n" +
-                        "Preciso economizar dinheiro, mas tenho muita dificuldade em lidar com gastos.")
-        )
 
-        val recyclerContainer = binding.recyclerContainer
-        recyclerContainer.layoutManager = LinearLayoutManager(context)
+        Rest.getListFeedTopic().getListTopicById("Bearer ${arguments?.getString("accessToken")}")
+            .enqueue(object : Callback<ListaFeedTopicoResponse> {
+                override fun onResponse(
+                    call: Call<ListaFeedTopicoResponse>,
+                    response: Response<ListaFeedTopicoResponse>
+                ) {
+                    val data = response.body()?.listTopic
 
-        recyclerContainer.adapter = TopicPostsProfileAdapter(
-            testPost
-        ) { message ->
-            showMessageTest(message)
-        }
+                    when (response.code()) {
+                        200 -> {
+                            if (data == null) {
+                                binding.emptyListOfTopics.text = getString(R.string.no_posts)
+                            } else {
+                                binding.emptyListOfTopics.text = ""
+                            }
+
+                            val recyclerContainer = binding.recyclerContainer
+
+                            recyclerContainer.layoutManager = LinearLayoutManager(context)
+
+                            recyclerContainer.adapter = TopicPostsProfileAdapter(
+                                data,
+                            ) { mensagem ->
+                                showMessageTest(mensagem)
+                            }
+                        }
+
+                        // TODO usar erro getString que a verdinha fez.
+                        else -> Toast.makeText(context, "erro na comunicacao", Toast.LENGTH_SHORT)
+                            .show()
+                    }
+                }
+
+                override fun onFailure(call: Call<ListaFeedTopicoResponse>, t: Throwable) {
+                    Toast.makeText(context, t.message, Toast.LENGTH_SHORT).show()
+                    binding.emptyListOfTopics.text =  getString(R.string.no_posts)
+                }
+            })
+
     }
 
-    private fun showMessageTest(message : String) {
+    private fun showMessageTest(message: String) {
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
     }
 }

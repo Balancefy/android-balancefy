@@ -74,7 +74,9 @@ class MainActivity : AppCompatActivity() {
         val transaction = supportFragmentManager.beginTransaction()
         val container = binding.fragmentContainerView.id
         val bundle = bundleOf(
-            "nameUser" to preferences.getString("nameUser", null)
+            "nameUser" to preferences.getString("nameUser", null),
+            "accountId" to preferences.getInt("accountId", 0),
+            "accessToken" to preferences.getString("accessToken", null)
         )
 
         val fragment = when(fragmentId){
