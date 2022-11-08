@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:background="@color/black_balancefy"
     android:orientation="vertical"
     android:paddingTop="70dp"
@@ -18,7 +18,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="230dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="-85dp"
         android:orientation="vertical">
 
@@ -66,11 +66,20 @@
             android:layout_marginTop="5sp"
             android:layout_marginEnd="20sp"
             android:background="@color/gray_line" />
+
+        <TextView
+            android:id="@+id/emptyListOfTopics"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/no_posts"
+            android:textColor="@color/white" />
     </LinearLayout>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/no_posts"
-        android:layout_gravity="center"/>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerContainer"
+        android:layout_width="match_parent"
+        android:layout_height="260dp"
+        tools:itemCount="4"
+        tools:listitem="@layout/profile_post_card"/>
 </LinearLayout>

@@ -2,9 +2,7 @@ package com.balancefy.balancefyapp.activities
 
 import android.content.Intent
 import android.content.SharedPreferences
-import android.content.res.ColorStateList
 import android.os.Bundle
-import android.text.Editable
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.balancefy.balancefyapp.R
@@ -12,20 +10,16 @@ import com.balancefy.balancefyapp.databinding.ActivityRegisterStep2Binding
 import com.balancefy.balancefyapp.databinding.AgreementBottomSheetBinding
 import com.balancefy.balancefyapp.models.request.RegisterRequestDto
 import com.balancefy.balancefyapp.models.request.UserRegisterRequest
-import com.balancefy.balancefyapp.models.response.LoginResponseDto
-import com.balancefy.balancefyapp.models.response.RegisterResponseDto
 import com.balancefy.balancefyapp.rest.Rest
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.datepicker.CalendarConstraints
 import com.google.android.material.datepicker.DateValidatorPointBackward
 import com.google.android.material.datepicker.MaterialDatePicker
-import com.google.gson.annotations.SerializedName
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.text.SimpleDateFormat
-import java.time.LocalDate
 import java.util.*
 
 class RegisterStep2Activity : AppCompatActivity() {
@@ -168,7 +162,7 @@ class RegisterStep2Activity : AppCompatActivity() {
     private fun validateFields(): Boolean {
         return when {
             date == null -> {
-                Toast.makeText(baseContext, getString(R.string.error_message_birth_date), Toast.LENGTH_SHORT).show()
+                Toast.makeText(baseContext, getString(R.string.error_message_date), Toast.LENGTH_SHORT).show()
                 false
             }
             !binding.cbAgreement.isChecked -> {

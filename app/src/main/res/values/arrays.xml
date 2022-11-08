@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="category_items">
+        <item>@string/goal_category_internacional_trip</item>
+        <item>@string/goal_category_nacional_trip</item>
+        <item>@string/goal_category_purchase_house</item>
+        <item>@string/goal_category_purchase_car</item>
+        <item>@string/goal_category_college</item>
+        <item>@string/goal_category_debt_discharge</item>
+        <item>@string/goal_category_general_purchases</item>
+    </string-array>
+    <string-array name="transaction_type_items">
+        <item>@string/income</item>
+        <item>@string/spending</item>
+    </string-array>
+    <string-array name="transaction_category_items">
+        <item>@string/transaction_category_leisure</item>
+        <item>@string/transaction_category_emergency</item>
+        <item>@string/transaction_category_goal</item>
+        <item>@string/transaction_category_salary</item>
+        <item>@string/transaction_category_profit</item>
+    </string-array>
+</resources>

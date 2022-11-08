@@ -13,6 +13,7 @@ import com.balancefy.balancefyapp.databinding.LoginBottomSheetBinding
 import com.balancefy.balancefyapp.fragments.OnboardingFragment1
 import com.balancefy.balancefyapp.models.request.LoginRequestDto
 import com.balancefy.balancefyapp.models.response.LoginResponseDto
+import com.balancefy.balancefyapp.models.response.UserResponseDto
 import com.balancefy.balancefyapp.rest.Rest
 import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_EXPANDED
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -109,9 +110,34 @@ class IntroActivity : AppCompatActivity() {
                 when(response.code()){
                     400 -> Toast.makeText(baseContext, "Senha ou Email Inválido", Toast.LENGTH_SHORT).show()
                     200 -> {
+                        if(data == null){
+                            Toast.makeText(baseContext, " data: $data ", Toast.LENGTH_SHORT).show()
+                            return
+                        }
+
+                        if(data.account == null){
+                            Toast.makeText(baseContext, " account: ${data.account} ", Toast.LENGTH_SHORT).show()
+                            return
+                        }
+
+                        val user = UserResponseDto(
+                            id = data.account.id,
+                            name = data.account.user.name,
+                            birthDate = data.account.user.birthDate,
+                            avatar = data.account.user.avatar,
+                            banner = data.account.user.banner,
+                            type = data.account.user.type
+                        )
+
+                        val auth = response.body()!!.token
                         val editor = preferences.edit()
                         editor.putString("nameUser", data?.account?.user?.name)
+                        editor.putString("token", data?.token)
+                        editor.putString("nameUser", user.name)
+                        editor.putString("avatar", user.avatar)
+                        editor.putString("accessToken", auth)
                         editor.apply()
+
                         startActivity(Intent(baseContext, MainActivity::class.java))
                     }
                 }
@@ -122,7 +148,8 @@ class IntroActivity : AppCompatActivity() {
         })
 
     }
-    fun changeScreen() {
+
+    private fun changeScreen() {
         startActivity(Intent(this, RegisterActivity::class.java))
     }
 }
