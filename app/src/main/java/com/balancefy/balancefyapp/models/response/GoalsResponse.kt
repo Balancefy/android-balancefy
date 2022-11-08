@@ -16,8 +16,8 @@ data class GoalsResponse (
     @SerializedName("valorInicial")
     val initialValue: Double,
     @SerializedName("tempoEstimado")
-    val estimatedTime: LocalDate,
+    val estimatedTime: String,
     @SerializedName("pontuacao")
     val score: Double,
-    val createdAt: LocalDateTime
+    val createdAt: String
 )
