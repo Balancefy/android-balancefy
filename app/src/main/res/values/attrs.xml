@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="Transaction">
+        <attr name="type" format="string"/>
+        <attr name="value" format="string" />
+        <attr name="category" format="string" />
+        <attr name= "description" format="string"/>
+        <attr name="date" format="string" />
+    </declare-styleable>
+</resources>

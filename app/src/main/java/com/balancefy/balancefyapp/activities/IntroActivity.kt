@@ -131,6 +131,8 @@ class IntroActivity : AppCompatActivity() {
 
                         val auth = response.body()!!.token
                         val editor = preferences.edit()
+                        editor.putString("nameUser", data?.account?.user?.name)
+                        editor.putString("token", data?.token)
                         editor.putString("nameUser", user.name)
                         editor.putString("avatar", user.avatar)
                         editor.putString("accessToken", auth)
@@ -146,7 +148,8 @@ class IntroActivity : AppCompatActivity() {
         })
 
     }
-    fun changeScreen() {
+
+    private fun changeScreen() {
         startActivity(Intent(this, RegisterActivity::class.java))
     }
 }

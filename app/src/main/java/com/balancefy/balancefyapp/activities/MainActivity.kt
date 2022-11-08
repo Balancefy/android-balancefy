@@ -4,22 +4,44 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.View
+import android.view.WindowManager
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
-import androidx.navigation.NavController
 import com.balancefy.balancefyapp.R
 import com.balancefy.balancefyapp.databinding.ActivityMainBinding
+import com.balancefy.balancefyapp.databinding.GoalBottomSheetBinding
 import com.balancefy.balancefyapp.frames.*
+import com.balancefy.balancefyapp.models.request.CreateGoalDto
+import com.balancefy.balancefyapp.models.request.GoalCategory
+import com.balancefy.balancefyapp.rest.Rest
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.android.material.datepicker.CalendarConstraints
+import com.google.android.material.datepicker.DateValidatorPointForward
+import com.google.android.material.datepicker.MaterialDatePicker
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import java.text.SimpleDateFormat
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
+    // Bindings
     private lateinit var binding: ActivityMainBinding
-    lateinit var preferences : SharedPreferences
+    private lateinit var sheetGoalBinding: GoalBottomSheetBinding
 
+    // Goal creation
+    private var date: String? = null
+    // Preferences
+    lateinit var preferences : SharedPreferences
+    private var token: String? = null
+
+    // Animation
     private val fromBottom: Animation by lazy { AnimationUtils.loadAnimation(this, R.anim.from_bottom_anim) }
     private val toBottom: Animation by lazy { AnimationUtils.loadAnimation(this, R.anim.to_bottom_anim) }
-
     private var clicked = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,6 +49,8 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         preferences = getSharedPreferences("Auth", MODE_PRIVATE)
         setContentView(binding.root)
+
+        token = preferences.getString("token", null)
 
         initHome()
 
@@ -47,10 +71,10 @@ class MainActivity : AppCompatActivity() {
         binding.topAppBar.setNavigationOnClickListener {
             logOut()
         }
-//
-//        binding.fabGoals.setOnClickListener {
-//            TODO("Not yet implemented")
-//        }
+
+        binding.fabGoals.setOnClickListener {
+            showGoalCreationBottomSheet()
+        }
 //
 //        binding.fabPosts.setOnClickListener {
 //            TODO("Not yet implemented")
@@ -62,9 +86,19 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initHome() {
+
+        val homeFragment = HomeFragment()
+
+        val bundle = bundleOf(
+            "nameUser" to preferences.getString("nameUser", null),
+            "token" to token
+        )
+
+        homeFragment.arguments = bundle
+
         supportFragmentManager.beginTransaction().add(
             binding.fragmentContainerView.id,
-            HomeFragment()
+            homeFragment
         ).commit()
 
         binding.topAppBar.title =  getString(R.string.description_home)
@@ -76,7 +110,9 @@ class MainActivity : AppCompatActivity() {
         val bundle = bundleOf(
             "nameUser" to preferences.getString("nameUser", null),
             "accountId" to preferences.getInt("accountId", 0),
-            "accessToken" to preferences.getString("accessToken", null)
+            "accessToken" to preferences.getString("accessToken", null),
+            "nameUser" to preferences.getString("nameUser", null),
+            "token" to token
         )
 
         val fragment = when(fragmentId){
@@ -131,7 +167,128 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun logOut() {
+    private fun showGoalCreationBottomSheet() {
+        val dialog = BottomSheetDialog(this, R.style.BottomSheetDialog).apply {
+            window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
+        }
+
+        dialog.behavior.skipCollapsed = true
+        dialog.behavior.state = BottomSheetBehavior.STATE_EXPANDED
+
+        sheetGoalBinding = GoalBottomSheetBinding.inflate(layoutInflater, null, false)
+
+        dialog.setContentView(sheetGoalBinding.root)
+        dialog.show()
+
+        sheetGoalBinding.btnEstimatedDate.setOnClickListener {
+            selectDate()
+        }
+
+        sheetGoalBinding.btnCreate.setOnClickListener {
+            if(createGoal()) {
+                dialog.dismiss()
+            }
+        }
+    }
+
+    private fun selectDate() {
+        val constrains = CalendarConstraints
+            .Builder()
+            .setValidator(DateValidatorPointForward.now())
+            .build()
+
+        val datePicker = MaterialDatePicker.Builder.datePicker()
+            .setTitleText(getString(R.string.birth_date))
+            .setTheme(R.style.ThemeOverlay_App_MaterialCalendar)
+            .setCalendarConstraints(constrains)
+            .build()
+
+        datePicker.show(supportFragmentManager, "MATERIAL_DATE_PICKER")
+
+        datePicker.addOnPositiveButtonClickListener {
+            val sdf = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+            date = sdf.format(it)
+            sheetGoalBinding.btnEstimatedDate.text = date
+        }
+    }
+
+    private fun createGoal(): Boolean {
+        val initialValue = sheetGoalBinding.etGoalInitialValue.text.toString()
+
+        if(validateFields()) {
+            val body = CreateGoalDto(
+                goal = GoalCategory(getCategory()),
+                description = sheetGoalBinding.etDescription.text.toString(),
+                totalValue = sheetGoalBinding.etGoalValue.text.toString().toDouble(),
+                initialValue = if (initialValue.isEmpty()) 0.0 else initialValue.toDouble(),
+                estimatedTime = date!!
+            )
+
+            Rest.getGoalInstance().createGoal("Bearer $token", body).enqueue(object : Callback<Objects> {
+                override fun onResponse(
+                    call: Call<Objects>,
+                    response: Response<Objects>
+                ) {
+                    println(response.code())
+                    println(response)
+                    when(response.code()){
+                        201 -> {
+                            Toast.makeText(baseContext, getString(R.string.created_goal), Toast.LENGTH_SHORT).show()
+                        }
+                        else -> {
+                            Toast.makeText(baseContext, getString(R.string.register_error), Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                }
+
+                override fun onFailure(call: Call<Objects>, t: Throwable) {
+                    Toast.makeText(baseContext, t.message, Toast.LENGTH_SHORT).show()
+                }
+            })
+
+            return true
+        }
+
+        return false
+    }
+
+    private fun getCategory(): Int = when(sheetGoalBinding.goalCategory.text.toString()) {
+            getString(R.string.goal_category_internacional_trip) -> 1
+            getString(R.string.goal_category_nacional_trip) -> 2
+            getString(R.string.goal_category_purchase_house) -> 3
+            getString(R.string.goal_category_purchase_car) -> 4
+            getString(R.string.goal_category_college) -> 5
+            getString(R.string.goal_category_debt_discharge) -> 6
+            else -> 7
+    }
+
+    private fun validateFields(): Boolean {
+        return when {
+            sheetGoalBinding.etDescription.text.toString().isNullOrEmpty() -> {
+                sheetGoalBinding.etDescription.error = getString(R.string.error_empty_field)
+                false
+            }
+            sheetGoalBinding.etGoalValue.text.toString().isNullOrEmpty() -> {
+                sheetGoalBinding.etGoalValue.error = getString(R.string.error_empty_field)
+                false
+            }
+            sheetGoalBinding.etGoalValue.text.toString().toDouble() <= 0 -> {
+                sheetGoalBinding.etGoalValue.error = getString(R.string.error_empty_field)
+                false
+            }
+            date == null -> {
+                Toast.makeText(baseContext, getString(R.string.error_message_date), Toast.LENGTH_SHORT).show()
+                false
+            }
+            sheetGoalBinding.goalCategory.text.toString().isNullOrEmpty() -> {
+                sheetGoalBinding.goalCategory.error = getString(R.string.error_empty_field)
+                false
+            }
+            else -> true
+        }
+    }
+
+    private fun logOut() {
         val editor = preferences.edit()
         editor.putString("nameUser", null)
         editor.apply()
