@@ -109,6 +109,9 @@ class MainActivity : AppCompatActivity() {
         val container = binding.fragmentContainerView.id
         val bundle = bundleOf(
             "nameUser" to preferences.getString("nameUser", null),
+            "accountId" to preferences.getInt("accountId", 0),
+            "accessToken" to preferences.getString("accessToken", null),
+            "nameUser" to preferences.getString("nameUser", null),
             "token" to token
         )
 
