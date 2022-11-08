@@ -63,8 +63,7 @@
             android:layout_marginTop="10dp"
             android:text="@string/next"
             android:textAllCaps="false"
-            app:cornerRadius="10dp"
-            android:onClick="entrar"/>
+            app:cornerRadius="10dp"/>
 
     </LinearLayout>
 

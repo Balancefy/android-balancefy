@@ -111,6 +111,7 @@ class IntroActivity : AppCompatActivity() {
                     200 -> {
                         val editor = preferences.edit()
                         editor.putString("nameUser", data?.account?.user?.name)
+                        editor.putString("token", data?.token)
                         editor.apply()
                         startActivity(Intent(baseContext, MainActivity::class.java))
                     }
@@ -122,7 +123,8 @@ class IntroActivity : AppCompatActivity() {
         })
 
     }
-    fun changeScreen() {
+
+    private fun changeScreen() {
         startActivity(Intent(this, RegisterActivity::class.java))
     }
 }
