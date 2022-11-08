@@ -3,11 +3,9 @@ package com.balancefy.balancefyapp.activities
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.balancefy.balancefyapp.R
 import com.balancefy.balancefyapp.databinding.ActivityRegisterBinding
-import com.balancefy.balancefyapp.databinding.AgreementBottomSheetBinding
 import com.balancefy.balancefyapp.databinding.PasswordRequirmentsBottomSheetBinding
 import com.google.android.material.bottomsheet.BottomSheetDialog
 

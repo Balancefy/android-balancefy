@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.balancefy.balancefyapp.R
@@ -12,6 +11,7 @@ import com.balancefy.balancefyapp.adapter.GoalCardsAdapter
 import com.balancefy.balancefyapp.databinding.FragmentGoalBinding
 import com.balancefy.balancefyapp.models.response.GoalsResponse
 import com.balancefy.balancefyapp.rest.Rest
+import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayout
 import retrofit2.Call
 import retrofit2.Callback
@@ -115,6 +115,6 @@ class GoalFragment : Fragment() {
     }
 
     private fun showMessageTest(message : String) {
-        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+        Snackbar.make(binding.root, message, Snackbar.LENGTH_SHORT).show()
     }
 }
