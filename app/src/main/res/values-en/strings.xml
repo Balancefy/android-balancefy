@@ -107,4 +107,5 @@
     <string name="goal_category_debt_discharge">Debt Discharge</string>
     <string name="goal_category_general_purchases">General Purchases</string>
     <string name="estimated_date_title">Estimated Date:</string>
+    <string name="invalid_login">Senha ou Email inválidos</string>
 </resources>

@@ -7,7 +7,6 @@ import android.view.View
 import android.view.WindowManager
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
 import com.balancefy.balancefyapp.R
@@ -22,6 +21,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.datepicker.CalendarConstraints
 import com.google.android.material.datepicker.DateValidatorPointForward
 import com.google.android.material.datepicker.MaterialDatePicker
+import com.google.android.material.snackbar.Snackbar
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -230,16 +230,16 @@ class MainActivity : AppCompatActivity() {
                     println(response)
                     when(response.code()){
                         201 -> {
-                            Toast.makeText(baseContext, getString(R.string.created_goal), Toast.LENGTH_SHORT).show()
+                            Snackbar.make(sheetGoalBinding.root, R.string.created_goal, Snackbar.LENGTH_SHORT).show()
                         }
                         else -> {
-                            Toast.makeText(baseContext, getString(R.string.register_error), Toast.LENGTH_SHORT).show()
+                            Snackbar.make(sheetGoalBinding.root, R.string.register_error, Snackbar.LENGTH_SHORT).show()
                         }
                     }
                 }
 
                 override fun onFailure(call: Call<Objects>, t: Throwable) {
-                    Toast.makeText(baseContext, t.message, Toast.LENGTH_SHORT).show()
+                    Snackbar.make(sheetGoalBinding.root, R.string.connection_error, Snackbar.LENGTH_SHORT).show()
                 }
             })
 
@@ -274,7 +274,7 @@ class MainActivity : AppCompatActivity() {
                 false
             }
             date == null -> {
-                Toast.makeText(baseContext, getString(R.string.error_message_date), Toast.LENGTH_SHORT).show()
+                Snackbar.make(sheetGoalBinding.root, R.string.error_message_date, Snackbar.LENGTH_SHORT).show()
                 false
             }
             sheetGoalBinding.goalCategory.text.toString().isNullOrEmpty() -> {
