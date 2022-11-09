@@ -107,4 +107,13 @@
     <string name="created_goal">Objetivo Criado!</string>
     <string name="estimated_date_title">Data Estimada:</string>
     <string name="invalid_login">Senha ou Email inválidos</string>
+    <string name="zero_score">0xp</string>
+    <string name="remaining_days">\tdias restante</string>
+    <string name="transaction">Movimentações</string>
+    <string name="add_transaction">Adicionar Movimentações</string>
+    <string name="current_goal_title">Objetivo Atual</string>
+    <string name="next_steps">Próximos passos</string>
+    <string name="conclude">Concluir</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

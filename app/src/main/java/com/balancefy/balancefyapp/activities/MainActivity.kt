@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity() {
     private var date: String? = null
     // Preferences
     lateinit var preferences : SharedPreferences
-    private var token: String? = null
+    private var token: String? = ""
 
     // Animation
     private val fromBottom: Animation by lazy { AnimationUtils.loadAnimation(this, R.anim.from_bottom_anim) }
@@ -108,10 +108,8 @@ class MainActivity : AppCompatActivity() {
         val transaction = supportFragmentManager.beginTransaction()
         val container = binding.fragmentContainerView.id
         val bundle = bundleOf(
-            "nameUser" to preferences.getString("nameUser", null),
+            "nameUser" to "julio",
             "accountId" to preferences.getInt("accountId", 0),
-            "accessToken" to preferences.getString("accessToken", null),
-            "nameUser" to preferences.getString("nameUser", null),
             "token" to token
         )
 
@@ -122,7 +120,7 @@ class MainActivity : AppCompatActivity() {
             }
             R.id.goal_fragment -> {
                 binding.topAppBar.title =  getString(R.string.description_goal)
-                GoalFragment()
+                GoalPagesFragment()
             }
             R.id.forum_fragment -> {
                 binding.topAppBar.title =  getString(R.string.description_forum)
@@ -264,11 +262,11 @@ class MainActivity : AppCompatActivity() {
 
     private fun validateFields(): Boolean {
         return when {
-            sheetGoalBinding.etDescription.text.toString().isNullOrEmpty() -> {
+            sheetGoalBinding.etDescription.text.toString().isEmpty() -> {
                 sheetGoalBinding.etDescription.error = getString(R.string.error_empty_field)
                 false
             }
-            sheetGoalBinding.etGoalValue.text.toString().isNullOrEmpty() -> {
+            sheetGoalBinding.etGoalValue.text.toString().isEmpty() -> {
                 sheetGoalBinding.etGoalValue.error = getString(R.string.error_empty_field)
                 false
             }
@@ -280,7 +278,7 @@ class MainActivity : AppCompatActivity() {
                 Snackbar.make(sheetGoalBinding.root, R.string.error_message_date, Snackbar.LENGTH_SHORT).show()
                 false
             }
-            sheetGoalBinding.goalCategory.text.toString().isNullOrEmpty() -> {
+            sheetGoalBinding.goalCategory.text.toString().isEmpty() -> {
                 sheetGoalBinding.goalCategory.error = getString(R.string.error_empty_field)
                 false
             }

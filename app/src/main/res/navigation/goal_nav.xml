@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/goal_nav"
+    app:startDestination="@id/goal">
+
+    <fragment
+        android:id="@+id/goal"
+        android:name="com.balancefy.balancefyapp.frames.GoalFragment"
+        android:label="fragment_goal2"
+        tools:layout="@layout/fragment_goal" >
+        <action
+            android:id="@+id/fromGoalToGoalDetails"
+            app:destination="@id/goal_details"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/goal_details"
+        android:name="com.balancefy.balancefyapp.frames.GoalDetailsFragment"
+        android:label="fragment_goal_details"
+        tools:layout="@layout/fragment_goal_details" >
+        <action
+            android:id="@+id/fromGoalDetailsToGoalRoadmap"
+            app:destination="@id/goal_roadmap"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right" />
+        <action
+            android:id="@+id/fromGoalDetailsToGoal"
+            app:destination="@id/goal"
+            app:enterAnim="@android:anim/slide_out_right"
+            app:exitAnim="@android:anim/slide_in_left" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/goal_roadmap"
+        android:name="com.balancefy.balancefyapp.frames.GoalRoadmapFragment"
+        android:label="fragment_goal_roadmap"
+        tools:layout="@layout/fragment_goal_roadmap" >
+        <action
+            android:id="@+id/fromGoalRoadmapToGoalDetails"
+            app:destination="@id/goal_details"
+            app:enterAnim="@android:anim/slide_out_right"
+            app:exitAnim="@android:anim/slide_in_left" />
+    </fragment>
+
+</navigation>

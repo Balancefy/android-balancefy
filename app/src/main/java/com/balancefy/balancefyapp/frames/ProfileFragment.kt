@@ -38,7 +38,7 @@ class ProfileFragment : Fragment() {
 
     private fun recyclerViewConfiguration() {
 
-        Rest.getListFeedTopic().getListTopicById("Bearer ${arguments?.getString("accessToken")}")
+        Rest.getListFeedTopic().getListTopicById("Bearer ${arguments?.getString("token")}")
             .enqueue(object : Callback<ListaFeedTopicoResponse> {
                 override fun onResponse(
                     call: Call<ListaFeedTopicoResponse>,
@@ -65,8 +65,7 @@ class ProfileFragment : Fragment() {
                             }
                         }
 
-                        // TODO usar erro getString que a verdinha fez.
-                        else -> Toast.makeText(context, "erro na comunicacao", Toast.LENGTH_SHORT)
+                        else -> Toast.makeText(context, getString(R.string.connection_error), Toast.LENGTH_SHORT)
                             .show()
                     }
                 }

@@ -5,13 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.balancefy.balancefyapp.R
 import com.balancefy.balancefyapp.adapter.GoalCardsAdapter
 import com.balancefy.balancefyapp.databinding.FragmentGoalBinding
 import com.balancefy.balancefyapp.models.response.GoalsResponse
 import com.balancefy.balancefyapp.rest.Rest
-import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayout
 import retrofit2.Call
 import retrofit2.Callback
@@ -111,10 +111,10 @@ class GoalFragment : Fragment() {
 
         recyclerContainer.adapter = GoalCardsAdapter(
             goals
-        ) { message -> showMessageTest(message) }
+        ) { id -> getGoalDetails(id) }
     }
 
-    private fun showMessageTest(message : String) {
-        Snackbar.make(binding.root, message, Snackbar.LENGTH_SHORT).show()
+    private fun getGoalDetails(id : Int) {
+        findNavController().navigate(R.id.fromGoalToGoalDetails)
     }
 }
