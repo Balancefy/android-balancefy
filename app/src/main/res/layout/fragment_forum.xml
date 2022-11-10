@@ -7,12 +7,46 @@
     android:background="@color/black_balancefy"
     android:paddingTop="50dp"
     tools:context=".frames.ForumFragment">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tab_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:tabTextAppearance="@style/titleStyle"
+            android:background="@color/black_balancefy"
+          >
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/geral"
+                />
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/recomendados"
+                />
+
+        </com.google.android.material.tabs.TabLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
 
         <TextView
-            android:layout_width="wrap_content"
+            android:id="@+id/tv_error"
+            android:layout_marginTop="50dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/in_development"
-            android:textColor="@color/white"
-            android:layout_gravity="center"/>
+            android:textAlignment="center"
+            android:textColor="@color/grey"/>
 
+    </LinearLayout>
 </FrameLayout>
