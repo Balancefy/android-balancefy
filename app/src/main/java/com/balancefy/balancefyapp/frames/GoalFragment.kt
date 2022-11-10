@@ -1,9 +1,12 @@
 package com.balancefy.balancefyapp.frames
 
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -20,6 +23,7 @@ import retrofit2.Response
 class GoalFragment : Fragment() {
 
     private lateinit var binding: FragmentGoalBinding
+    lateinit var preferences : SharedPreferences
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,6 +35,7 @@ class GoalFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        preferences = context?.getSharedPreferences("Auth", AppCompatActivity.MODE_PRIVATE)!!
         findGoals()
 
         binding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
@@ -56,7 +61,7 @@ class GoalFragment : Fragment() {
     }
 
     private fun findGoals(status: String = "ACTIVE") {
-        val token = arguments?.getString("token")
+        val token = preferences.getString("token", null)
 
         when (status) {
             "ACTIVE" -> Rest.getGoalInstance().listGoals("Bearer ${token!!}").enqueue(object : Callback<List<GoalsResponse>> {
@@ -115,6 +120,10 @@ class GoalFragment : Fragment() {
     }
 
     private fun getGoalDetails(id : Int) {
-        findNavController().navigate(R.id.fromGoalToGoalDetails)
+        val bundle = bundleOf(
+            "goalId" to id
+        )
+
+        findNavController().navigate(R.id.fromGoalToGoalDetails, bundle)
     }
 }

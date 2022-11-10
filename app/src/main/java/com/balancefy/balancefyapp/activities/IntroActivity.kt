@@ -42,9 +42,9 @@ class IntroActivity : AppCompatActivity() {
 
         val lastUser = preferences.getString("nameUser", null)
 
-        // if (lastUser != null) {
+         if (lastUser != null) {
             startActivity(Intent(baseContext, MainActivity::class.java))
-        // }
+        }
 
         binding.btnHasAcc.setOnClickListener {
             showBottomSheetDialog()
@@ -53,6 +53,9 @@ class IntroActivity : AppCompatActivity() {
         binding.btnCreateAcc.setOnClickListener {
             changeScreen()
         }
+    }
+
+    override fun onBackPressed() {
     }
 
     private fun validateFirstLogin(firstLogin: Boolean) {
@@ -109,7 +112,7 @@ class IntroActivity : AppCompatActivity() {
                 when(response.code()){
                     400 -> Snackbar.make(sheetEmailBinding.root, R.string.invalid_login, Snackbar.LENGTH_SHORT).show()
                     200 -> {
-                        if(data!=null) {
+                        if(data != null) {
                             val user = UserResponseDto(
                                 id = data.account!!.id,
                                 name = data.account.user.name,
@@ -121,7 +124,7 @@ class IntroActivity : AppCompatActivity() {
 
                             val editor = preferences.edit()
                             editor.putString("nameUser", user.name)
-                            editor.putString("token", data?.token)
+                            editor.putString("token", data.token)
                             editor.putString("avatar", user.avatar)
                             editor.apply()
 

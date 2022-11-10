@@ -9,6 +9,7 @@ import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
+import androidx.fragment.app.FragmentManager
 import com.balancefy.balancefyapp.R
 import com.balancefy.balancefyapp.databinding.ActivityMainBinding
 import com.balancefy.balancefyapp.databinding.GoalBottomSheetBinding
@@ -85,12 +86,19 @@ class MainActivity : AppCompatActivity() {
 //        }
     }
 
+    override fun onBackPressed() {
+        if(supportFragmentManager.backStackEntryCount >= 1) {
+            super.onBackPressed()
+        }
+    }
+
     private fun initHome() {
 
         val homeFragment = HomeFragment()
 
         val bundle = bundleOf(
             "nameUser" to preferences.getString("nameUser", null),
+            "accountId" to preferences.getInt("accountId", 0),
             "token" to token
         )
 
@@ -108,7 +116,7 @@ class MainActivity : AppCompatActivity() {
         val transaction = supportFragmentManager.beginTransaction()
         val container = binding.fragmentContainerView.id
         val bundle = bundleOf(
-            "nameUser" to "julio",
+            "nameUser" to preferences.getString("nameUser", null),
             "accountId" to preferences.getInt("accountId", 0),
             "token" to token
         )
@@ -139,7 +147,10 @@ class MainActivity : AppCompatActivity() {
 
         fragment.arguments = bundle
 
-        transaction.replace(container, fragment).commit()
+        transaction
+            .replace(container, fragment)
+            .addToBackStack(null)
+            .commit()
     }
 
     private fun onFabMenuClicked() {

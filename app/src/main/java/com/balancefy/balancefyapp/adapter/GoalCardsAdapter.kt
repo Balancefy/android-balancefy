@@ -31,6 +31,7 @@ class GoalCardsAdapter(
             binding.estimatedDate.text = goalCard.estimatedTime
 
             binding.card.setOnClickListener {
+                println("Ate aqui deu certo onClick")
                 onClick(goalCard.id)
             }
         }

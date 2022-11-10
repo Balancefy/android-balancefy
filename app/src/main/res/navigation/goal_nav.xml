@@ -32,6 +32,9 @@
             app:destination="@id/goal"
             app:enterAnim="@android:anim/slide_out_right"
             app:exitAnim="@android:anim/slide_in_left" />
+        <argument
+            android:name="goal_id"
+            app:argType="integer" />
     </fragment>
 
     <fragment
@@ -44,6 +47,9 @@
             app:destination="@id/goal_details"
             app:enterAnim="@android:anim/slide_out_right"
             app:exitAnim="@android:anim/slide_in_left" />
+        <argument
+            android:name="goal_id"
+            app:argType="integer" />
     </fragment>
 
 </navigation>
