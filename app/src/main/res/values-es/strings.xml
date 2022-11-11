@@ -116,5 +116,4 @@
     <string name="next_steps">Próximos pasos</string>
     <string name="conclude">Concluir</string>
     <string name="transaction_amount">Cantidad de Transacción</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

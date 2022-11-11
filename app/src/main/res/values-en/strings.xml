@@ -116,5 +116,4 @@
     <string name="current_goal_title">" Current Objective"</string>
     <string name="next_steps">" Next steps"</string>
     <string name="conclude">Complete</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

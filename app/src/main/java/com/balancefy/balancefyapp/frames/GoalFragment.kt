@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.setFragmentResult
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.balancefy.balancefyapp.R
@@ -123,7 +124,7 @@ class GoalFragment : Fragment() {
         val bundle = bundleOf(
             "goalId" to id
         )
-
-        findNavController().navigate(R.id.fromGoalToGoalDetails, bundle)
+        setFragmentResult("requestKey", bundle)
+        findNavController().navigate(R.id.fromGoalToGoalDetails)
     }
 }
