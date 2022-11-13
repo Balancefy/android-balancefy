@@ -57,7 +57,6 @@ class ForumFragment : Fragment() {
             }
         }}.attach()
 
-
         super.onViewCreated(view, savedInstanceState)
     }
 }
