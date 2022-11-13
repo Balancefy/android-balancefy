@@ -108,4 +108,6 @@
     <string name="goal_category_general_purchases">Compras generales</string>
     <string name="estimated_date_title">Fecha estimada:</string>
     <string name="invalid_login">Senha ou Email inválidos</string>
+    <string name="geral">Todos</string>
+    <string name="recomendados">Recomendado</string>
 </resources>
