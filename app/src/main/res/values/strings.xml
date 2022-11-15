@@ -110,6 +110,8 @@
     <string name="zero_score">0x</string>
     <string name="remaining_days">dias restante</string>
     <string name="transaction">"Transação "</string>
+    <string name="geral">Geral</string>
+    <string name="recomendados">Recomendados</string>
     <string name="current_goal_title">Objetivo Atual</string>
     <string name="next_steps">Próximos passos</string>
     <string name="conclude">Concluir</string>
