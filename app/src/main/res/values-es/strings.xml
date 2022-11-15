@@ -97,7 +97,7 @@
     <string name="transaction_category_salary">Salario</string>
     <string name="transaction_category_profit">Beneficio</string>
     <string name="connection_error">Error de conexión</string>
-    <string name="no_goal">" Actualmente no hay metas activas"</string>
+    <string name="no_goal">" Actualmente no hay metas"</string>
     <string name="created_goal">¡Gol creado!</string>
     <string name="goal_category_internacional_trip">Viaje internacional</string>
     <string name="goal_category_nacional_trip">Viajes Nacionales</string>
@@ -108,4 +108,12 @@
     <string name="goal_category_general_purchases">Compras generales</string>
     <string name="estimated_date_title">Fecha estimada:</string>
     <string name="invalid_login">Senha ou Email inválidos</string>
+    <string name="zero_score">0xp</string>
+    <string name="remaining_days">días restantes</string>
+    <string name="transaction">Transacción</string>
+    <string name="add_transaction">" Agregar transacción"</string>
+    <string name="current_goal_title">Objetivo actual</string>
+    <string name="next_steps">Próximos pasos</string>
+    <string name="conclude">Concluir</string>
+    <string name="transaction_amount">Cantidad de Transacción</string>
 </resources>

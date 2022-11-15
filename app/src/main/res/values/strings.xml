@@ -103,8 +103,17 @@
     <string name="goal_category_debt_discharge">Quitação de Dívida</string>
     <string name="goal_category_general_purchases">Compras Gerais</string>
     <string name="connection_error">Erro de Conexão</string>
-    <string name="no_goal">Não há objetivos ativos no momento</string>
+    <string name="no_goal">Não há objetivos no momento</string>
     <string name="created_goal">Objetivo Criado!</string>
     <string name="estimated_date_title">Data Estimada:</string>
     <string name="invalid_login">Senha ou Email inválidos</string>
+    <string name="zero_score">0x</string>
+    <string name="remaining_days">dias restante</string>
+    <string name="transaction">"Transação "</string>
+    <string name="current_goal_title">Objetivo Atual</string>
+    <string name="next_steps">Próximos passos</string>
+    <string name="conclude">Concluir</string>
+    <string name="add_transaction">Adicionar Transação</string>
+    <string name="transaction_amount">Valor da transação</string>
+    <!-- TODO: Remove or change this placeholder text -->
 </resources>

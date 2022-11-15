@@ -4,6 +4,7 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.WindowManager
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.balancefy.balancefyapp.R
 import com.balancefy.balancefyapp.databinding.ActivityIntroBinding
@@ -15,7 +16,6 @@ import com.balancefy.balancefyapp.models.response.UserResponseDto
 import com.balancefy.balancefyapp.rest.Rest
 import com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_EXPANDED
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.google.android.material.snackbar.Snackbar
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -42,7 +42,7 @@ class IntroActivity : AppCompatActivity() {
 
         val lastUser = preferences.getString("nameUser", null)
 
-        if (lastUser != null) {
+         if (lastUser != null) {
             startActivity(Intent(baseContext, MainActivity::class.java))
         }
 
@@ -53,6 +53,9 @@ class IntroActivity : AppCompatActivity() {
         binding.btnCreateAcc.setOnClickListener {
             changeScreen()
         }
+    }
+
+    override fun onBackPressed() {
     }
 
     private fun validateFirstLogin(firstLogin: Boolean) {
@@ -107,42 +110,31 @@ class IntroActivity : AppCompatActivity() {
             ) {
                 val data = response.body()
                 when(response.code()){
-                    400 -> Snackbar.make(sheetEmailBinding.root, R.string.invalid_login, Snackbar.LENGTH_SHORT).show()
+                    400 -> Toast.makeText(baseContext, R.string.invalid_login, Toast.LENGTH_SHORT).show()
                     200 -> {
-                        if(data == null){
-                            Toast.makeText(baseContext, " data: $data ", Toast.LENGTH_SHORT).show()
-                            return
+                        if(data != null) {
+                            val user = UserResponseDto(
+                                id = data.account!!.id,
+                                name = data.account.user.name,
+                                birthDate = data.account.user.birthDate,
+                                avatar = data.account.user.avatar,
+                                banner = data.account.user.banner,
+                                type = data.account.user.type
+                            )
+
+                            val editor = preferences.edit()
+                            editor.putString("nameUser", user.name)
+                            editor.putString("token", data.token)
+                            editor.putString("avatar", user.avatar)
+                            editor.apply()
+
+                            startActivity(Intent(baseContext, MainActivity::class.java))
                         }
-
-                        if(data.account == null){
-                            Toast.makeText(baseContext, " account: ${data.account} ", Toast.LENGTH_SHORT).show()
-                            return
-                        }
-
-                        val user = UserResponseDto(
-                            id = data.account.id,
-                            name = data.account.user.name,
-                            birthDate = data.account.user.birthDate,
-                            avatar = data.account.user.avatar,
-                            banner = data.account.user.banner,
-                            type = data.account.user.type
-                        )
-
-                        val auth = response.body()!!.token
-                        val editor = preferences.edit()
-                        editor.putString("nameUser", data?.account?.user?.name)
-                        editor.putString("token", data?.token)
-                        editor.putString("nameUser", user.name)
-                        editor.putString("avatar", user.avatar)
-                        editor.putString("accessToken", auth)
-                        editor.apply()
-
-                        startActivity(Intent(baseContext, MainActivity::class.java))
                     }
                 }
             }
             override fun onFailure(call: Call<LoginResponseDto>, t: Throwable) {
-                Snackbar.make(sheetEmailBinding.root, R.string.connection_error, Snackbar.LENGTH_SHORT).show()
+                Toast.makeText(baseContext, R.string.connection_error, Toast.LENGTH_SHORT).show()
             }
         })
 

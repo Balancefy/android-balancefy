@@ -7,8 +7,10 @@ import android.view.View
 import android.view.WindowManager
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
+import androidx.fragment.app.FragmentManager
 import com.balancefy.balancefyapp.R
 import com.balancefy.balancefyapp.databinding.ActivityMainBinding
 import com.balancefy.balancefyapp.databinding.GoalBottomSheetBinding
@@ -21,7 +23,6 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.datepicker.CalendarConstraints
 import com.google.android.material.datepicker.DateValidatorPointForward
 import com.google.android.material.datepicker.MaterialDatePicker
-import com.google.android.material.snackbar.Snackbar
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -37,7 +38,7 @@ class MainActivity : AppCompatActivity() {
     private var date: String? = null
     // Preferences
     lateinit var preferences : SharedPreferences
-    private var token: String? = null
+    private var token: String? = ""
 
     // Animation
     private val fromBottom: Animation by lazy { AnimationUtils.loadAnimation(this, R.anim.from_bottom_anim) }
@@ -85,12 +86,19 @@ class MainActivity : AppCompatActivity() {
 //        }
     }
 
+    override fun onBackPressed() {
+        if(supportFragmentManager.backStackEntryCount >= 1) {
+            super.onBackPressed()
+        }
+    }
+
     private fun initHome() {
 
         val homeFragment = HomeFragment()
 
         val bundle = bundleOf(
             "nameUser" to preferences.getString("nameUser", null),
+            "accountId" to preferences.getInt("accountId", 0),
             "token" to token
         )
 
@@ -110,8 +118,6 @@ class MainActivity : AppCompatActivity() {
         val bundle = bundleOf(
             "nameUser" to preferences.getString("nameUser", null),
             "accountId" to preferences.getInt("accountId", 0),
-            "accessToken" to preferences.getString("accessToken", null),
-            "nameUser" to preferences.getString("nameUser", null),
             "token" to token
         )
 
@@ -122,7 +128,7 @@ class MainActivity : AppCompatActivity() {
             }
             R.id.goal_fragment -> {
                 binding.topAppBar.title =  getString(R.string.description_goal)
-                GoalFragment()
+                GoalPagesFragment()
             }
             R.id.forum_fragment -> {
                 binding.topAppBar.title =  getString(R.string.description_forum)
@@ -141,7 +147,10 @@ class MainActivity : AppCompatActivity() {
 
         fragment.arguments = bundle
 
-        transaction.replace(container, fragment).commit()
+        transaction
+            .replace(container, fragment)
+            .addToBackStack(null)
+            .commit()
     }
 
     private fun onFabMenuClicked() {
@@ -233,16 +242,16 @@ class MainActivity : AppCompatActivity() {
                     println(response)
                     when(response.code()){
                         201 -> {
-                            Snackbar.make(sheetGoalBinding.root, R.string.created_goal, Snackbar.LENGTH_SHORT).show()
+                            Toast.makeText(baseContext, R.string.created_goal, Toast.LENGTH_SHORT).show()
                         }
                         else -> {
-                            Snackbar.make(sheetGoalBinding.root, R.string.register_error, Snackbar.LENGTH_SHORT).show()
+                            Toast.makeText(baseContext, R.string.register_error, Toast.LENGTH_SHORT).show()
                         }
                     }
                 }
 
                 override fun onFailure(call: Call<Objects>, t: Throwable) {
-                    Snackbar.make(sheetGoalBinding.root, R.string.connection_error, Snackbar.LENGTH_SHORT).show()
+                    Toast.makeText(baseContext, R.string.connection_error, Toast.LENGTH_SHORT).show()
                 }
             })
 
@@ -264,11 +273,11 @@ class MainActivity : AppCompatActivity() {
 
     private fun validateFields(): Boolean {
         return when {
-            sheetGoalBinding.etDescription.text.toString().isNullOrEmpty() -> {
+            sheetGoalBinding.etDescription.text.toString().isEmpty() -> {
                 sheetGoalBinding.etDescription.error = getString(R.string.error_empty_field)
                 false
             }
-            sheetGoalBinding.etGoalValue.text.toString().isNullOrEmpty() -> {
+            sheetGoalBinding.etGoalValue.text.toString().isEmpty() -> {
                 sheetGoalBinding.etGoalValue.error = getString(R.string.error_empty_field)
                 false
             }
@@ -277,10 +286,10 @@ class MainActivity : AppCompatActivity() {
                 false
             }
             date == null -> {
-                Snackbar.make(sheetGoalBinding.root, R.string.error_message_date, Snackbar.LENGTH_SHORT).show()
+                Toast.makeText(baseContext, R.string.error_message_date, Toast.LENGTH_SHORT).show()
                 false
             }
-            sheetGoalBinding.goalCategory.text.toString().isNullOrEmpty() -> {
+            sheetGoalBinding.goalCategory.text.toString().isEmpty() -> {
                 sheetGoalBinding.goalCategory.error = getString(R.string.error_empty_field)
                 false
             }

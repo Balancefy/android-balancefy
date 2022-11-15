@@ -7,4 +7,28 @@
         <attr name= "description" format="string"/>
         <attr name="date" format="string" />
     </declare-styleable>
+
+    <declare-styleable name="GoalCard">
+        <attr name="title" format="string"/>
+        <attr name="current_balance" format="string" />
+        <attr name="achievable_balance" format="string" />
+        <attr name= "estimated_date" format="string"/>
+        <attr name= "progress_indicator" format="string"/>
+    </declare-styleable>
+
+    <declare-styleable name="GoalProgress">
+        <attr name="total_score" format="string"/>
+        <attr name="progress" format="string" />
+    </declare-styleable>
+
+    <declare-styleable name="GoalDetails">
+        <attr name="goal_details_title" format="string"/>
+        <attr name="remaining_days" format="string" />
+    </declare-styleable>
+
+    <declare-styleable name="CurrentTask">
+        <attr name="current_task_title" format="string"/>
+        <attr name="current_task_description" format="string" />
+        <attr name="score" format="string" />
+    </declare-styleable>
 </resources>

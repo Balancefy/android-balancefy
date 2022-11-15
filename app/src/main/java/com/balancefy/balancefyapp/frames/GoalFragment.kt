@@ -1,17 +1,21 @@
 package com.balancefy.balancefyapp.frames
 
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.setFragmentResult
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.balancefy.balancefyapp.R
 import com.balancefy.balancefyapp.adapter.GoalCardsAdapter
 import com.balancefy.balancefyapp.databinding.FragmentGoalBinding
 import com.balancefy.balancefyapp.models.response.GoalsResponse
 import com.balancefy.balancefyapp.rest.Rest
-import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayout
 import retrofit2.Call
 import retrofit2.Callback
@@ -20,6 +24,7 @@ import retrofit2.Response
 class GoalFragment : Fragment() {
 
     private lateinit var binding: FragmentGoalBinding
+    lateinit var preferences : SharedPreferences
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,6 +36,7 @@ class GoalFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        preferences = context?.getSharedPreferences("Auth", AppCompatActivity.MODE_PRIVATE)!!
         findGoals()
 
         binding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
@@ -56,7 +62,7 @@ class GoalFragment : Fragment() {
     }
 
     private fun findGoals(status: String = "ACTIVE") {
-        val token = arguments?.getString("token")
+        val token = preferences.getString("token", null)
 
         when (status) {
             "ACTIVE" -> Rest.getGoalInstance().listGoals("Bearer ${token!!}").enqueue(object : Callback<List<GoalsResponse>> {
@@ -111,10 +117,14 @@ class GoalFragment : Fragment() {
 
         recyclerContainer.adapter = GoalCardsAdapter(
             goals
-        ) { message -> showMessageTest(message) }
+        ) { id -> getGoalDetails(id) }
     }
 
-    private fun showMessageTest(message : String) {
-        Snackbar.make(binding.root, message, Snackbar.LENGTH_SHORT).show()
+    private fun getGoalDetails(id : Int) {
+        val bundle = bundleOf(
+            "goalId" to id
+        )
+        setFragmentResult("requestKey", bundle)
+        findNavController().navigate(R.id.fromGoalToGoalDetails)
     }
 }

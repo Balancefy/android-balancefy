@@ -15,8 +15,6 @@ import com.balancefy.balancefyapp.rest.Rest
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import com.balancefy.balancefyapp.models.request.TopicoRequestDto
-import com.google.android.material.snackbar.Snackbar
 
 class ProfileFragment : Fragment() {
     private lateinit var binding: FragmentProfileBinding
@@ -38,7 +36,7 @@ class ProfileFragment : Fragment() {
 
     private fun recyclerViewConfiguration() {
 
-        Rest.getListFeedTopic().getListTopicById("Bearer ${arguments?.getString("accessToken")}")
+        Rest.getListFeedTopic().getListTopicById("Bearer ${arguments?.getString("token")}")
             .enqueue(object : Callback<ListaFeedTopicoResponse> {
                 override fun onResponse(
                     call: Call<ListaFeedTopicoResponse>,
@@ -65,8 +63,7 @@ class ProfileFragment : Fragment() {
                             }
                         }
 
-                        // TODO usar erro getString que a verdinha fez.
-                        else -> Toast.makeText(context, "erro na comunicacao", Toast.LENGTH_SHORT)
+                        else -> Toast.makeText(context, getString(R.string.connection_error), Toast.LENGTH_SHORT)
                             .show()
                     }
                 }
@@ -80,6 +77,6 @@ class ProfileFragment : Fragment() {
     }
 
     private fun showMessageTest(message : String) {
-        Snackbar.make(binding.root, message, Snackbar.LENGTH_SHORT).show()
+        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
     }
 }

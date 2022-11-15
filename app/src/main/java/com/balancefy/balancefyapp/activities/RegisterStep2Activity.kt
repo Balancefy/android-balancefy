@@ -3,6 +3,7 @@ package com.balancefy.balancefyapp.activities
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.balancefy.balancefyapp.R
 import com.balancefy.balancefyapp.databinding.ActivityRegisterStep2Binding
@@ -148,12 +149,12 @@ class RegisterStep2Activity : AppCompatActivity() {
                         201 -> {
                             startActivity(Intent(baseContext, IntroActivity::class.java))
                         }
-                        else -> Snackbar.make(binding.root, R.string.register_error, Snackbar.LENGTH_SHORT).show()
+                        else -> Toast.makeText(baseContext, R.string.register_error, Toast.LENGTH_SHORT).show()
                     }
                 }
 
                 override fun onFailure(call: Call<Objects>, t: Throwable) {
-                    Snackbar.make(binding.root, R.string.connection_error, Snackbar.LENGTH_SHORT).show()
+                    Toast.makeText(baseContext, R.string.connection_error, Toast.LENGTH_SHORT).show()
                 }
             })
         }
@@ -162,15 +163,15 @@ class RegisterStep2Activity : AppCompatActivity() {
     private fun validateFields(): Boolean {
         return when {
             date == null -> {
-                Snackbar.make(binding.root, R.string.error_message_date, Snackbar.LENGTH_SHORT).show()
+                Toast.makeText(baseContext, R.string.error_message_date, Toast.LENGTH_SHORT).show()
                 false
             }
             !binding.cbAgreement.isChecked -> {
-                Snackbar.make(binding.root, R.string.error_terms, Snackbar.LENGTH_SHORT).show()
+                Toast.makeText(baseContext, R.string.error_terms, Toast.LENGTH_SHORT).show()
                 false
             }
             interestsSelected < 3 -> {
-                Snackbar.make(binding.root, R.string.error_less_interests, Snackbar.LENGTH_SHORT).show()
+                Toast.makeText(baseContext, R.string.error_less_interests, Toast.LENGTH_SHORT).show()
                 false
             }
             else -> true
