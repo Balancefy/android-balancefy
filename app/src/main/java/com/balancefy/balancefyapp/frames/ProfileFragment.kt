@@ -15,8 +15,6 @@ import com.balancefy.balancefyapp.rest.Rest
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import com.balancefy.balancefyapp.models.request.TopicoRequestDto
-import com.google.android.material.snackbar.Snackbar
 
 class ProfileFragment : Fragment() {
     private lateinit var binding: FragmentProfileBinding
@@ -79,6 +77,6 @@ class ProfileFragment : Fragment() {
     }
 
     private fun showMessageTest(message : String) {
-        Snackbar.make(binding.root, message, Snackbar.LENGTH_SHORT).show()
+        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
     }
 }
