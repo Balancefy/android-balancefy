@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.balancefy.balancefyapp.R
 import com.balancefy.balancefyapp.databinding.ActivityRegisterStep2Binding
 import com.balancefy.balancefyapp.databinding.AgreementBottomSheetBinding
-import com.balancefy.balancefyapp.models.request.RegisterRequestDto
+import com.balancefy.balancefyapp.models.request.RegisterRequest
 import com.balancefy.balancefyapp.models.request.UserRegisterRequest
 import com.balancefy.balancefyapp.rest.Rest
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -129,7 +129,7 @@ class RegisterStep2Activity : AppCompatActivity() {
         if(validateFields()) {
             val etIncoming = binding.etIncoming.text.toString()
 
-            val body = RegisterRequestDto(
+            val body = RegisterRequest(
                 incoming = if (etIncoming.isEmpty()) 0.0 else etIncoming.toDouble(),
                 user = UserRegisterRequest(
                     name = preferences.getString("name", null),
@@ -148,12 +148,12 @@ class RegisterStep2Activity : AppCompatActivity() {
                         201 -> {
                             startActivity(Intent(baseContext, IntroActivity::class.java))
                         }
-                        else -> Toast.makeText(baseContext, getString(R.string.register_error), Toast.LENGTH_SHORT).show()
+                        else -> Toast.makeText(baseContext, R.string.register_error, Toast.LENGTH_SHORT).show()
                     }
                 }
 
                 override fun onFailure(call: Call<Objects>, t: Throwable) {
-                    Toast.makeText(baseContext, t.message, Toast.LENGTH_SHORT).show()
+                    Toast.makeText(baseContext, R.string.connection_error, Toast.LENGTH_SHORT).show()
                 }
             })
         }
@@ -162,15 +162,15 @@ class RegisterStep2Activity : AppCompatActivity() {
     private fun validateFields(): Boolean {
         return when {
             date == null -> {
-                Toast.makeText(baseContext, getString(R.string.error_message_date), Toast.LENGTH_SHORT).show()
+                Toast.makeText(baseContext, R.string.error_message_date, Toast.LENGTH_SHORT).show()
                 false
             }
             !binding.cbAgreement.isChecked -> {
-                Toast.makeText(baseContext, getString(R.string.error_terms), Toast.LENGTH_SHORT).show()
+                Toast.makeText(baseContext, R.string.error_terms, Toast.LENGTH_SHORT).show()
                 false
             }
             interestsSelected < 3 -> {
-                Toast.makeText(baseContext, getString(R.string.error_less_interests), Toast.LENGTH_SHORT).show()
+                Toast.makeText(baseContext, R.string.error_less_interests, Toast.LENGTH_SHORT).show()
                 false
             }
             else -> true

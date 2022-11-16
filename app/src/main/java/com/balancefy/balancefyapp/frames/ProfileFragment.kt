@@ -32,12 +32,11 @@ class ProfileFragment : Fragment() {
         //TODO atualizar background e profile image do usuario
         binding.nameProfile.text = arguments?.getString("nameUser") ?: "Ze ninguem"
         recyclerViewConfiguration()
-
     }
 
     private fun recyclerViewConfiguration() {
 
-        Rest.getListFeedTopic().getListTopicById("Bearer ${arguments?.getString("accessToken")}")
+        Rest.getPostInstance().getListTopicById("Bearer ${arguments?.getString("token")}")
             .enqueue(object : Callback<ListaFeedTopicoResponse> {
                 override fun onResponse(
                     call: Call<ListaFeedTopicoResponse>,
@@ -64,8 +63,7 @@ class ProfileFragment : Fragment() {
                             }
                         }
 
-                        // TODO usar erro getString que a verdinha fez.
-                        else -> Toast.makeText(context, "erro na comunicacao", Toast.LENGTH_SHORT)
+                        else -> Toast.makeText(context, getString(R.string.connection_error), Toast.LENGTH_SHORT)
                             .show()
                     }
                 }
@@ -78,7 +76,7 @@ class ProfileFragment : Fragment() {
 
     }
 
-    private fun showMessageTest(message: String) {
+    private fun showMessageTest(message : String) {
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
     }
 }

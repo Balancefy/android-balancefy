@@ -15,6 +15,26 @@
         <entry key="..\:/Users/Bianca/Downloads/android-balancefy/app/src/main/res/layout/activity_main.xml" value="0.33" />
         <entry key="..\:/Users/Bianca/Downloads/android-balancefy/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.214" />
         <entry key="..\:/Users/Bianca/Downloads/android-balancefy/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.3635" />
+        <entry key="..\:/Users/Bianca/Downloads/balancefy/android-balancefy/app/src/main/res/drawable/bottom_sheet_creation_dialog.xml" value="0.2835" />
+        <entry key="..\:/Users/Bianca/Downloads/balancefy/android-balancefy/app/src/main/res/layout/email_bottom_sheet.xml" value="0.1" />
+        <entry key="..\:/Users/Bianca/Downloads/balancefy/android-balancefy/app/src/main/res/layout/fragment_goal.xml" value="0.25" />
+        <entry key="..\:/Users/Bianca/Downloads/balancefy/android-balancefy/app/src/main/res/layout/fragment_goal2.xml" value="0.3229166666666667" />
+        <entry key="..\:/Users/Bianca/Downloads/balancefy/android-balancefy/app/src/main/res/layout/fragment_goal_details.xml" value="0.33" />
+        <entry key="..\:/Users/Bianca/Downloads/balancefy/android-balancefy/app/src/main/res/layout/fragment_goal_pages.xml" value="0.3614583333333333" />
+        <entry key="..\:/Users/Bianca/Downloads/balancefy/android-balancefy/app/src/main/res/layout/fragment_goal_roadmap.xml" value="0.1762917933130699" />
+        <entry key="..\:/Users/Bianca/Downloads/balancefy/android-balancefy/app/src/main/res/layout/goal_bottom_sheet.xml" value="0.245018115942029" />
+        <entry key="..\:/Users/Bianca/Downloads/balancefy/android-balancefy/app/src/main/res/layout/goal_card.xml" value="0.245018115942029" />
+        <entry key="..\:/Users/Bianca/Downloads/balancefy/android-balancefy/app/src/main/res/layout/login_bottom_sheet.xml" value="0.3625" />
+        <entry key="..\:/Users/Bianca/Downloads/balancefy/android-balancefy/app/src/main/res/layout/onboarding_container.xml" value="0.3625" />
+        <entry key="..\:/Users/Bianca/Downloads/balancefy/android-balancefy/app/src/main/res/layout/post_bottom_sheet.xml" value="0.1757852077001013" />
+        <entry key="..\:/Users/Bianca/Downloads/balancefy/android-balancefy/app/src/main/res/layout/res_current_goal.xml" value="0.3614583333333333" />
+        <entry key="..\:/Users/Bianca/Downloads/balancefy/android-balancefy/app/src/main/res/layout/res_current_task.xml" value="0.18067226890756302" />
+        <entry key="..\:/Users/Bianca/Downloads/balancefy/android-balancefy/app/src/main/res/layout/res_goal_card.xml" value="0.5" />
+        <entry key="..\:/Users/Bianca/Downloads/balancefy/android-balancefy/app/src/main/res/layout/res_goal_details.xml" value="0.3229166666666667" />
+        <entry key="..\:/Users/Bianca/Downloads/balancefy/android-balancefy/app/src/main/res/layout/res_goal_progress.xml" value="0.3229166666666667" />
+        <entry key="..\:/Users/Bianca/Downloads/balancefy/android-balancefy/app/src/main/res/layout/res_goal_roadmap.xml" value="0.3614583333333333" />
+        <entry key="..\:/Users/Bianca/Downloads/balancefy/android-balancefy/app/src/main/res/layout/transaction_bottom_sheet.xml" value="0.152317880794702" />
+        <entry key="..\:/Users/Bianca/Downloads/balancefy/android-balancefy/app/src/main/res/xml/network_security_config.xml" value="0.11730072463768115" />
         <entry key="..\:/Users/Wesley/Desktop/balancefy/android-balancefy/app/src/main/res/drawable/bg_bottom_sheet_dialog.xml" value="0.191" />
         <entry key="..\:/Users/Wesley/Desktop/balancefy/android-balancefy/app/src/main/res/drawable/bg_custom_dialog.xml" value="0.3275" />
         <entry key="..\:/Users/Wesley/Desktop/balancefy/android-balancefy/app/src/main/res/drawable/bt_black_white.xml" value="0.3635" />

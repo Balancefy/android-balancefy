@@ -6,38 +6,33 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.balancefy.balancefyapp.R
-import com.balancefy.balancefyapp.models.request.TopicoRequestDto
+import com.balancefy.balancefyapp.components.GoalCard
+import com.balancefy.balancefyapp.databinding.ResGoalCardBinding
 import com.balancefy.balancefyapp.models.response.GoalsResponse
 
 class GoalCardsAdapter(
     private val goalList: List<GoalsResponse>,
-    private val onClick: (mensagem: String) -> Unit
+    private val onClick: (id: Int) -> Unit
 ): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        val goalCardLayout = LayoutInflater.from(
-            parent.context
-        ).inflate(R.layout.goal_card, parent, false)
+        val inflater = ResGoalCardBinding.inflate(LayoutInflater.from(parent.context), parent, false)
 
-        return GoalCardHolder(goalCardLayout)
+        return GoalCardHolder(inflater)
     }
 
     inner class GoalCardHolder(
-        private val goalCardLayout: View
-    ) : RecyclerView.ViewHolder(goalCardLayout) {
+        private val binding: ResGoalCardBinding
+    ) : RecyclerView.ViewHolder(binding.root) {
 
         fun attach(goalCard : GoalsResponse) {
-            val tvTitle = goalCardLayout.findViewById<TextView>(R.id.tv_goal_title)
-            val tvAchievableBalance = goalCardLayout.findViewById<TextView>(R.id.tv_goal_achievable_balance)
-            val tvActualBalance = goalCardLayout.findViewById<TextView>(R.id.tv_goal_actual_balance)
-            val tvEstimatedDate = goalCardLayout.findViewById<TextView>(R.id.tv_goal_estimated_date)
+            binding.title.text = goalCard.description
+            binding.achievableBalance.text = goalCard.totalValue.toString()
+            binding.currentBalance.text = goalCard.initialValue.toString()
+            binding.estimatedDate.text = goalCard.estimatedTime
 
-            tvTitle.text = goalCard.description
-            tvAchievableBalance.text = goalCard.totalValue.toString()
-            tvActualBalance.text = goalCard.initialValue.toString()
-            tvEstimatedDate.text = goalCard.estimatedTime.toString()
-
-            goalCardLayout.setOnClickListener{
-                onClick("Redirecionar para Post da Pessoa (in development)")
+            binding.card.setOnClickListener {
+                println("Ate aqui deu certo onClick")
+                onClick(goalCard.id)
             }
         }
     }
