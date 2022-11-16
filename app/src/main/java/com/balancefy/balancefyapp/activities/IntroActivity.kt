@@ -10,7 +10,7 @@ import com.balancefy.balancefyapp.R
 import com.balancefy.balancefyapp.databinding.ActivityIntroBinding
 import com.balancefy.balancefyapp.databinding.EmailBottomSheetBinding
 import com.balancefy.balancefyapp.databinding.LoginBottomSheetBinding
-import com.balancefy.balancefyapp.models.request.LoginRequestDto
+import com.balancefy.balancefyapp.models.request.LoginRequest
 import com.balancefy.balancefyapp.models.response.LoginResponseDto
 import com.balancefy.balancefyapp.models.response.UserResponseDto
 import com.balancefy.balancefyapp.rest.Rest
@@ -101,7 +101,7 @@ class IntroActivity : AppCompatActivity() {
         val email = sheetEmailBinding.etLoginEmail.text.toString()
         val password = sheetEmailBinding.etLoginPassword.text.toString()
 
-        val body = LoginRequestDto(email, password)
+        val body = LoginRequest(email, password)
 
         Rest.getAuthInstance().login(body).enqueue(object : Callback<LoginResponseDto> {
             override fun onResponse(

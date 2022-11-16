@@ -2,7 +2,7 @@ package com.balancefy.balancefyapp.models.request
 
 import com.google.gson.annotations.SerializedName
 
-data class CreateGoalDto(
+data class CreateGoal(
     @SerializedName("objetivo")
     val goal: GoalCategory,
     @SerializedName("descricao")

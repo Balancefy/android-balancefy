@@ -1,9 +1,6 @@
 package com.balancefy.balancefyapp.rest
 
-import com.balancefy.balancefyapp.services.Auth
-import com.balancefy.balancefyapp.services.Forum
-import com.balancefy.balancefyapp.services.Goal
-import com.balancefy.balancefyapp.services.Register
+import com.balancefy.balancefyapp.services.*
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -26,5 +23,7 @@ object Rest {
 
     fun getGoalInstance() = getInstance().create(Goal::class.java)
 
-    fun getListFeedTopic() = getInstance().create(Forum::class.java)
+    fun getPostInstance() = getInstance().create(Forum::class.java)
+
+    fun getTransactionInstance() = getInstance().create(RepeatedTransaction::class.java)
 }

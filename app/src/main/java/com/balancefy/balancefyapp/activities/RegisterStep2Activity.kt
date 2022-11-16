@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.balancefy.balancefyapp.R
 import com.balancefy.balancefyapp.databinding.ActivityRegisterStep2Binding
 import com.balancefy.balancefyapp.databinding.AgreementBottomSheetBinding
-import com.balancefy.balancefyapp.models.request.RegisterRequestDto
+import com.balancefy.balancefyapp.models.request.RegisterRequest
 import com.balancefy.balancefyapp.models.request.UserRegisterRequest
 import com.balancefy.balancefyapp.rest.Rest
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -16,7 +16,6 @@ import com.google.android.material.button.MaterialButton
 import com.google.android.material.datepicker.CalendarConstraints
 import com.google.android.material.datepicker.DateValidatorPointBackward
 import com.google.android.material.datepicker.MaterialDatePicker
-import com.google.android.material.snackbar.Snackbar
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -130,7 +129,7 @@ class RegisterStep2Activity : AppCompatActivity() {
         if(validateFields()) {
             val etIncoming = binding.etIncoming.text.toString()
 
-            val body = RegisterRequestDto(
+            val body = RegisterRequest(
                 incoming = if (etIncoming.isEmpty()) 0.0 else etIncoming.toDouble(),
                 user = UserRegisterRequest(
                     name = preferences.getString("name", null),

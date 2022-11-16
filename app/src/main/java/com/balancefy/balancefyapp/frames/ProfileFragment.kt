@@ -36,7 +36,7 @@ class ProfileFragment : Fragment() {
 
     private fun recyclerViewConfiguration() {
 
-        Rest.getListFeedTopic().getListTopicById("Bearer ${arguments?.getString("token")}")
+        Rest.getPostInstance().getListTopicById("Bearer ${arguments?.getString("token")}")
             .enqueue(object : Callback<ListaFeedTopicoResponse> {
                 override fun onResponse(
                     call: Call<ListaFeedTopicoResponse>,

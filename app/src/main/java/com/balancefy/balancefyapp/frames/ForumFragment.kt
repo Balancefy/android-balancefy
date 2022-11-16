@@ -7,14 +7,9 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
-import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
 import com.balancefy.balancefyapp.R
 import com.balancefy.balancefyapp.adapter.pagers.ForumPagerAdapter
 import com.balancefy.balancefyapp.databinding.FragmentForumBinding
-import com.balancefy.balancefyapp.fragments.OnboardingFragment1
-import com.balancefy.balancefyapp.fragments.OnboardingFragment2
-import com.balancefy.balancefyapp.fragments.OnboardingFragment3
-import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
 class ForumFragment : Fragment() {
@@ -38,7 +33,7 @@ class ForumFragment : Fragment() {
         ) { tab, position -> run {
             when(position) {
                 0 -> {
-                    tab.text = resources.getString(R.string.geral)
+                    tab.text = resources.getString(R.string.general)
                     val badge = tab.orCreateBadge
                     badge.backgroundColor = ContextCompat.getColor(
                         requireContext(),
@@ -47,7 +42,7 @@ class ForumFragment : Fragment() {
                     badge.isVisible = true
                 }
                 1 -> {
-                    tab.text = resources.getString(R.string.recomendados)
+                    tab.text = resources.getString(R.string.for_you)
                     val badge = tab.orCreateBadge
                     badge.backgroundColor = ContextCompat.getColor(
                         requireContext(),

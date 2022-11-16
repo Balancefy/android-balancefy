@@ -10,16 +10,20 @@ import android.view.animation.AnimationUtils
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
-import androidx.fragment.app.FragmentManager
 import com.balancefy.balancefyapp.R
 import com.balancefy.balancefyapp.databinding.ActivityMainBinding
 import com.balancefy.balancefyapp.databinding.GoalBottomSheetBinding
+import com.balancefy.balancefyapp.databinding.PostBottomSheetBinding
+import com.balancefy.balancefyapp.databinding.TransactionBottomSheetBinding
 import com.balancefy.balancefyapp.frames.*
-import com.balancefy.balancefyapp.models.request.CreateGoalDto
+import com.balancefy.balancefyapp.models.request.CreateGoal
 import com.balancefy.balancefyapp.models.request.GoalCategory
+import com.balancefy.balancefyapp.models.request.PostRequest
+import com.balancefy.balancefyapp.models.request.RepeatedTransactionRequest
 import com.balancefy.balancefyapp.rest.Rest
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.android.material.button.MaterialButton
 import com.google.android.material.datepicker.CalendarConstraints
 import com.google.android.material.datepicker.DateValidatorPointForward
 import com.google.android.material.datepicker.MaterialDatePicker
@@ -33,9 +37,14 @@ class MainActivity : AppCompatActivity() {
     // Bindings
     private lateinit var binding: ActivityMainBinding
     private lateinit var sheetGoalBinding: GoalBottomSheetBinding
+    private lateinit var sheetTransactionBinding: TransactionBottomSheetBinding
+    private lateinit var sheetPostBottomSheetBinding: PostBottomSheetBinding
 
     // Goal creation
     private var date: String? = null
+    // Transaction creation
+    private var typeSelected = false
+
     // Preferences
     lateinit var preferences : SharedPreferences
     private var token: String? = ""
@@ -76,14 +85,14 @@ class MainActivity : AppCompatActivity() {
         binding.fabGoals.setOnClickListener {
             showGoalCreationBottomSheet()
         }
-//
-//        binding.fabPosts.setOnClickListener {
-//            TODO("Not yet implemented")
-//        }
-//
-//        binding.fabTransaction.setOnClickListener {
-//            TODO("Not yet implemented")
-//        }
+
+        binding.fabPosts.setOnClickListener {
+            showPostBottomSheet()
+        }
+
+        binding.fabTransaction.setOnClickListener {
+            showTransactionBottomSheet()
+        }
     }
 
     override fun onBackPressed() {
@@ -224,8 +233,8 @@ class MainActivity : AppCompatActivity() {
     private fun createGoal(): Boolean {
         val initialValue = sheetGoalBinding.etGoalInitialValue.text.toString()
 
-        if(validateFields()) {
-            val body = CreateGoalDto(
+        if(validateGoalFields()) {
+            val body = CreateGoal(
                 goal = GoalCategory(getCategory()),
                 description = sheetGoalBinding.etDescription.text.toString(),
                 totalValue = sheetGoalBinding.etGoalValue.text.toString().toDouble(),
@@ -238,8 +247,6 @@ class MainActivity : AppCompatActivity() {
                     call: Call<Objects>,
                     response: Response<Objects>
                 ) {
-                    println(response.code())
-                    println(response)
                     when(response.code()){
                         201 -> {
                             Toast.makeText(baseContext, R.string.created_goal, Toast.LENGTH_SHORT).show()
@@ -271,7 +278,7 @@ class MainActivity : AppCompatActivity() {
             else -> 7
     }
 
-    private fun validateFields(): Boolean {
+    private fun validateGoalFields(): Boolean {
         return when {
             sheetGoalBinding.etDescription.text.toString().isEmpty() -> {
                 sheetGoalBinding.etDescription.error = getString(R.string.error_empty_field)
@@ -297,8 +304,190 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun showTransactionBottomSheet() {
+        val dialog = BottomSheetDialog(this, R.style.BottomSheetDialog).apply {
+            window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
+        }
+
+        dialog.behavior.skipCollapsed = true
+        dialog.behavior.state = BottomSheetBehavior.STATE_EXPANDED
+
+        sheetTransactionBinding = TransactionBottomSheetBinding.inflate(layoutInflater, null, false)
+
+        dialog.setContentView(sheetTransactionBinding.root)
+        dialog.show()
+
+        var type = ""
+
+        sheetTransactionBinding.btnIncoming.setOnClickListener {
+            changeColor(sheetTransactionBinding.btnIncoming)
+
+            if(type.isNotEmpty()) {
+                changeColor(sheetTransactionBinding.btnSpending)
+            }
+
+            type = "Entrada"
+        }
+
+        sheetTransactionBinding.btnSpending.setOnClickListener {
+            changeColor(sheetTransactionBinding.btnSpending)
+
+            if(type.isNotEmpty()) {
+                changeColor(sheetTransactionBinding.btnIncoming)
+            }
+
+            type = "Saída"
+        }
+
+        sheetTransactionBinding.btnCreate.setOnClickListener {
+            if(createTransaction(type)) {
+                dialog.dismiss()
+            }
+        }
+    }
+
+    private fun createTransaction(type: String): Boolean {
+        if(validateTransactionFields(type)) {
+            val body = RepeatedTransactionRequest(
+                value = sheetTransactionBinding.etValue.text.toString().toDouble(),
+                category = sheetTransactionBinding.transactionCategory.text.toString(),
+                description = sheetTransactionBinding.etDescription.text.toString(),
+                type = type
+            )
+
+            Rest.getTransactionInstance().create("Bearer $token", body).enqueue(object : Callback<Objects> {
+                override fun onResponse(
+                    call: Call<Objects>,
+                    response: Response<Objects>
+                ) {
+                    when(response.code()){
+                        201 -> {
+                            Toast.makeText(baseContext, R.string.created_transaction, Toast.LENGTH_SHORT).show()
+                        }
+                        else -> {
+                            Toast.makeText(baseContext, R.string.register_error, Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                }
+
+                override fun onFailure(call: Call<Objects>, t: Throwable) {
+                    Toast.makeText(baseContext, R.string.connection_error, Toast.LENGTH_SHORT).show()
+                }
+            })
+
+            return true
+        }
+
+        return false
+    }
+
+    private fun validateTransactionFields(type: String): Boolean {
+        return when {
+            sheetTransactionBinding.etDescription.text.toString().isEmpty() -> {
+                sheetTransactionBinding.etDescription.error = getString(R.string.error_empty_field)
+                false
+            }
+            sheetTransactionBinding.etValue.text.toString().isEmpty() -> {
+                sheetTransactionBinding.etValue.error = getString(R.string.error_empty_field)
+                false
+            }
+            sheetTransactionBinding.etValue.text.toString().toDouble() <= 0 -> {
+                sheetTransactionBinding.etValue.error = getString(R.string.error_empty_value)
+                false
+            }
+            sheetTransactionBinding.transactionCategory.text.toString().isEmpty() -> {
+                sheetTransactionBinding.transactionCategory.error = getString(R.string.error_empty_field)
+                false
+            }
+            type.isEmpty() -> {
+                Toast.makeText(baseContext, R.string.error_transaction_type, Toast.LENGTH_SHORT).show()
+                false
+            }
+            else -> true
+        }
+    }
+
+    private fun changeColor(btn: MaterialButton) {
+        if(btn.strokeColor.equals(getColorStateList(R.color.green_balancefy))) {
+            btn.strokeColor = getColorStateList(R.color.grey).withAlpha(24)
+            btn.setTextColor(getColor(R.color.grey))
+        } else {
+            btn.strokeColor = getColorStateList(R.color.green_balancefy)
+            btn.setTextColor(getColor(R.color.green_balancefy))
+        }
+    }
+
+    private fun showPostBottomSheet() {
+        val dialog = BottomSheetDialog(this, R.style.BottomSheetDialog).apply {
+            window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
+        }
+
+        dialog.behavior.skipCollapsed = true
+        dialog.behavior.state = BottomSheetBehavior.STATE_EXPANDED
+
+        sheetPostBottomSheetBinding = PostBottomSheetBinding.inflate(layoutInflater, null, false)
+
+        dialog.setContentView(sheetPostBottomSheetBinding.root)
+        dialog.show()
+
+        sheetPostBottomSheetBinding.btnCreate.setOnClickListener {
+            if(createPost()) {
+                dialog.dismiss()
+            }
+        }
+    }
+
+    private fun createPost(): Boolean {
+        if(validatePostFields()) {
+            val body = PostRequest(
+                title = sheetPostBottomSheetBinding.etTitle.text.toString(),
+                content = sheetPostBottomSheetBinding.etTitle.text.toString()
+            )
+
+            Rest.getPostInstance().create("Bearer $token", body).enqueue(object : Callback<Objects> {
+                override fun onResponse(
+                    call: Call<Objects>,
+                    response: Response<Objects>
+                ) {
+                    when(response.code()){
+                        201 -> {
+                            Toast.makeText(baseContext, R.string.created_post, Toast.LENGTH_SHORT).show()
+                        }
+                        else -> {
+                            Toast.makeText(baseContext, R.string.register_error, Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                }
+
+                override fun onFailure(call: Call<Objects>, t: Throwable) {
+                    Toast.makeText(baseContext, R.string.connection_error, Toast.LENGTH_SHORT).show()
+                }
+            })
+
+            return true
+        }
+
+        return false
+    }
+
+    private fun validatePostFields(): Boolean {
+        return when {
+            sheetPostBottomSheetBinding.etTitle.text.toString().isEmpty() -> {
+                sheetPostBottomSheetBinding.etTitle.error = getString(R.string.error_empty_field)
+                false
+            }
+            sheetPostBottomSheetBinding.etDescription.text.toString().isEmpty() -> {
+                sheetPostBottomSheetBinding.etDescription.error = getString(R.string.error_empty_field)
+                false
+            }
+            else -> true
+        }
+    }
+
     private fun logOut() {
         val editor = preferences.edit()
+        editor.putString("token", null)
+        editor.putString("avatar", null)
         editor.putString("nameUser", null)
         editor.apply()
         startActivity(Intent(this, IntroActivity::class.java))

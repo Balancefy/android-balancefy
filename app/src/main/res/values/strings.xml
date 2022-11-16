@@ -110,12 +110,18 @@
     <string name="zero_score">0x</string>
     <string name="remaining_days">dias restante</string>
     <string name="transaction">"Transação "</string>
-    <string name="geral">Geral</string>
-    <string name="recomendados">Recomendados</string>
+    <string name="general">Geral</string>
+    <string name="for_you">Recomendados</string>
     <string name="current_goal_title">Objetivo Atual</string>
     <string name="next_steps">Próximos passos</string>
     <string name="conclude">Concluir</string>
     <string name="add_transaction">Adicionar Transação</string>
     <string name="transaction_amount">Valor da transação</string>
+    <string name="created_transaction">Transação Criada!</string>
+    <string name="error_transaction_type">Tipo de transação não pode estar vazio</string>
+    <string name="error_empty_value">Insira um valor acima de 0</string>
+    <string name="title">Título</string>
+    <string name="publish">Publicar</string>
+    <string name="created_post">Tópico criado!</string>
     <!-- TODO: Remove or change this placeholder text -->
 </resources>

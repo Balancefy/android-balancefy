@@ -116,6 +116,6 @@
     <string name="next_steps">Próximos pasos</string>
     <string name="conclude">Concluir</string>
     <string name="transaction_amount">Cantidad de Transacción</string>
-    <string name="geral">Todos</string>
-    <string name="recomendados">Recomendado</string>
+    <string name="general">Todos</string>
+    <string name="for_you">Recomendado</string>
 </resources>
