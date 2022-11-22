@@ -1,12 +1,10 @@
 package com.balancefy.balancefyapp.services
 
 import com.balancefy.balancefyapp.models.request.CreateGoal
+import com.balancefy.balancefyapp.models.response.GoalsDetailsResponse
 import com.balancefy.balancefyapp.models.response.GoalsResponse
 import retrofit2.Call
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.Header
-import retrofit2.http.POST
+import retrofit2.http.*
 import java.util.*
 
 interface Goal {
@@ -18,4 +16,7 @@ interface Goal {
 
     @POST("/accounts/goals")
     fun createGoal(@Header("Authorization") token: String, @Body body: CreateGoal): Call<Objects>
+
+    @GET("/accounts/goals/{id}")
+    fun findById(@Header("Authorization") token: String, @Path("id") id: Int): Call<GoalsDetailsResponse>
 }

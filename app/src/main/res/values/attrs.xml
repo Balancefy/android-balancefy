@@ -31,4 +31,10 @@
         <attr name="current_task_description" format="string" />
         <attr name="score" format="string" />
     </declare-styleable>
+
+    <declare-styleable name="GoalRoadmapCard">
+        <attr name="roadmap_title" format="string"/>
+        <attr name="roadmap_score" format="string" />
+        <attr name="roadmap_status" format="string" />
+    </declare-styleable>
 </resources>

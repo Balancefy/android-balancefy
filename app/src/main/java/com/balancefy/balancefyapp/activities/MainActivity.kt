@@ -30,6 +30,7 @@ import com.google.android.material.datepicker.MaterialDatePicker
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.sql.Timestamp
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -225,7 +226,14 @@ class MainActivity : AppCompatActivity() {
 
         datePicker.addOnPositiveButtonClickListener {
             val sdf = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
-            date = sdf.format(it)
+
+            var ts = Timestamp(it)
+            val cal = Calendar.getInstance()
+            cal.timeInMillis = ts.time
+            cal.add(Calendar.DAY_OF_MONTH, +1)
+            ts = Timestamp(cal.time.time)
+
+            date = sdf.format(ts)
             sheetGoalBinding.btnEstimatedDate.text = date
         }
     }
@@ -355,7 +363,7 @@ class MainActivity : AppCompatActivity() {
                 type = type
             )
 
-            Rest.getTransactionInstance().create("Bearer $token", body).enqueue(object : Callback<Objects> {
+            Rest.getRepeatedTransactionInstance().create("Bearer $token", body).enqueue(object : Callback<Objects> {
                 override fun onResponse(
                     call: Call<Objects>,
                     response: Response<Objects>
