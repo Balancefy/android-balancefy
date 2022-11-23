@@ -15,24 +15,26 @@
         android:padding="20dp">
 
         <com.balancefy.balancefyapp.components.GoalDetails
+            android:id="@+id/goal_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:goal_details_title="Viagem"
-            app:remaining_days="10"/>
+            tools:goal_details_title="Viagem"
+            tools:remaining_days="10"/>
 
         <com.balancefy.balancefyapp.components.GoalProgress
+            android:id="@+id/goal_progress"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:total_score="1600xp"/>
+            tools:total_score="1600xp"/>
 
         <com.balancefy.balancefyapp.components.CurrentTask
             android:id="@+id/current_task"
             android:layout_marginTop="20dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:current_task_title="Economizar"
-            app:current_task_description="Reservar 20 reais por mês, durante 2 meses"
-            app:score="+400xp"/>
+            tools:current_task_title="Economizar"
+            tools:current_task_description="Reservar 20 reais por mês, durante 2 meses"
+            tools:score="+400xp"/>
 
         <TextView
             android:layout_width="match_parent"
@@ -54,38 +56,26 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="20dp">
+                android:orientation="horizontal">
 
-                <com.balancefy.balancefyapp.components.Transaction
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:category="Lazer"
-                    app:date="20 de fev, 2022"
-                    app:description="Netflix"
-                    app:type="out"
-                    app:value="23,00" />
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerContainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
 
-                <com.balancefy.balancefyapp.components.Transaction
-                    android:layout_width="wrap_content"
+                <TextView
+                    android:id="@+id/tv_error"
+                    android:layout_marginTop="50dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:category="Outros"
-                    app:date="25 de fev, 2022"
-                    app:description="Mesada"
-                    app:value="50,00" />
-
-                <com.balancefy.balancefyapp.components.Transaction
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:category="Lazer"
-                    app:date="30 de fev, 2022"
-                    app:description="Prime"
-                    app:type="out"
-                    app:value="10,00" />
+                    android:textAlignment="center"
+                    android:textColor="@color/grey"/>
 
             </LinearLayout>
         </HorizontalScrollView>
 
         <Button
+            android:id="@+id/add_transaction"
             android:layout_width="wrap_content"
             android:layout_height="45dp"
             app:cornerRadius="5dp"
