@@ -107,9 +107,12 @@ class MainActivity : AppCompatActivity() {
         val homeFragment = HomeFragment()
 
         val bundle = bundleOf(
-            "nameUser" to preferences.getString("nameUser", null),
+            "token" to preferences.getString("token", null),
             "accountId" to preferences.getInt("accountId", 0),
-            "token" to token
+            "nameUser" to preferences.getString("nameUser", null),
+            "avatar" to preferences.getString("avatar", null),
+            "banner" to preferences.getString("banner", null),
+            "type" to preferences.getString("type", null)
         )
 
         homeFragment.arguments = bundle
@@ -452,7 +455,7 @@ class MainActivity : AppCompatActivity() {
                 content = sheetPostBottomSheetBinding.etTitle.text.toString()
             )
 
-            Rest.getPostInstance().create("Bearer $token", body).enqueue(object : Callback<Objects> {
+            Rest.getForumInstance().create("Bearer $token", body).enqueue(object : Callback<Objects> {
                 override fun onResponse(
                     call: Call<Objects>,
                     response: Response<Objects>
@@ -495,8 +498,11 @@ class MainActivity : AppCompatActivity() {
     private fun logOut() {
         val editor = preferences.edit()
         editor.putString("token", null)
-        editor.putString("avatar", null)
+        editor.putInt("accountId", 0)
         editor.putString("nameUser", null)
+        editor.putString("avatar", null)
+        editor.putString("banner", null)
+        editor.putString("type", null)
         editor.apply()
         startActivity(Intent(this, IntroActivity::class.java))
     }

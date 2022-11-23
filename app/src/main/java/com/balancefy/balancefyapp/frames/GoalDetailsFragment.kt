@@ -1,6 +1,7 @@
 package com.balancefy.balancefyapp.frames
 
 import android.content.SharedPreferences
+import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -8,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.balancefy.balancefyapp.R
@@ -26,6 +28,7 @@ import com.google.android.material.button.MaterialButton
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.time.LocalDateTime
 import java.util.*
 
 class GoalDetailsFragment : Fragment() {
@@ -39,7 +42,7 @@ class GoalDetailsFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentGoalDetailsBinding.inflate(layoutInflater)
         return binding.root
     }
@@ -56,6 +59,7 @@ class GoalDetailsFragment : Fragment() {
 
     private fun showGoalsDetails() {
         Rest.getGoalInstance().findById("Bearer $token", goalId!!).enqueue(object : Callback<GoalsDetailsResponse> {
+            @RequiresApi(Build.VERSION_CODES.O)
             override fun onResponse(
                 call: Call<GoalsDetailsResponse>,
                 response: Response<GoalsDetailsResponse>
@@ -77,6 +81,7 @@ class GoalDetailsFragment : Fragment() {
         })
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun configScreen(goal: GoalsDetailsResponse) {
         setProgress(goal)
         setGoalDescription(goal.goal)
@@ -113,15 +118,16 @@ class GoalDetailsFragment : Fragment() {
         binding.currentTask.setScore("+%.0fxp".format(task.score))
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun setGoalTransaction() {
         configRecyclerView(
             listOf(
-                TransactionRequest(
+                Transaction(
                     value = 50.0,
                     category = "Lazer",
                     description = "Netflix",
                     type = "Entrada",
-                    goal = goalDetails!!
+                    createdAt = LocalDateTime.now()
                 )
             )
         )
@@ -186,7 +192,7 @@ class GoalDetailsFragment : Fragment() {
                 category = sheetTransactionBinding.transactionCategory.text.toString(),
                 description = sheetTransactionBinding.etDescription.text.toString(),
                 type = type,
-                goal = goalDetails!!
+                goal = goalDetails
             )
 
             Rest.getTransactionInstance().create("Bearer $token", body).enqueue(object : Callback<Objects> {

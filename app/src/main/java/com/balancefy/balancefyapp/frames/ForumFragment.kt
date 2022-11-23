@@ -18,7 +18,7 @@ class ForumFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentForumBinding.inflate(layoutInflater)
 
         return binding.root
@@ -53,7 +53,6 @@ class ForumFragment : Fragment() {
             }
         }}.attach()
 
-
         viewPager2.registerOnPageChangeCallback(object: ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
                 val badge = tabLayout.getTabAt(position)?.orCreateBadge
@@ -61,7 +60,6 @@ class ForumFragment : Fragment() {
                 badge?.number = 0
             }
         })
-
         super.onViewCreated(view, savedInstanceState)
     }
 }

@@ -20,7 +20,6 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-
 class IntroActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityIntroBinding
@@ -122,11 +121,15 @@ class IntroActivity : AppCompatActivity() {
                                 type = data.account.user.type
                             )
 
-                            val editor = preferences.edit()
-                            editor.putString("nameUser", user.name)
-                            editor.putString("token", data.token)
-                            editor.putString("avatar", user.avatar)
-                            editor.apply()
+                        val auth = response.body()!!.token
+                        val editor = preferences.edit()
+                        editor.putString("token", data.token)
+                        editor.putInt("accountId", user.id)
+                        editor.putString("nameUser", user.name)
+                        editor.putString("avatar", user.avatar)
+                        editor.putString("banner", user.banner)
+                        editor.putString("type", user.type.toString())
+                        editor.apply()
 
                             startActivity(Intent(baseContext, MainActivity::class.java))
                         }

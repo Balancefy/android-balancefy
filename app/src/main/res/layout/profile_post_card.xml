@@ -2,47 +2,70 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:orientation="vertical"
     android:layout_height="wrap_content"
     android:layout_margin="5dp"
-    android:elevation="10dp"
-    app:cardCornerRadius="5dp"
     android:background="@color/black_balancefy"
-    >
+    android:elevation="10dp"
+    android:orientation="vertical"
+    app:cardCornerRadius="5dp">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
         android:background="@color/black_balancefy"
+        android:orientation="vertical"
         android:padding="10dp"
         android:paddingStart="15dp">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="8dp">
+
+            <ImageView
+                android:id="@+id/posts_profile_image"
+                android:layout_width="31dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:background="@drawable/bg_profile_image"
+                android:contentDescription="@string/background_avatar_image_post"
+                android:src="@drawable/ic_account" />
+
+            <TextView
+                android:id="@+id/tv_posts_create_profile_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:paddingStart="8dp"
+                android:paddingTop="5dp"
+                android:text="@string/name_of_the_one_who_created_the_post"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
+
+        </LinearLayout>
 
         <TextView
             android:id="@+id/tv_titlePost"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/green_balancefy"
-            android:textStyle="bold"
             android:layout_marginBottom="16dp"
+            android:text="@string/titulo_aleatorio"
+            android:textColor="@color/green_balancefy"
             android:textSize="18sp"
-            android:text="Titulo aleatorio">
-
-        </TextView>
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/tv_textPost"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="@string/texto_aleatorio"
             android:textColor="@color/white"
-            android:textSize="14sp"
-            android:text="Texto aleatorio">
-
-        </TextView>
+            android:textSize="14sp" />
 
         <LinearLayout
-            android:layout_marginTop="15dp"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:layout_marginTop="15dp"
             android:layout_weight="1"
             android:orientation="horizontal">
 
@@ -51,57 +74,55 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:src="@drawable/ic_post_comments">
-            </ImageView>
+                android:contentDescription="@string/comment_icon"
+                android:src="@drawable/ic_post_comments" />
 
             <TextView
                 android:id="@+id/tv_post_comments"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:textColor="@color/white"
                 android:text="11"
-                android:textSize="16sp"
-                />
+                android:textColor="@color/white"
+                android:textSize="16sp" />
 
             <ImageView
                 android:id="@+id/ic_post_likes"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:src="@drawable/ic_post_likes_disable"/>
+                android:src="@drawable/ic_post_likes_disable" />
 
             <TextView
                 android:id="@+id/tv_post_likes"
-                android:textColor="@color/white"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="11"
-                android:textSize="16sp"/>
+                android:textColor="@color/white"
+                android:textSize="16sp" />
 
             <ImageView
                 android:id="@+id/ic_post_timer"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:src="@drawable/ic_post_timer">
-
-            </ImageView>
+                android:src="@drawable/ic_post_timer" />
 
             <TextView
                 android:id="@+id/tv_post_timer"
-                android:textColor="@color/white"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="3"
                 android:text="11"
-                android:textSize="16sp"
-                />
-
+                android:textColor="@color/white"
+                android:textSize="16sp" />
         </LinearLayout>
 
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:layout_marginTop="15sp"
+            android:background="@color/gray_line" />
     </LinearLayout>
-
-
 </androidx.cardview.widget.CardView>

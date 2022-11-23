@@ -8,12 +8,16 @@ import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.POST
 import java.util.*
+import retrofit2.http.Path
 
 interface Forum {
 
     @GET("/forum")
-    fun getListTopicById(@Header("Authorization") token: String): Call<ListaFeedTopicoResponse>
+    fun getListTopic(@Header("Authorization") token: String): Call<ListaFeedTopicoResponse>
 
     @POST("/forum")
     fun create(@Header("Authorization") token: String, @Body body: PostRequest): Call<Objects>
+
+    @GET("/forum/accounts/{accountId}")
+    fun getListTopicById(@Header("Authorization") token: String, @Path("accountId") accountId:Int): Call<ListaFeedTopicoResponse>
 }

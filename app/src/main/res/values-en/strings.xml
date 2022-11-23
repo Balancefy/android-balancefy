@@ -118,4 +118,14 @@
     <string name="conclude">Complete</string>
     <string name="general">General</string>
     <string name="for_you">For You</string>
+    <string name="created_transaction">Transaction Created</string>
+    <string name="error_transaction_type">Transaction type cannot be empty</string>
+    <string name="error_empty_value">Value must be higher than 0</string>
+    <string name="title">Title</string>
+    <string name="publish">Publish</string>
+    <string name="created_post">Topic created!</string>
+    <string name="background_avatar_image_post">Avatar Background Image</string>
+    <string name="profile_editable_icon">" Editable profile icon"</string>
+    <string name="titulo_aleatorio">Random Title</string>
+    <string name="texto_aleatorio">Random Text</string>
 </resources>
