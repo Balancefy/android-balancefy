@@ -15,6 +15,7 @@
         android:orientation="vertical">
 
         <com.balancefy.balancefyapp.components.GoalDetails
+            android:id="@+id/goal_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:goal_details_title="Viagem"
@@ -23,7 +24,8 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerContainer"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp" />
 
 <!--        <com.google.android.material.divider.MaterialDivider-->
 <!--            android:layout_width="3dp"-->

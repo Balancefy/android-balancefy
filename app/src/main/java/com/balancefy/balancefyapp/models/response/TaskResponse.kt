@@ -20,4 +20,23 @@ data class TaskGoalKey(
     val taskId: Int,
     @SerializedName("objetivoContaId")
     val goalId: Int
+) {}
+
+data class TesteResponse(
+    val id: Teste,
+    @SerializedName("ordem")
+    val order: Int,
+    @SerializedName("descricao")
+    val description: String,
+    val done: Int,
+    @SerializedName("pontuacao")
+    val score: Double,
+    @SerializedName("valor")
+    val value: Double,
+    val createdAt: String
 )
+
+data class Teste(
+    val taskId: Int,
+    val objetivoContaId: Int
+) {}

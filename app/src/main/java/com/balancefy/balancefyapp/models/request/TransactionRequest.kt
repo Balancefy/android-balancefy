@@ -1,5 +1,6 @@
 package com.balancefy.balancefyapp.models.request
 
+import com.balancefy.balancefyapp.models.response.GoalsDetailsResponse
 import com.balancefy.balancefyapp.models.response.GoalsResponse
 import com.google.gson.annotations.SerializedName
 
@@ -13,5 +14,5 @@ data class TransactionRequest(
     @SerializedName("tipo")
     val type: String,
     @SerializedName("fkObjetivoConta")
-    val goal: GoalsResponse
+    val goal: GoalsDetailsResponse
 )

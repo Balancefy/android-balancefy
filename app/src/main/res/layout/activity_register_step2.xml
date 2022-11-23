@@ -67,7 +67,7 @@
     <com.google.android.material.textfield.TextInputLayout
         app:prefixText="@string/money"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="wrap_content"
         android:hint="@string/incoming"
         android:layout_marginTop="20dp"
         android:textColorHint="@color/white">
