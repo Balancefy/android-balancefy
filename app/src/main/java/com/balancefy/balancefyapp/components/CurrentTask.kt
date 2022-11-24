@@ -9,11 +9,11 @@ import androidx.core.content.ContextCompat
 import androidx.core.graphics.blue
 import androidx.core.graphics.green
 import androidx.core.graphics.red
+import androidx.core.os.bundleOf
+import androidx.fragment.app.setFragmentResult
 import androidx.navigation.findNavController
 import com.balancefy.balancefyapp.R
 import com.balancefy.balancefyapp.databinding.ResCurrentTaskBinding
-import com.balancefy.balancefyapp.databinding.ResGoalCardBinding
-import com.balancefy.balancefyapp.databinding.ResTransactionBinding
 
 class CurrentTask(context: Context, attrs: AttributeSet) : LinearLayout(context, attrs) {
 
@@ -27,12 +27,18 @@ class CurrentTask(context: Context, attrs: AttributeSet) : LinearLayout(context,
         setTitle(attributes.getString(R.styleable.CurrentTask_current_task_title) ?: "")
         setDescription(attributes.getString(R.styleable.CurrentTask_current_task_description) ?: "")
         setScore(attributes.getString(R.styleable.CurrentTask_score) ?: "")
-        setOnClickListener()
+        setNextStepOnClickListener()
     }
 
-    fun setOnClickListener() {
+    fun setNextStepOnClickListener() {
         binding.btnNextStep.setOnClickListener {
             findNavController().navigate(R.id.fromGoalDetailsToGoalRoadmap)
+        }
+    }
+
+    fun setCompleteOnClickListener(function: () -> Unit) {
+        binding.btnDone.setOnClickListener {
+            function()
         }
     }
 

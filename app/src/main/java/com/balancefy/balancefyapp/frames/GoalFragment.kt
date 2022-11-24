@@ -11,11 +11,15 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResult
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.balancefy.balancefyapp.R
 import com.balancefy.balancefyapp.adapter.GoalCardsAdapter
+import com.balancefy.balancefyapp.adapter.TransactionCardsAdapter
 import com.balancefy.balancefyapp.databinding.FragmentGoalBinding
 import com.balancefy.balancefyapp.models.response.GoalsResponse
+import com.balancefy.balancefyapp.models.response.TransactionResponse
 import com.balancefy.balancefyapp.rest.Rest
+import com.balancefy.balancefyapp.services.Goal
 import com.google.android.material.tabs.TabLayout
 import retrofit2.Call
 import retrofit2.Callback
@@ -25,6 +29,7 @@ class GoalFragment : Fragment() {
 
     private lateinit var binding: FragmentGoalBinding
     lateinit var preferences : SharedPreferences
+    private lateinit var swipeContainer: SwipeRefreshLayout
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,15 +42,20 @@ class GoalFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         preferences = context?.getSharedPreferences("Auth", AppCompatActivity.MODE_PRIVATE)!!
+        swipeContainer = binding.swipe
         findGoals()
+
+        var actualTab: Int = 0
 
         binding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 when(tab?.position) {
                     0 -> {
+                        actualTab = 0
                         findGoals()
                     }
                     1 -> {
+                        actualTab = 1
                         findGoals("DONE")
                     }
                 }
@@ -59,6 +69,18 @@ class GoalFragment : Fragment() {
                 // Handle tab unselect
             }
         })
+
+        swipeContainer.setOnRefreshListener {
+            when(actualTab) {
+                0 -> {
+                    findGoals()
+                }
+                1 -> {
+                    findGoals("DONE")
+                }
+            }
+            swipeContainer.isRefreshing = false
+        }
     }
 
     private fun findGoals(status: String = "ACTIVE") {
@@ -75,6 +97,7 @@ class GoalFragment : Fragment() {
                         200 -> {
                             configRecyclerView(data ?: emptyList())
                         }
+                        else -> configRecyclerView(emptyList())
                     }
                 }
 
@@ -93,6 +116,7 @@ class GoalFragment : Fragment() {
                         200 -> {
                             configRecyclerView(data ?: emptyList())
                         }
+                        else -> configRecyclerView(emptyList())
                     }
                 }
                 override fun onFailure(call: Call<List<GoalsResponse>>, t: Throwable) {
@@ -106,25 +130,40 @@ class GoalFragment : Fragment() {
     }
 
     private fun configRecyclerView(goals: List<GoalsResponse>) {
-        val recyclerContainer = binding.recyclerContainer
-        recyclerContainer.layoutManager = LinearLayoutManager(context)
-
         if(goals.isEmpty()) {
-            binding.tvError.text = context?.getString(R.string.no_goal)
-        } else {
-            binding.tvError.text = ""
-        }
+            binding.tvError.visibility = View.VISIBLE
 
-        recyclerContainer.adapter = GoalCardsAdapter(
-            goals
-        ) { id -> getGoalDetails(id) }
+            binding.recyclerContainer.visibility = View.GONE
+        } else {
+            binding.tvError.visibility = View.GONE
+            binding.recyclerContainer.visibility = View.VISIBLE
+
+            val recyclerContainer = binding.recyclerContainer
+            recyclerContainer.layoutManager = LinearLayoutManager(context)
+
+            recyclerContainer.adapter = GoalCardsAdapter(
+                goals
+            ) { id -> getGoalDetails(id) }
+        }
     }
 
+    private fun configRecyclerViewRefresh(transaction: List<TransactionResponse>) {
+        if(transaction.isEmpty()) {
+            binding.tvError.visibility = View.VISIBLE
+        } else {
+            binding.tvError.visibility = View.GONE
+
+            val recyclerContainer = binding.recyclerContainer
+
+            (recyclerContainer.adapter as TransactionCardsAdapter).notifyDataSetChanged()
+        }
+    }
+
+
     private fun getGoalDetails(id : Int) {
-        val bundle = bundleOf(
-            "goalId" to id
-        )
-        setFragmentResult("requestKey", bundle)
+        val editor = preferences.edit()
+        editor.putInt("goalId", id)
+        editor.apply()
         findNavController().navigate(R.id.fromGoalToGoalDetails)
     }
 }

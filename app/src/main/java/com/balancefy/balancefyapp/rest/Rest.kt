@@ -25,5 +25,7 @@ object Rest {
 
     fun getPostInstance() = getInstance().create(Forum::class.java)
 
-    fun getTransactionInstance() = getInstance().create(RepeatedTransaction::class.java)
+    fun getRepeatedTransactionInstance() = getInstance().create(RepeatedTransaction::class.java)
+
+    fun getTransactionInstance() = getInstance().create(Transaction::class.java)
 }
