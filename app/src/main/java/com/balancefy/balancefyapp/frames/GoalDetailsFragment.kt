@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.balancefy.balancefyapp.R
+import com.balancefy.balancefyapp.adapter.GoalCardsAdapter
 import com.balancefy.balancefyapp.adapter.TransactionCardsAdapter
 import com.balancefy.balancefyapp.databinding.FragmentGoalDetailsBinding
 import com.balancefy.balancefyapp.databinding.TransactionBottomSheetBinding
@@ -59,7 +60,7 @@ class GoalDetailsFragment : Fragment() {
         showGoalsDetails()
     }
 
-    private fun showGoalsDetails() {
+    private fun showGoalsDetails(refresh: Boolean = false) {
         Rest.getGoalInstance().findById("Bearer $token", goalId!!).enqueue(object : Callback<GoalsDetailsResponse> {
             override fun onResponse(
                 call: Call<GoalsDetailsResponse>,
@@ -68,7 +69,12 @@ class GoalDetailsFragment : Fragment() {
                 when(response.code()){
                     200 -> {
                         goalDetails = response.body()!!
-                        configScreen(response.body()!!)
+
+                        if(refresh) {
+                            configScreenRefresh(response.body()!!)
+                        } else {
+                            configScreen(response.body()!!)
+                        }
                     }
                     else -> {
                         Toast.makeText(context, R.string.connection_error, Toast.LENGTH_SHORT).show()
@@ -91,6 +97,12 @@ class GoalDetailsFragment : Fragment() {
         binding.addTransaction.setOnClickListener {
             showTransactionBottomSheet()
         }
+    }
+
+    private fun configScreenRefresh(goal: GoalsDetailsResponse) {
+        setProgress(goal)
+        setGoalDescription(goal.goal)
+        setCurrentTask(goal.tasks.first{ it.done == 0})
     }
 
     private fun setProgress(goal: GoalsDetailsResponse) {
@@ -119,14 +131,14 @@ class GoalDetailsFragment : Fragment() {
 
         binding.currentTask.setCompleteOnClickListener {
             Rest.getGoalInstance().completeTask("Bearer ${token!!}", task.id)
-                .enqueue(object : Callback<Objects> {
+                .enqueue(object : Callback<Unit> {
                     override fun onResponse(
-                        call: Call<Objects>,
-                        response: Response<Objects>
+                        call: Call<Unit>,
+                        response: Response<Unit>
                     ) {
                         when (response.code()) {
                             200 -> {
-                                // showGoalsDetails()
+                                showGoalsDetails(true)
                                 Toast.makeText(context, R.string.complete_task, Toast.LENGTH_SHORT).show()
                             }
                             else -> {
@@ -135,7 +147,7 @@ class GoalDetailsFragment : Fragment() {
                         }
                     }
 
-                    override fun onFailure(call: Call<Objects>, t: Throwable) {
+                    override fun onFailure(call: Call<Unit>, t: Throwable) {
                         Toast.makeText(context, R.string.error_complete_task, Toast.LENGTH_SHORT).show()
                     }
                 }
@@ -143,7 +155,7 @@ class GoalDetailsFragment : Fragment() {
         }
     }
 
-    private fun setGoalTransaction() {
+    private fun setGoalTransaction(refresh: Boolean = false) {
         Rest.getTransactionInstance().getTransactionByGoal("Bearer ${token!!}", goalId!!).enqueue(object : Callback<List<TransactionResponse>> {
             override fun onResponse(
                 call: Call<List<TransactionResponse>>,
@@ -153,7 +165,11 @@ class GoalDetailsFragment : Fragment() {
 
                 when(response.code()){
                     200 -> {
-                        configRecyclerView(data ?: emptyList())
+                        if(refresh) {
+                            configRecyclerViewRefresh(data ?: emptyList())
+                        } else {
+                            configRecyclerView(data ?: emptyList())
+                        }
                     }
                     else -> {
                         binding.tvError.text = context?.getString(R.string.no_transactions)
@@ -167,13 +183,31 @@ class GoalDetailsFragment : Fragment() {
     }
 
     private fun configRecyclerView(transaction: List<TransactionResponse>) {
-        val recyclerContainer = binding.recyclerContainer
-        recyclerContainer.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        if(transaction.isEmpty()) {
+            binding.tvError.visibility = View.VISIBLE
+        } else {
+            binding.tvError.visibility = View.GONE
 
-        recyclerContainer.adapter = TransactionCardsAdapter(
-            transaction,
-            requireContext()
-        )
+            val recyclerContainer = binding.recyclerContainer
+            recyclerContainer.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+
+            recyclerContainer.adapter = TransactionCardsAdapter(
+                transaction,
+                requireContext()
+            )
+        }
+    }
+
+    private fun configRecyclerViewRefresh(transaction: List<TransactionResponse>) {
+        if(transaction.isEmpty()) {
+            binding.tvError.visibility = View.VISIBLE
+        } else {
+            binding.tvError.visibility = View.GONE
+
+            val recyclerContainer = binding.recyclerContainer
+
+            (recyclerContainer.adapter as TransactionCardsAdapter).notifyDataSetChanged()
+        }
     }
 
     private fun showTransactionBottomSheet() {
@@ -225,17 +259,20 @@ class GoalDetailsFragment : Fragment() {
                 category = sheetTransactionBinding.transactionCategory.text.toString(),
                 description = sheetTransactionBinding.etDescription.text.toString(),
                 type = type,
-                goal = goalDetails!!
+                goal = goalDetails.goal
             )
 
-            Rest.getTransactionInstance().create("Bearer $token", body).enqueue(object : Callback<Objects> {
+            println(body)
+
+            Rest.getTransactionInstance().create("Bearer $token", body).enqueue(object : Callback<Unit> {
                 override fun onResponse(
-                    call: Call<Objects>,
-                    response: Response<Objects>
+                    call: Call<Unit>,
+                    response: Response<Unit>
                 ) {
                     when(response.code()){
                         201 -> {
                             Toast.makeText(context, R.string.created_transaction, Toast.LENGTH_SHORT).show()
+                            setGoalTransaction()
                         }
                         else -> {
                             Toast.makeText(context, R.string.register_error, Toast.LENGTH_SHORT).show()
@@ -243,7 +280,7 @@ class GoalDetailsFragment : Fragment() {
                     }
                 }
 
-                override fun onFailure(call: Call<Objects>, t: Throwable) {
+                override fun onFailure(call: Call<Unit>, t: Throwable) {
                     Toast.makeText(context, R.string.connection_error, Toast.LENGTH_SHORT).show()
                 }
             })

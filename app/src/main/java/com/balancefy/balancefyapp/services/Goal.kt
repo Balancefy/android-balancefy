@@ -17,11 +17,11 @@ interface Goal {
     fun listDoneGoals(@Header("Authorization") token: String): Call<List<GoalsResponse>>
 
     @POST("/accounts/goals")
-    fun createGoal(@Header("Authorization") token: String, @Body body: CreateGoal): Call<Objects>
+    fun createGoal(@Header("Authorization") token: String, @Body body: CreateGoal): Call<Unit>
 
     @GET("/accounts/goals/{id}")
     fun findById(@Header("Authorization") token: String, @Path("id") id: Int): Call<GoalsDetailsResponse>
 
     @PATCH("/accounts/goals/tasks/")
-    fun completeTask(@Header("Authorization") token: String, @Body body: TaskGoalKey): Call<Objects>
+    fun completeTask(@Header("Authorization") token: String, @Body body: TaskGoalKey): Call<Unit>
 }

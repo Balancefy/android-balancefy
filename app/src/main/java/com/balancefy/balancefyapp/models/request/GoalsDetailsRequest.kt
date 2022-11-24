@@ -1,15 +1,13 @@
-package com.balancefy.balancefyapp.models.response
+package com.balancefy.balancefyapp.models.request
 
+import com.balancefy.balancefyapp.models.response.GoalsDetailsResponse
+import com.balancefy.balancefyapp.models.response.GoalsResponse
 import com.google.gson.annotations.SerializedName
-import java.time.LocalDate
-import java.time.LocalDateTime
 
-data class GoalsResponse (
+data class GoalsDetailsRequest(
     val id: Int,
-    @SerializedName("conta")
-    val account: AccountResponseDto,
-    @SerializedName("objetivo")
-    val category: Goal,
+    @SerializedName("categoria")
+    val category: String,
     @SerializedName("descricao")
     val description: String,
     val done: Int,
@@ -22,10 +20,4 @@ data class GoalsResponse (
     @SerializedName("pontuacao")
     val score: Double,
     val createdAt: String
-)
-
-data class Goal(
-    val id: Int,
-    @SerializedName("categoria")
-    val category: String
 )

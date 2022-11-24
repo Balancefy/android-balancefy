@@ -9,7 +9,7 @@ import java.util.*
 
 interface Transaction {
     @POST("/transactions")
-    fun create(@Header("Authorization") token: String, @Body body: TransactionRequest): Call<Objects>
+    fun create(@Header("Authorization") token: String, @Body body: TransactionRequest): Call<Unit>
 
     @GET("/transactions/goal/{id}")
     fun getTransactionByGoal(@Header("Authorization") token: String,  @Path("id") id: Int): Call<List<TransactionResponse>>

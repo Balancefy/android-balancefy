@@ -11,6 +11,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
 import com.balancefy.balancefyapp.R
+import com.balancefy.balancefyapp.adapter.TransactionCardsAdapter
 import com.balancefy.balancefyapp.databinding.ActivityMainBinding
 import com.balancefy.balancefyapp.databinding.GoalBottomSheetBinding
 import com.balancefy.balancefyapp.databinding.PostBottomSheetBinding
@@ -250,10 +251,10 @@ class MainActivity : AppCompatActivity() {
                 estimatedTime = date!!
             )
 
-            Rest.getGoalInstance().createGoal("Bearer $token", body).enqueue(object : Callback<Objects> {
+            Rest.getGoalInstance().createGoal("Bearer $token", body).enqueue(object : Callback<Unit> {
                 override fun onResponse(
-                    call: Call<Objects>,
-                    response: Response<Objects>
+                    call: Call<Unit>,
+                    response: Response<Unit>
                 ) {
                     when(response.code()){
                         201 -> {
@@ -265,7 +266,7 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
 
-                override fun onFailure(call: Call<Objects>, t: Throwable) {
+                override fun onFailure(call: Call<Unit>, t: Throwable) {
                     Toast.makeText(baseContext, R.string.connection_error, Toast.LENGTH_SHORT).show()
                 }
             })
@@ -363,10 +364,10 @@ class MainActivity : AppCompatActivity() {
                 type = type
             )
 
-            Rest.getRepeatedTransactionInstance().create("Bearer $token", body).enqueue(object : Callback<Objects> {
+            Rest.getRepeatedTransactionInstance().create("Bearer $token", body).enqueue(object : Callback<Unit> {
                 override fun onResponse(
-                    call: Call<Objects>,
-                    response: Response<Objects>
+                    call: Call<Unit>,
+                    response: Response<Unit>
                 ) {
                     when(response.code()){
                         201 -> {
@@ -378,7 +379,7 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
 
-                override fun onFailure(call: Call<Objects>, t: Throwable) {
+                override fun onFailure(call: Call<Unit>, t: Throwable) {
                     Toast.makeText(baseContext, R.string.connection_error, Toast.LENGTH_SHORT).show()
                 }
             })
@@ -452,10 +453,10 @@ class MainActivity : AppCompatActivity() {
                 content = sheetPostBottomSheetBinding.etTitle.text.toString()
             )
 
-            Rest.getPostInstance().create("Bearer $token", body).enqueue(object : Callback<Objects> {
+            Rest.getPostInstance().create("Bearer $token", body).enqueue(object : Callback<Unit> {
                 override fun onResponse(
-                    call: Call<Objects>,
-                    response: Response<Objects>
+                    call: Call<Unit>,
+                    response: Response<Unit>
                 ) {
                     when(response.code()){
                         201 -> {
@@ -467,7 +468,7 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
 
-                override fun onFailure(call: Call<Objects>, t: Throwable) {
+                override fun onFailure(call: Call<Unit>, t: Throwable) {
                     Toast.makeText(baseContext, R.string.connection_error, Toast.LENGTH_SHORT).show()
                 }
             })

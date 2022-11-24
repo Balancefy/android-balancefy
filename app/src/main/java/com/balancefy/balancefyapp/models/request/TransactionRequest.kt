@@ -7,12 +7,12 @@ import com.google.gson.annotations.SerializedName
 data class TransactionRequest(
     @SerializedName("valor")
     val value: Double,
-    @SerializedName("categoria")
+    @SerializedName("topico")
     val category: String,
     @SerializedName("descricao")
     val description: String,
     @SerializedName("tipo")
     val type: String,
     @SerializedName("fkObjetivoConta")
-    val goal: GoalsDetailsResponse
+    val goal: GoalsResponse
 )
