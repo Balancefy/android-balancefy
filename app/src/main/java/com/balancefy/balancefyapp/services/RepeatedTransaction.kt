@@ -9,5 +9,5 @@ import java.util.*
 
 interface RepeatedTransaction {
     @POST("/transactionFixed")
-    fun create(@Header("Authorization") token: String, @Body body: RepeatedTransactionRequest): Call<Objects>
+    fun create(@Header("Authorization") token: String, @Body body: RepeatedTransactionRequest): Call<Unit>
 }

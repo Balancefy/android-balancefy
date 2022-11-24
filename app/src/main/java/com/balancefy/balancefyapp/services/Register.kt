@@ -9,5 +9,5 @@ import java.util.*
 interface Register {
 
     @POST("/accounts")
-    fun register(@Body body: RegisterRequest): Call<Objects>
+    fun register(@Body body: RegisterRequest): Call<Unit>
 }

@@ -25,14 +25,13 @@ class GoalProgress(context: Context, attrs: AttributeSet) : LinearLayout(context
         val attributes = context.obtainStyledAttributes(attrs, R.styleable.GoalProgress)
 
         setTotalScore(attributes.getString(R.styleable.GoalProgress_total_score) ?: "")
-        setProgress(attributes.getString(R.styleable.GoalProgress_progress) ?: "0")
     }
 
     fun setTotalScore(score: String) {
         binding.totalScore.text = score
     }
 
-    fun setProgress(progress: String) {
+    fun setProgress(progress: Double) {
         binding.progressIndicator.progress = progress.toInt()
     }
 }

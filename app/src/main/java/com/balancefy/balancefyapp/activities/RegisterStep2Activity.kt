@@ -139,10 +139,10 @@ class RegisterStep2Activity : AppCompatActivity() {
                 )
             )
 
-            Rest.getRegisterInstance().register(body).enqueue(object : Callback<Objects> {
+            Rest.getRegisterInstance().register(body).enqueue(object : Callback<Unit> {
                 override fun onResponse(
-                    call: Call<Objects>,
-                    response: Response<Objects>
+                    call: Call<Unit>,
+                    response: Response<Unit>
                 ) {
                     when(response.code()){
                         201 -> {
@@ -152,7 +152,8 @@ class RegisterStep2Activity : AppCompatActivity() {
                     }
                 }
 
-                override fun onFailure(call: Call<Objects>, t: Throwable) {
+                override fun onFailure(call: Call<Unit>, t: Throwable) {
+                    println(t.message)
                     Toast.makeText(baseContext, R.string.connection_error, Toast.LENGTH_SHORT).show()
                 }
             })

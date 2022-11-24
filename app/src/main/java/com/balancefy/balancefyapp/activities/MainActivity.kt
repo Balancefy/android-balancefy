@@ -11,6 +11,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
 import com.balancefy.balancefyapp.R
+import com.balancefy.balancefyapp.adapter.TransactionCardsAdapter
 import com.balancefy.balancefyapp.databinding.ActivityMainBinding
 import com.balancefy.balancefyapp.databinding.GoalBottomSheetBinding
 import com.balancefy.balancefyapp.databinding.PostBottomSheetBinding
@@ -30,6 +31,7 @@ import com.google.android.material.datepicker.MaterialDatePicker
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.sql.Timestamp
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -225,7 +227,14 @@ class MainActivity : AppCompatActivity() {
 
         datePicker.addOnPositiveButtonClickListener {
             val sdf = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
-            date = sdf.format(it)
+
+            var ts = Timestamp(it)
+            val cal = Calendar.getInstance()
+            cal.timeInMillis = ts.time
+            cal.add(Calendar.DAY_OF_MONTH, +1)
+            ts = Timestamp(cal.time.time)
+
+            date = sdf.format(ts)
             sheetGoalBinding.btnEstimatedDate.text = date
         }
     }
@@ -242,10 +251,10 @@ class MainActivity : AppCompatActivity() {
                 estimatedTime = date!!
             )
 
-            Rest.getGoalInstance().createGoal("Bearer $token", body).enqueue(object : Callback<Objects> {
+            Rest.getGoalInstance().createGoal("Bearer $token", body).enqueue(object : Callback<Unit> {
                 override fun onResponse(
-                    call: Call<Objects>,
-                    response: Response<Objects>
+                    call: Call<Unit>,
+                    response: Response<Unit>
                 ) {
                     when(response.code()){
                         201 -> {
@@ -257,7 +266,7 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
 
-                override fun onFailure(call: Call<Objects>, t: Throwable) {
+                override fun onFailure(call: Call<Unit>, t: Throwable) {
                     Toast.makeText(baseContext, R.string.connection_error, Toast.LENGTH_SHORT).show()
                 }
             })
@@ -355,10 +364,10 @@ class MainActivity : AppCompatActivity() {
                 type = type
             )
 
-            Rest.getTransactionInstance().create("Bearer $token", body).enqueue(object : Callback<Objects> {
+            Rest.getRepeatedTransactionInstance().create("Bearer $token", body).enqueue(object : Callback<Unit> {
                 override fun onResponse(
-                    call: Call<Objects>,
-                    response: Response<Objects>
+                    call: Call<Unit>,
+                    response: Response<Unit>
                 ) {
                     when(response.code()){
                         201 -> {
@@ -370,7 +379,7 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
 
-                override fun onFailure(call: Call<Objects>, t: Throwable) {
+                override fun onFailure(call: Call<Unit>, t: Throwable) {
                     Toast.makeText(baseContext, R.string.connection_error, Toast.LENGTH_SHORT).show()
                 }
             })
@@ -444,10 +453,10 @@ class MainActivity : AppCompatActivity() {
                 content = sheetPostBottomSheetBinding.etTitle.text.toString()
             )
 
-            Rest.getPostInstance().create("Bearer $token", body).enqueue(object : Callback<Objects> {
+            Rest.getPostInstance().create("Bearer $token", body).enqueue(object : Callback<Unit> {
                 override fun onResponse(
-                    call: Call<Objects>,
-                    response: Response<Objects>
+                    call: Call<Unit>,
+                    response: Response<Unit>
                 ) {
                     when(response.code()){
                         201 -> {
@@ -459,7 +468,7 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
 
-                override fun onFailure(call: Call<Objects>, t: Throwable) {
+                override fun onFailure(call: Call<Unit>, t: Throwable) {
                     Toast.makeText(baseContext, R.string.connection_error, Toast.LENGTH_SHORT).show()
                 }
             })

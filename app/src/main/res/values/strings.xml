@@ -56,7 +56,7 @@
     <string name="description_goal">Objetivo</string>
     <string name="description_rank">Rank</string>
     <string name="description_profile">Perfil</string>
-    <string name="no_posts">Sem postagens no momento</string>
+    <string name="no_posts">Não há postagens no momento</string>
     <string name="last_transaction">Últimas Movimentações</string>
     <string name="user_logout">user_logout</string>
     <string name="icon_menu">icon menu</string>
@@ -107,7 +107,7 @@
     <string name="created_goal">Objetivo Criado!</string>
     <string name="estimated_date_title">Data Estimada:</string>
     <string name="invalid_login">Senha ou Email inválidos</string>
-    <string name="zero_score">0x</string>
+    <string name="zero_score">0xp</string>
     <string name="remaining_days">dias restante</string>
     <string name="transaction">"Transação "</string>
     <string name="general">Geral</string>
@@ -123,5 +123,10 @@
     <string name="title">Título</string>
     <string name="publish">Publicar</string>
     <string name="created_post">Tópico criado!</string>
-    <!-- TODO: Remove or change this placeholder text -->
+    <string name="score_suffix">xp</string>
+    <string name="score_prefix">+</string>
+    <string name="no_transactions">Não há transações no momento</string>
+    <string name="error_complete_task">Erro ao completar, tente novamente!</string>
+    <string name="complete_task">Task finalizada!</string>
+    <string name="no_tasks">Suas tarefas já foram concluídas!</string>
 </resources>
