@@ -128,4 +128,5 @@
     <string name="no_transactions">Não há transações no momento</string>
     <string name="error_complete_task">Erro ao completar, tente novamente!</string>
     <string name="complete_task">Task finalizada!</string>
+    <string name="no_tasks">Suas tarefas já foram concluídas!</string>
 </resources>

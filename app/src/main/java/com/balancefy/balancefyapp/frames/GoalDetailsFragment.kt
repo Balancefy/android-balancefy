@@ -12,6 +12,8 @@ import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.marginTop
+import androidx.core.view.updatePadding
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.balancefy.balancefyapp.R
@@ -48,8 +50,6 @@ class GoalDetailsFragment : Fragment() {
         binding = FragmentGoalDetailsBinding.inflate(layoutInflater)
         return binding.root
     }
-
-    // fazer o botao concluir funcionar :)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         preferences = context?.getSharedPreferences("Auth", AppCompatActivity.MODE_PRIVATE)!!
@@ -91,7 +91,7 @@ class GoalDetailsFragment : Fragment() {
     private fun configScreen(goal: GoalsDetailsResponse) {
         setProgress(goal)
         setGoalDescription(goal.goal)
-        setCurrentTask(goal.tasks.first{ it.done == 0})
+        setCurrentTask(goal.tasks.firstOrNull{ it.done == 0})
         setGoalTransaction()
 
         binding.addTransaction.setOnClickListener {
@@ -102,7 +102,7 @@ class GoalDetailsFragment : Fragment() {
     private fun configScreenRefresh(goal: GoalsDetailsResponse) {
         setProgress(goal)
         setGoalDescription(goal.goal)
-        setCurrentTask(goal.tasks.first{ it.done == 0})
+        setCurrentTask(goal.tasks.firstOrNull{ it.done == 0})
     }
 
     private fun setProgress(goal: GoalsDetailsResponse) {
@@ -124,34 +124,40 @@ class GoalDetailsFragment : Fragment() {
         binding.goalTitle.setRemainingDays("${ChronoUnit.DAYS.between(LocalDate.now(), LocalDate.parse(goal.estimatedTime.replace("-", ""), DateTimeFormatter.BASIC_ISO_DATE))} ")
     }
 
-    private fun setCurrentTask(task: TaskResponse) {
-        binding.currentTask.setTitle(task.description)
-        binding.currentTask.setDescription("R$%.2f".format(task.value))
-        binding.currentTask.setScore("+%.0fxp".format(task.score))
+    private fun setCurrentTask(task: TaskResponse?) {
+        if(task == null) {
+            binding.currentTask.visibility = View.GONE
+            binding.tvNoCurrentTask.visibility = View.VISIBLE
+            binding.transactionTitle.updatePadding(top = 50)
+        } else {
+            binding.currentTask.setTitle(task.description)
+            binding.currentTask.setDescription("R$%.2f".format(task.value))
+            binding.currentTask.setScore("+%.0fxp".format(task.score))
 
-        binding.currentTask.setCompleteOnClickListener {
-            Rest.getGoalInstance().completeTask("Bearer ${token!!}", task.id)
-                .enqueue(object : Callback<Unit> {
-                    override fun onResponse(
-                        call: Call<Unit>,
-                        response: Response<Unit>
-                    ) {
-                        when (response.code()) {
-                            200 -> {
-                                showGoalsDetails(true)
-                                Toast.makeText(context, R.string.complete_task, Toast.LENGTH_SHORT).show()
-                            }
-                            else -> {
-                                Toast.makeText(context, R.string.error_complete_task, Toast.LENGTH_SHORT).show()
+            binding.currentTask.setCompleteOnClickListener {
+                Rest.getGoalInstance().completeTask("Bearer ${token!!}", task.id)
+                    .enqueue(object : Callback<Unit> {
+                        override fun onResponse(
+                            call: Call<Unit>,
+                            response: Response<Unit>
+                        ) {
+                            when (response.code()) {
+                                200 -> {
+                                    showGoalsDetails(true)
+                                    Toast.makeText(context, R.string.complete_task, Toast.LENGTH_SHORT).show()
+                                }
+                                else -> {
+                                    Toast.makeText(context, R.string.error_complete_task, Toast.LENGTH_SHORT).show()
+                                }
                             }
                         }
-                    }
 
-                    override fun onFailure(call: Call<Unit>, t: Throwable) {
-                        Toast.makeText(context, R.string.error_complete_task, Toast.LENGTH_SHORT).show()
+                        override fun onFailure(call: Call<Unit>, t: Throwable) {
+                            Toast.makeText(context, R.string.error_complete_task, Toast.LENGTH_SHORT).show()
+                        }
                     }
-                }
-            )
+                    )
+            }
         }
     }
 

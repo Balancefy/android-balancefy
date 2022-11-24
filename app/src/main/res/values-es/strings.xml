@@ -129,4 +129,5 @@
     <string name="created_transaction">" ¡Transacción creada!"</string>
     <string name="error_complete_task">¡Error al completar, inténtalo de nuevo!</string>
     <string name="complete_task">¡Tarea terminada!</string>
+    <string name="no_tasks">" ¡Tus tareas ya han sido completadas!"</string>
 </resources>

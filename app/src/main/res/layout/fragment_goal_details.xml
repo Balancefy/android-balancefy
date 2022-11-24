@@ -27,6 +27,16 @@
             android:layout_height="wrap_content"
             tools:total_score="1600xp"/>
 
+        <TextView
+            android:id="@+id/tv_no_current_task"
+            android:layout_marginTop="50dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:text="@string/no_tasks"
+            android:visibility="gone"
+            android:textColor="@color/white"/>
+
         <com.balancefy.balancefyapp.components.CurrentTask
             android:id="@+id/current_task"
             android:layout_marginTop="20dp"
@@ -37,6 +47,7 @@
             tools:score="+400xp"/>
 
         <TextView
+            android:id="@+id/transaction_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
