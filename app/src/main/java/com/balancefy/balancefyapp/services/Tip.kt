@@ -7,5 +7,5 @@ import retrofit2.http.Header
 
 interface Tip {
     @GET("/dicas")
-    fun getAllTips(): Call<List<TipsResponse>>
+    fun getAllTips(@Header("Authorization") token : String ): Call<List<TipsResponse>>
 }

@@ -1,11 +1,13 @@
 package com.balancefy.balancefyapp.frames
 
+import android.content.SharedPreferences
 import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.balancefy.balancefyapp.R
@@ -23,7 +25,7 @@ import retrofit2.Response
 
 class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
-
+    lateinit var preferences : SharedPreferences
     private lateinit var chart: PieChart
 
     override fun onCreateView(
@@ -40,9 +42,9 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding.nameUser.text = arguments?.getString("nameUser") ?: "Ze ninguem"
-
+        preferences = context?.getSharedPreferences("Auth", AppCompatActivity.MODE_PRIVATE)!!
         initChart()
-
+        getTips()
     }
 
     fun initChart() {
@@ -81,7 +83,9 @@ class HomeFragment : Fragment() {
 
 
     fun getTips() {
-        Rest.getTipsInstance().getAllTips().enqueue(object: Callback<List<TipsResponse>>{
+        val token = preferences.getString("token", null)
+
+        Rest.getTipsInstance().getAllTips("Bearer $token").enqueue(object: Callback<List<TipsResponse>>{
             override fun onResponse(
                 call: Call<List<TipsResponse>>,
                 response: Response<List<TipsResponse>>
@@ -105,7 +109,7 @@ class HomeFragment : Fragment() {
 
     fun configRecyclerView(list: List<TipsResponse>) {
         val recyclerContainer = binding.recyclerContainer
-        recyclerContainer.layoutManager = LinearLayoutManager(context)
+        recyclerContainer.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         recyclerContainer.adapter = TipCardAdapter(list)
     }
 }
