@@ -16,7 +16,7 @@ interface Forum {
     fun getListTopic(@Header("Authorization") token: String): Call<ListaFeedTopicoResponse>
 
     @POST("/forum")
-    fun create(@Header("Authorization") token: String, @Body body: PostRequest): Call<Objects>
+    fun create(@Header("Authorization") token: String, @Body body: PostRequest): Call<Unit>
 
     @GET("/forum/accounts/{accountId}")
     fun getListTopicById(@Header("Authorization") token: String, @Path("accountId") accountId:Int): Call<ListaFeedTopicoResponse>

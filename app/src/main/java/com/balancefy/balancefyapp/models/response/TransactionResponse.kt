@@ -1,20 +1,16 @@
 package com.balancefy.balancefyapp.models.response
 
-import com.balancefy.balancefyapp.models.response.GoalsResponse
 import com.google.gson.annotations.SerializedName
 import java.time.LocalDateTime
 
 data class TransactionResponse(
-    override val value: Double,
-    override val category: String,
-    override val description: String,
-    override val type: String,
-    override val createdAt: LocalDateTime,
-    val goal: GoalsResponse
-): Transaction(
-    value,
-    category,
-    description,
-    type,
-    createdAt
+    @SerializedName("valor")
+    val value: Double,
+    @SerializedName("categoria")
+    val category: String,
+    @SerializedName("descricao")
+    val description: String,
+    @SerializedName("tipo")
+    val type: String,
+    val createdAt: String
 )

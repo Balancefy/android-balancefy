@@ -7,10 +7,13 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.balancefy.balancefyapp.R
 import com.balancefy.balancefyapp.databinding.ResTransactionBinding
-import com.balancefy.balancefyapp.models.response.Transaction
+import com.balancefy.balancefyapp.models.response.TransactionResponse
+import java.time.LocalDate
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 class TransactionCardsAdapter(
-    private val transactionList: List<Transaction>,
+    private val transactionList: List<TransactionResponse>,
     private val context: Context
 ): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -23,11 +26,16 @@ class TransactionCardsAdapter(
         private val binding: ResTransactionBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun attach(transaction : Transaction) {
+        fun attach(transaction : TransactionResponse) {
+            val formatter = DateTimeFormatter.ofPattern("dd 'de' MMMM',' yyyy")
+            val date = LocalDateTime.parse(
+                transaction.createdAt
+            )
+
             binding.tvValue.text = "%.2f".format(transaction.value)
             binding.tvCategory.text = transaction.category
             binding.tvDescription.text = transaction.description
-            binding.tvDate.text = transaction.createdAt.toString()
+            binding.tvDate.text = date.format(formatter)
 
             if(transaction.type == "Saída") {
                 binding.tvValue.setTextColor(ContextCompat.getColor(context, R.color.red_balancefy))

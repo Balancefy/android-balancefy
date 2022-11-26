@@ -25,10 +25,14 @@ class RoadmapCardsAdapter(
         private val binding: ResGoalRoadmapCardBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun attach(taskCard : TaskResponse) {
+        fun attach(taskCard : TaskResponse, lastTask: Boolean) {
             binding.title.text = taskCard.description
             binding.score.text = taskCard.score.toInt().toString()
             setColor(taskCard.done, binding.statusCard)
+
+            if(lastTask) {
+                binding.divider.visibility = View.GONE
+            }
         }
     }
 
@@ -41,7 +45,7 @@ class RoadmapCardsAdapter(
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        (holder as RoadmapCardHolder).attach(taskList[position])
+        (holder as RoadmapCardHolder).attach(taskList[position], position == taskList.lastIndex)
     }
 
     override fun getItemCount(): Int {
