@@ -10,10 +10,7 @@ android {
         enabled = true
     }
 
-    //adicionei isso para evitar um erro de lint
-    lintOptions {
-        abortOnError false
-    }
+
 
     buildFeatures {
         dataBinding = true

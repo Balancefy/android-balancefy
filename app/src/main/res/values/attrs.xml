@@ -37,4 +37,9 @@
         <attr name="roadmap_score" format="string" />
         <attr name="roadmap_status" format="string" />
     </declare-styleable>
+
+    <declare-styleable name="TipCard">
+        <attr name="tip_title" format="string" />
+        <attr name="tip_description" format="string"/>
+    </declare-styleable>
 </resources>

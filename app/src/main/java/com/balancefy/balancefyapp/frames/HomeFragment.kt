@@ -5,12 +5,21 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.balancefy.balancefyapp.R
+import com.balancefy.balancefyapp.adapter.TipCardAdapter
 import com.balancefy.balancefyapp.databinding.FragmentHomeBinding
+import com.balancefy.balancefyapp.models.response.TipsResponse
+import com.balancefy.balancefyapp.rest.Rest
 import com.github.mikephil.charting.charts.PieChart
 import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
@@ -68,5 +77,35 @@ class HomeFragment : Fragment() {
         chart.description.isEnabled = false
         chart.setEntryLabelColor(Color.argb(0, 19 ,21 ,21))
 
+    }
+
+
+    fun getTips() {
+        Rest.getTipsInstance().getAllTips().enqueue(object: Callback<List<TipsResponse>>{
+            override fun onResponse(
+                call: Call<List<TipsResponse>>,
+                response: Response<List<TipsResponse>>
+            ) {
+                when(response.code()) {
+                    200 -> {
+                        configRecyclerView(response.body() ?: emptyList())
+                    }
+                    else -> {
+                        Toast.makeText(context, R.string.connection_error, Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<List<TipsResponse>>, t: Throwable) {
+                Toast.makeText(context, R.string.connection_error, Toast.LENGTH_SHORT).show()
+            }
+
+        } )
+    }
+
+    fun configRecyclerView(list: List<TipsResponse>) {
+        val recyclerContainer = binding.recyclerContainer
+        recyclerContainer.layoutManager = LinearLayoutManager(context)
+        recyclerContainer.adapter = TipCardAdapter(list)
     }
 }

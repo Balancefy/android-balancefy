@@ -134,4 +134,5 @@
     <string name="profile_editable_icon">icono de perfil editable</string>
     <string name="titulo_aleatorio">Titulo aleatorio</string>
     <string name="texto_aleatorio">Texto aleatorio</string>
+    <string name="dicas">Puntas</string>
 </resources>

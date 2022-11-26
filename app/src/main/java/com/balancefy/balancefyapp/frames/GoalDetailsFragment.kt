@@ -1,23 +1,17 @@
 package com.balancefy.balancefyapp.frames
 
 import android.content.SharedPreferences
-import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
-import android.widget.LinearLayout
 import android.widget.Toast
-import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.marginTop
 import androidx.core.view.updatePadding
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.balancefy.balancefyapp.R
-import com.balancefy.balancefyapp.adapter.GoalCardsAdapter
 import com.balancefy.balancefyapp.adapter.TransactionCardsAdapter
 import com.balancefy.balancefyapp.databinding.FragmentGoalDetailsBinding
 import com.balancefy.balancefyapp.databinding.TransactionBottomSheetBinding
@@ -33,7 +27,6 @@ import retrofit2.Response
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.time.temporal.ChronoUnit
-import java.util.*
 
 class GoalDetailsFragment : Fragment() {
     private lateinit var binding: FragmentGoalDetailsBinding
@@ -268,7 +261,6 @@ class GoalDetailsFragment : Fragment() {
                 goal = goalDetails.goal
             )
 
-            println(body)
 
             Rest.getTransactionInstance().create("Bearer $token", body).enqueue(object : Callback<Unit> {
                 override fun onResponse(

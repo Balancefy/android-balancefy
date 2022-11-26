@@ -135,5 +135,5 @@
     <string name="titulo_aleatorio">Titulo aleatorio</string>
     <string name="texto_aleatorio">Texto aleatorio</string>
     <string name="comment_icon" translatable="false">comment icon</string>
-    <!-- TODO: Remove or change this placeholder text -->
+    <string name="dicas">Dicas</string>
 </resources>
