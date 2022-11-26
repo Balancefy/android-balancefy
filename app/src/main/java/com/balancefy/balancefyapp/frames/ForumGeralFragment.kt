@@ -37,11 +37,11 @@ class ForumGeralFragment : Fragment() {
 
         token = preferences.getString("token", null)!!
 
-        recyclerViewConfiguration()
+        recyclerViewConfigurationGeral()
         super.onViewCreated(view, savedInstanceState)
     }
 
-    private fun recyclerViewConfiguration() {
+    private fun recyclerViewConfigurationGeral() {
         Rest.getForumInstance().getListTopic("Bearer $token")
             .enqueue(object : Callback<ListaFeedTopicoResponse> {
                 override fun onResponse(

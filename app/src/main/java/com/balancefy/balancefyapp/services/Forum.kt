@@ -7,7 +7,6 @@ import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.POST
-import java.util.*
 import retrofit2.http.Path
 
 interface Forum {
@@ -20,4 +19,7 @@ interface Forum {
 
     @GET("/forum/accounts/{accountId}")
     fun getListTopicById(@Header("Authorization") token: String, @Path("accountId") accountId:Int): Call<ListaFeedTopicoResponse>
+
+    @GET("/forum/mostLike")
+    fun getMostLike(@Header("Authorization") token: String): Call<ListaFeedTopicoResponse>
 }
