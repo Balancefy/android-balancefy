@@ -2,12 +2,9 @@ package com.balancefy.balancefyapp.services
 
 import com.balancefy.balancefyapp.models.request.PostRequest
 import com.balancefy.balancefyapp.models.response.ListaFeedTopicoResponse
+import com.balancefy.balancefyapp.models.response.TopicoResponseDto
 import retrofit2.Call
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.Header
-import retrofit2.http.POST
-import retrofit2.http.Path
+import retrofit2.http.*
 
 interface Forum {
 
@@ -22,4 +19,10 @@ interface Forum {
 
     @GET("/forum/mostLike")
     fun getMostLike(@Header("Authorization") token: String): Call<ListaFeedTopicoResponse>
+
+    @PATCH("/forum/like/{topicId}")
+    fun addLike(@Header("Authorization") token: String, @Path("topicId") topicId:Int): Call<TopicoResponseDto>
+
+    @PATCH("/forum/unlike/{topicId}")
+    fun unlike(@Header("Authorization") token: String, @Path("topicId") topicId:Int): Call<TopicoResponseDto>
 }

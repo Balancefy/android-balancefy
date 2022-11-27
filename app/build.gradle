@@ -14,8 +14,6 @@ android {
         abortOnError false
     }
 
-
-
     buildFeatures {
         dataBinding = true
         viewBinding = true

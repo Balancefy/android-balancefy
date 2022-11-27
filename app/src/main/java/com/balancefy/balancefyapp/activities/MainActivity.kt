@@ -11,7 +11,6 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
 import com.balancefy.balancefyapp.R
-import com.balancefy.balancefyapp.adapter.TransactionCardsAdapter
 import com.balancefy.balancefyapp.databinding.ActivityMainBinding
 import com.balancefy.balancefyapp.databinding.GoalBottomSheetBinding
 import com.balancefy.balancefyapp.databinding.PostBottomSheetBinding
@@ -453,7 +452,7 @@ class MainActivity : AppCompatActivity() {
         if(validatePostFields()) {
             val body = PostRequest(
                 title = sheetPostBottomSheetBinding.etTitle.text.toString(),
-                content = sheetPostBottomSheetBinding.etTitle.text.toString()
+                content = sheetPostBottomSheetBinding.etDescription.text.toString()
             )
 
             Rest.getForumInstance().create("Bearer $token", body).enqueue(object : Callback<Unit> {
