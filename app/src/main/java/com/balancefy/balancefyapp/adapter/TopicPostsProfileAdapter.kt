@@ -61,10 +61,10 @@ class TopicPostsProfileAdapter(
 
                 if (postLiked){
                     isLiked(true, binding.icPostLikes)
-                    binding.tvPostLikes.text = likeAPost(topicPosts.topicoResponseDto.id, amountLike--).toString()
+                    binding.tvPostLikes.text = likeAPost(topicPosts.topicoResponseDto.id, amountLike).toString()
                 }else {
                     isLiked(false, binding.icPostLikes)
-                    binding.tvPostLikes.text = unlikePost(topicPosts.topicoResponseDto.id, amountLike++).toString()
+                    binding.tvPostLikes.text = unlikePost(topicPosts.topicoResponseDto.id, amountLike).toString()
                 }
             }
         }
