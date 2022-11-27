@@ -136,4 +136,6 @@
     <string name="texto_aleatorio">Texto aleatorio</string>
     <string name="comment_icon" translatable="false">comment icon</string>
     <string name="dicas">Dicas</string>
+    <string name="default_post_value" translatable="false">11</string>
+    <string name="icon_post_likes" translatable="false">icon post likes</string>
 </resources>

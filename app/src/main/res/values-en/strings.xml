@@ -122,8 +122,6 @@
     <string name="profile_editable_icon">" Editable profile icon"</string>
     <string name="titulo_aleatorio">Random Title</string>
     <string name="texto_aleatorio">Random Text</string>
-    <string name="score_suffix">xp</string>
-    <string name="score_prefix">+</string>
     <string name="created_transaction">"Transaction Created! "</string>
     <string name="error_transaction_type">Transaction type cannot be empty</string>
     <string name="error_empty_value">" Enter a value greater than 0"</string>

@@ -118,8 +118,6 @@
     <string name="transaction_amount">Cantidad de Transacción</string>
     <string name="general">Todos</string>
     <string name="for_you">Recomendado</string>
-    <string name="score_suffix">xp</string>
-    <string name="score_prefix">+</string>
     <string name="no_transactions">Actualmente no hay transacciones</string>
     <string name="error_complete_task">¡Error al completar, inténtalo de nuevo!</string>
     <string name="complete_task">¡Tarea terminada!</string>
