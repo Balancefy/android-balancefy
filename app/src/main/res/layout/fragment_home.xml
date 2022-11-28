@@ -247,7 +247,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="370dp"
+            android:layout_marginTop="360dp"
             android:orientation="vertical">
 
             <TextView
@@ -271,31 +271,13 @@
                     android:layout_height="wrap_content"
                     android:padding="20dp">
 
-                    <com.balancefy.balancefyapp.components.Transaction
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recyclerContainer"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        app:category="Lazer"
-                        app:date="20 de fev, 2022"
-                        app:description="Netflix"
-                        app:type="out"
-                        app:value="23,00" />
-
-                    <com.balancefy.balancefyapp.components.Transaction
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:category="Outros"
-                        app:date="25 de fev, 2022"
-                        app:description="Mesada"
-                        app:value="50,00" />
-
-                    <com.balancefy.balancefyapp.components.Transaction
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:category="Lazer"
-                        app:date="30 de fev, 2022"
-                        app:description="Prime"
-                        app:type="out"
-                        app:value="10,00" />
+                        tools:listitem="@layout/res_transaction"
+                        tools:itemCount="1"
+                        />
 
                 </LinearLayout>
             </HorizontalScrollView>
@@ -328,7 +310,7 @@
                         android:padding="20dp">
 
                         <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/recyclerContainer"
+                            android:id="@+id/recyclerContainerTips"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             tools:listitem="@layout/res_tip_component"

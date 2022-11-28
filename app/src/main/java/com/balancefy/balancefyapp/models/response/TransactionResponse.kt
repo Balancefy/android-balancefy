@@ -1,7 +1,6 @@
 package com.balancefy.balancefyapp.models.response
 
 import com.google.gson.annotations.SerializedName
-import java.time.LocalDateTime
 
 data class TransactionResponse(
     @SerializedName("valor")

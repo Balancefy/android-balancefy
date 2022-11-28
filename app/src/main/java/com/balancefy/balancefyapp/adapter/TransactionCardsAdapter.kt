@@ -37,7 +37,7 @@ class TransactionCardsAdapter(
             binding.tvDescription.text = transaction.description
             binding.tvDate.text = date.format(formatter)
 
-            if(transaction.type == "Saída") {
+            if(transaction.type == "Saída" || transaction.type == "Saida") {
                 binding.tvValue.setTextColor(ContextCompat.getColor(context, R.color.red_balancefy))
                 binding.icon.setColorFilter(ContextCompat.getColor(context,R.color.red_balancefy))
             }
