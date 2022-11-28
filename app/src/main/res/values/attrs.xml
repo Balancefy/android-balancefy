@@ -42,4 +42,12 @@
         <attr name="tip_title" format="string" />
         <attr name="tip_description" format="string"/>
     </declare-styleable>
+
+    <declare-styleable name="ForumCard">
+        <attr name="forum_card_avatar" format="integer"/>
+        <attr name="forum_card_name" format="string" />
+        <attr name="forum_card_title" format="string" />
+        <attr name="forum_card_description" format="string" />
+        <attr name="forum_card_likes" format="string" />
+    </declare-styleable>
 </resources>
