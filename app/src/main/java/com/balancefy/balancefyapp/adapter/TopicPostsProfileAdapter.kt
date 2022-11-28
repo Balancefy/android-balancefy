@@ -1,5 +1,6 @@
 package com.balancefy.balancefyapp.adapter
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.SharedPreferences
 import android.view.LayoutInflater
@@ -26,8 +27,7 @@ class TopicPostsProfileAdapter(
     private val onClick: (mensagem: String) -> Unit
 
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-    private var postLiked = false
-    private var amountLike = 0
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val inflater =
@@ -38,10 +38,13 @@ class TopicPostsProfileAdapter(
 
     inner class TopicPostsProfileHolder(
         private val binding: ProfilePostCardBinding,
-        private val context: Context
+        val context: Context
     ) : RecyclerView.ViewHolder(binding.root) {
-        private var preferences = context.getSharedPreferences("Auth", AppCompatActivity.MODE_PRIVATE)
+        private var preferences =
+            context.getSharedPreferences("Auth", AppCompatActivity.MODE_PRIVATE)
+        private var postLiked = false
 
+        @SuppressLint("SetTextI18n")
         fun attach(topicPosts: FeedTopicoResponseDto?) {
 
             setDefaultImage(topicPosts?.autor?.fkUsuario!!.avatar, binding.postsProfileImage)
@@ -57,9 +60,7 @@ class TopicPostsProfileAdapter(
 
             postLiked = topicPosts.liked
 
-            amountLike = topicPosts.topicoResponseDto.likes
-
-            binding.tvPostsCreateProfileName.setOnClickListener{
+            binding.tvPostsCreateProfileName.setOnClickListener {
                 val editor = preferences.edit()
                 editor.putString("alternativeAccountName", topicPosts.autor.fkUsuario.name)
                 editor.putInt("alternativeAccountId", topicPosts.autor.fkUsuario.id)
@@ -83,12 +84,14 @@ class TopicPostsProfileAdapter(
             binding.icPostLikes.setOnClickListener {
                 postLiked = !postLiked
 
-                if (postLiked){
+                if (postLiked) {
                     isLiked(true, binding.icPostLikes)
-                    binding.tvPostLikes.text = likeAPost(topicPosts.topicoResponseDto.id, amountLike).toString()
-                }else {
+                    likeAPost(topicPosts.topicoResponseDto.id)
+                    binding.tvPostLikes.text = (topicPosts.topicoResponseDto.likes + 1).toString()
+                } else {
                     isLiked(false, binding.icPostLikes)
-                    binding.tvPostLikes.text = unlikePost(topicPosts.topicoResponseDto.id, amountLike).toString()
+                    unlikePost(topicPosts.topicoResponseDto.id)
+                    binding.tvPostLikes.text = (topicPosts.topicoResponseDto.likes).toString()
                 }
             }
         }
@@ -102,67 +105,48 @@ class TopicPostsProfileAdapter(
         return listTopics.size
     }
 
-    private fun isLiked(liked : Boolean, card: ImageView){
-        if (liked){
+    private fun isLiked(liked: Boolean, card: ImageView) {
+        if (liked) {
             card.setImageResource(R.drawable.ic_post_likes_enable)
-        }else {
+        } else {
             card.setImageResource(R.drawable.ic_post_likes)
         }
     }
 
-    private fun likeAPost(idTopic: Int, amountLike: Int): Int{
-        var resultLike = amountLike
+    private fun likeAPost(idTopic: Int) {
         Rest.getForumInstance().addLike("Bearer $token", idTopic)
             .enqueue(object : Callback<TopicoResponseDto> {
                 override fun onResponse(
                     call: Call<TopicoResponseDto>,
                     response: Response<TopicoResponseDto>
                 ) {
-                    val data = response.body()
                     println(response.code())
-                    when (response.code()) {
-                        200 -> {
-                            if (data != null) {
-                                resultLike = data.likes
-                            }
-                        }
-                    }
+                    return
                 }
 
                 override fun onFailure(call: Call<TopicoResponseDto>, t: Throwable) {
                     return
                 }
             })
-        return resultLike
     }
 
-    private fun unlikePost(idTopic: Int, amountLike: Int): Int{
-        var resultLike = amountLike
+    private fun unlikePost(idTopic: Int) {
         Rest.getForumInstance().unlike("Bearer $token", idTopic)
             .enqueue(object : Callback<TopicoResponseDto> {
                 override fun onResponse(
                     call: Call<TopicoResponseDto>,
                     response: Response<TopicoResponseDto>
                 ) {
-                    val data = response.body()
                     println(response.code())
-                    when (response.code()) {
-                        200 -> {
-                            if (data != null) {
-                                resultLike = data.likes
-                            }
-                        }
-                    }
+                    return
                 }
-
                 override fun onFailure(call: Call<TopicoResponseDto>, t: Throwable) {
                     return
                 }
             })
-        return resultLike
     }
 
-    private fun setDefaultImage(avatarImg : String, card: View) {
+    private fun setDefaultImage(avatarImg: String, card: View) {
         if (avatarImg.isEmpty()) {
             card.setBackgroundResource(R.drawable.ic_account)
         }
