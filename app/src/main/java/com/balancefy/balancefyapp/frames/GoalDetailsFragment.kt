@@ -8,19 +8,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
+import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.marginTop
+import androidx.core.view.updatePadding
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.balancefy.balancefyapp.R
+import com.balancefy.balancefyapp.adapter.GoalCardsAdapter
 import com.balancefy.balancefyapp.adapter.TransactionCardsAdapter
 import com.balancefy.balancefyapp.databinding.FragmentGoalDetailsBinding
 import com.balancefy.balancefyapp.databinding.TransactionBottomSheetBinding
-import com.balancefy.balancefyapp.models.response.Transaction
 import com.balancefy.balancefyapp.models.request.TransactionRequest
-import com.balancefy.balancefyapp.models.response.GoalsDetailsResponse
-import com.balancefy.balancefyapp.models.response.GoalsResponse
-import com.balancefy.balancefyapp.models.response.TaskResponse
+import com.balancefy.balancefyapp.models.response.*
 import com.balancefy.balancefyapp.rest.Rest
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -28,21 +30,23 @@ import com.google.android.material.button.MaterialButton
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.time.LocalDateTime
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
+import java.time.temporal.ChronoUnit
 import java.util.*
 
 class GoalDetailsFragment : Fragment() {
     private lateinit var binding: FragmentGoalDetailsBinding
     private var goalId: Int? = null
     private var token: String? = null
-    private lateinit var goalDetails: GoalsResponse
+    private lateinit var goalDetails: GoalsDetailsResponse
     private lateinit var preferences: SharedPreferences
     private lateinit var sheetTransactionBinding: TransactionBottomSheetBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
+    ): View? {
         binding = FragmentGoalDetailsBinding.inflate(layoutInflater)
         return binding.root
     }
@@ -57,17 +61,21 @@ class GoalDetailsFragment : Fragment() {
         showGoalsDetails()
     }
 
-    private fun showGoalsDetails() {
+    private fun showGoalsDetails(refresh: Boolean = false) {
         Rest.getGoalInstance().findById("Bearer $token", goalId!!).enqueue(object : Callback<GoalsDetailsResponse> {
-            @RequiresApi(Build.VERSION_CODES.O)
             override fun onResponse(
                 call: Call<GoalsDetailsResponse>,
                 response: Response<GoalsDetailsResponse>
             ) {
                 when(response.code()){
                     200 -> {
-                        goalDetails = response.body()?.goal!!
-                        configScreen(response.body()!!)
+                        goalDetails = response.body()!!
+
+                        if(refresh) {
+                            configScreenRefresh(response.body()!!)
+                        } else {
+                            configScreen(response.body()!!)
+                        }
                     }
                     else -> {
                         Toast.makeText(context, R.string.connection_error, Toast.LENGTH_SHORT).show()
@@ -81,16 +89,21 @@ class GoalDetailsFragment : Fragment() {
         })
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     private fun configScreen(goal: GoalsDetailsResponse) {
         setProgress(goal)
         setGoalDescription(goal.goal)
-        setCurrentTask(goal.tasks.first{ it.done == 0})
+        setCurrentTask(goal.tasks.firstOrNull{ it.done == 0})
         setGoalTransaction()
 
         binding.addTransaction.setOnClickListener {
             showTransactionBottomSheet()
         }
+    }
+
+    private fun configScreenRefresh(goal: GoalsDetailsResponse) {
+        setProgress(goal)
+        setGoalDescription(goal.goal)
+        setCurrentTask(goal.tasks.firstOrNull{ it.done == 0})
     }
 
     private fun setProgress(goal: GoalsDetailsResponse) {
@@ -109,38 +122,99 @@ class GoalDetailsFragment : Fragment() {
 
     private fun setGoalDescription(goal: GoalsResponse) {
         binding.goalTitle.setTitle(goal.description)
-        binding.goalTitle.setRemainingDays("dias restantes")
+        binding.goalTitle.setRemainingDays("${ChronoUnit.DAYS.between(LocalDate.now(), LocalDate.parse(goal.estimatedTime.replace("-", ""), DateTimeFormatter.BASIC_ISO_DATE))} ")
     }
 
-    private fun setCurrentTask(task: TaskResponse) {
-        binding.currentTask.setTitle(task.description)
-        binding.currentTask.setDescription("R$%.2f".format(task.value))
-        binding.currentTask.setScore("+%.0fxp".format(task.score))
+    private fun setCurrentTask(task: TaskResponse?) {
+        if(task == null) {
+            binding.currentTask.visibility = View.GONE
+            binding.tvNoCurrentTask.visibility = View.VISIBLE
+            binding.transactionTitle.updatePadding(top = 50)
+        } else {
+            binding.currentTask.setTitle(task.description)
+            binding.currentTask.setDescription("R$%.2f".format(task.value))
+            binding.currentTask.setScore("+%.0fxp".format(task.score))
+
+            binding.currentTask.setCompleteOnClickListener {
+                Rest.getGoalInstance().completeTask("Bearer ${token!!}", task.id)
+                    .enqueue(object : Callback<Unit> {
+                        override fun onResponse(
+                            call: Call<Unit>,
+                            response: Response<Unit>
+                        ) {
+                            when (response.code()) {
+                                200 -> {
+                                    showGoalsDetails(true)
+                                    Toast.makeText(context, R.string.complete_task, Toast.LENGTH_SHORT).show()
+                                }
+                                else -> {
+                                    Toast.makeText(context, R.string.error_complete_task, Toast.LENGTH_SHORT).show()
+                                }
+                            }
+                        }
+
+                        override fun onFailure(call: Call<Unit>, t: Throwable) {
+                            Toast.makeText(context, R.string.error_complete_task, Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                    )
+            }
+        }
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
-    private fun setGoalTransaction() {
-        configRecyclerView(
-            listOf(
-                Transaction(
-                    value = 50.0,
-                    category = "Lazer",
-                    description = "Netflix",
-                    type = "Entrada",
-                    createdAt = LocalDateTime.now()
-                )
+    private fun setGoalTransaction(refresh: Boolean = false) {
+        Rest.getTransactionInstance().getTransactionByGoal("Bearer ${token!!}", goalId!!).enqueue(object : Callback<List<TransactionResponse>> {
+            override fun onResponse(
+                call: Call<List<TransactionResponse>>,
+                response: Response<List<TransactionResponse>>
+            ) {
+                val data = response.body()
+
+                when(response.code()){
+                    200 -> {
+                        if(refresh) {
+                            configRecyclerViewRefresh(data ?: emptyList())
+                        } else {
+                            configRecyclerView(data ?: emptyList())
+                        }
+                    }
+                    else -> {
+                        binding.tvError.text = context?.getString(R.string.no_transactions)
+                    }
+                }
+            }
+            override fun onFailure(call: Call<List<TransactionResponse>>, t: Throwable) {
+                binding.tvError.text = context?.getString(R.string.connection_error)
+            }
+        })
+    }
+
+    private fun configRecyclerView(transaction: List<TransactionResponse>) {
+        if(transaction.isEmpty()) {
+            binding.tvError.visibility = View.VISIBLE
+        } else {
+            binding.tvError.visibility = View.GONE
+
+            val recyclerContainer = binding.recyclerContainer
+            recyclerContainer.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+
+            recyclerContainer.adapter = TransactionCardsAdapter(
+                transaction,
+                requireContext()
             )
-        )
+        }
     }
 
-    private fun configRecyclerView(transaction: List<Transaction>) {
-        val recyclerContainer = binding.recyclerContainer
-        recyclerContainer.layoutManager = LinearLayoutManager(context)
+    private fun configRecyclerViewRefresh(transaction: List<TransactionResponse>) {
+        if(transaction.isEmpty()) {
+            binding.tvError.visibility = View.VISIBLE
+        } else {
+            binding.tvError.visibility = View.GONE
 
-        recyclerContainer.adapter = TransactionCardsAdapter(
-            transaction,
-            requireContext()
-        )
+            val recyclerContainer = binding.recyclerContainer
+
+            (recyclerContainer.adapter as TransactionCardsAdapter).notifyDataSetChanged()
+        }
     }
 
     private fun showTransactionBottomSheet() {
@@ -192,17 +266,20 @@ class GoalDetailsFragment : Fragment() {
                 category = sheetTransactionBinding.transactionCategory.text.toString(),
                 description = sheetTransactionBinding.etDescription.text.toString(),
                 type = type,
-                goal = goalDetails
+                goal = goalDetails.goal
             )
 
-            Rest.getTransactionInstance().create("Bearer $token", body).enqueue(object : Callback<Objects> {
+            println(body)
+
+            Rest.getTransactionInstance().create("Bearer $token", body).enqueue(object : Callback<Unit> {
                 override fun onResponse(
-                    call: Call<Objects>,
-                    response: Response<Objects>
+                    call: Call<Unit>,
+                    response: Response<Unit>
                 ) {
                     when(response.code()){
                         201 -> {
                             Toast.makeText(context, R.string.created_transaction, Toast.LENGTH_SHORT).show()
+                            setGoalTransaction()
                         }
                         else -> {
                             Toast.makeText(context, R.string.register_error, Toast.LENGTH_SHORT).show()
@@ -210,7 +287,7 @@ class GoalDetailsFragment : Fragment() {
                     }
                 }
 
-                override fun onFailure(call: Call<Objects>, t: Throwable) {
+                override fun onFailure(call: Call<Unit>, t: Throwable) {
                     Toast.makeText(context, R.string.connection_error, Toast.LENGTH_SHORT).show()
                 }
             })

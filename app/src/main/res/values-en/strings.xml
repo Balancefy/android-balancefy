@@ -128,4 +128,10 @@
     <string name="profile_editable_icon">" Editable profile icon"</string>
     <string name="titulo_aleatorio">Random Title</string>
     <string name="texto_aleatorio">Random Text</string>
+    <string name="score_suffix">xp</string>
+    <string name="score_prefix">+</string>
+    <string name="no_transactions">" There are currently no transactions"</string>
+    <string name="complete_task">Finished task!</string>
+    <string name="error_complete_task">Error completing, please try again!</string>
+    <string name="no_tasks">Your tasks have already been completed!</string>
 </resources>

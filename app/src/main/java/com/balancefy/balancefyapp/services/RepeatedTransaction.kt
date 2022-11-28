@@ -17,5 +17,5 @@ interface RepeatedTransaction {
     fun getList(@Header("Authorization") token: String, @Path("id") id: Int): Call<List<RepeatedTransactionResponse>>
 
     @POST("/transactionFixed")
-    fun create(@Header("Authorization") token: String, @Body body: RepeatedTransactionRequest): Call<Objects>
+    fun create(@Header("Authorization") token: String, @Body body: RepeatedTransactionRequest): Call<Unit>
 }

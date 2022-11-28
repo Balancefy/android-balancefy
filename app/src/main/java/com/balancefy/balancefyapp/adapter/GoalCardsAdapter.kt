@@ -5,6 +5,13 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.balancefy.balancefyapp.databinding.ResGoalCardBinding
 import com.balancefy.balancefyapp.models.response.GoalsResponse
+import java.sql.Timestamp
+import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.time.LocalDate.*
+import java.time.format.DateTimeFormatter
+import java.time.temporal.ChronoUnit
+import java.util.*
 
 class GoalCardsAdapter(
     private val goalList: List<GoalsResponse>,
@@ -21,10 +28,13 @@ class GoalCardsAdapter(
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun attach(goalCard : GoalsResponse) {
+            val formatter = DateTimeFormatter.ofPattern("dd 'de' MMMM',' yyyy")
+            val date = parse(goalCard.estimatedTime.replace("-", ""), DateTimeFormatter.BASIC_ISO_DATE)
+
             binding.title.text = goalCard.description
             binding.achievableBalance.text = goalCard.totalValue.toString()
             binding.currentBalance.text = goalCard.initialValue.toString()
-            binding.estimatedDate.text = goalCard.estimatedTime
+            binding.estimatedDate.text = date.format(formatter)
 
             binding.card.setOnClickListener {
                 onClick(goalCard.id)
