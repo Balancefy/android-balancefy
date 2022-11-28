@@ -38,6 +38,7 @@ class HomeFragment : Fragment() {
 
     private lateinit var preferences : SharedPreferences
     private var token: String? = null
+    private var accountId : Int? = null
 
         override fun onCreateView(
         inflater: LayoutInflater,
@@ -56,6 +57,7 @@ class HomeFragment : Fragment() {
         preferences = context?.getSharedPreferences("Auth", AppCompatActivity.MODE_PRIVATE)!!
 
         token = preferences.getString("token", null)
+        accountId = arguments?.getInt("accountId")!!
 
         binding.nameUser.text = arguments?.getString("nameUser") ?: "Ze ninguem"
 
@@ -113,6 +115,7 @@ class HomeFragment : Fragment() {
                         )
 
                         chart.data = PieData(pieDataSet)
+                        chart.rotationAngle = 90f
 
                     }
                 }
@@ -126,13 +129,11 @@ class HomeFragment : Fragment() {
 
     private fun getTransactionsFixed() {
 
-        val accountId : Int = arguments?.getString("accountId")!!.toInt()
-
-        Rest.getRepeatedTransactionInstance().getList("Bearer $token", accountId).enqueue(object : Callback<List<RepeatedTransactionResponse>> {
+        Rest.getRepeatedTransactionInstance().getList("Bearer $token", accountId!!).enqueue(object : Callback<List<TransactionResponse>> {
             @RequiresApi(Build.VERSION_CODES.O)
             override fun onResponse(
-                call: Call<List<RepeatedTransactionResponse>>,
-                response: Response<List<RepeatedTransactionResponse>>
+                call: Call<List<TransactionResponse>>,
+                response: Response<List<TransactionResponse>>
             ) {
                 when(response.code()){
                     200 -> {
@@ -144,16 +145,16 @@ class HomeFragment : Fragment() {
                 }
             }
 
-            override fun onFailure(call: Call<List<RepeatedTransactionResponse>>, t: Throwable) {
+            override fun onFailure(call: Call<List<TransactionResponse>>, t: Throwable) {
                 Toast.makeText(context, R.string.connection_error, Toast.LENGTH_SHORT).show()
             }
         })
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
-    private fun configRecyclerView(transaction: List<RepeatedTransactionResponse>) {
+    private fun configRecyclerView(transaction: List<TransactionResponse>) {
         val recyclerContainer = binding.recyclerContainer
-        recyclerContainer.layoutManager = LinearLayoutManager(context)
+        recyclerContainer.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
 
         recyclerContainer.adapter = TransactionCardsAdapter(
             transaction,
