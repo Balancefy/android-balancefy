@@ -1,12 +1,18 @@
 package com.balancefy.balancefyapp.adapter
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.recyclerview.widget.RecyclerView
 import com.balancefy.balancefyapp.R
 import com.balancefy.balancefyapp.databinding.ProfilePostCardBinding
+import com.balancefy.balancefyapp.frames.ProfileAlternativeFragment
+import com.balancefy.balancefyapp.frames.ProfileFragment
 import com.balancefy.balancefyapp.models.response.FeedTopicoResponseDto
 import com.balancefy.balancefyapp.models.response.TopicoResponseDto
 import com.balancefy.balancefyapp.rest.Rest
@@ -19,24 +25,25 @@ class TopicPostsProfileAdapter(
     private val token: String,
     private val onClick: (mensagem: String) -> Unit
 
-
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private var postLiked = false
     private var amountLike = 0
-
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val inflater =
             ProfilePostCardBinding.inflate(LayoutInflater.from(parent.context), parent, false)
 
-        return TopicPostsProfileHolder(inflater)
+        return TopicPostsProfileHolder(inflater, parent.context)
     }
 
     inner class TopicPostsProfileHolder(
-        private val binding: ProfilePostCardBinding
+        private val binding: ProfilePostCardBinding,
+        private val context: Context
     ) : RecyclerView.ViewHolder(binding.root) {
+        private var preferences = context.getSharedPreferences("Auth", AppCompatActivity.MODE_PRIVATE)
 
         fun attach(topicPosts: FeedTopicoResponseDto?) {
+
             setDefaultImage(topicPosts?.autor?.fkUsuario!!.avatar, binding.postsProfileImage)
 
             binding.tvPostsCreateProfileName.text = topicPosts.autor.fkUsuario.name
@@ -51,6 +58,23 @@ class TopicPostsProfileAdapter(
             postLiked = topicPosts.liked
 
             amountLike = topicPosts.topicoResponseDto.likes
+
+            binding.tvPostsCreateProfileName.setOnClickListener{
+                val editor = preferences.edit()
+                editor.putString("alternativeAccountName", topicPosts.autor.fkUsuario.name)
+                editor.putInt("alternativeAccountId", topicPosts.autor.fkUsuario.id)
+                editor.apply()
+                ProfileAlternativeFragment()
+
+                //Mudar de fragment :)
+                val activity = it.context as AppCompatActivity
+
+                activity.supportFragmentManager.beginTransaction()
+                    .replace(
+                        R.id.fragmentContainerView,
+                        ProfileAlternativeFragment()
+                    ).commitNow()
+            }
 
             binding.tvTitlePost.setOnClickListener {
                 onClick("Redirecionar para Post da Pessoa (in development)")

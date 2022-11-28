@@ -42,6 +42,7 @@
         <entry key="..\:/Users/Bianca/Downloads/balancefy/android-balancefy/app/src/main/res/xml/network_security_config.xml" value="0.11730072463768115" />
         <entry key="..\:/Users/Wesley/Desktop/balancefy/android-balancefy/app/src/main/res/drawable/bg_bottom_sheet_dialog.xml" value="0.191" />
         <entry key="..\:/Users/Wesley/Desktop/balancefy/android-balancefy/app/src/main/res/drawable/bg_custom_dialog.xml" value="0.3275" />
+        <entry key="..\:/Users/Wesley/Desktop/balancefy/android-balancefy/app/src/main/res/drawable/bottom_sheet_creation_dialog.xml" value="0.168" />
         <entry key="..\:/Users/Wesley/Desktop/balancefy/android-balancefy/app/src/main/res/drawable/bt_black_white.xml" value="0.3635" />
         <entry key="..\:/Users/Wesley/Desktop/balancefy/android-balancefy/app/src/main/res/drawable/ic_add.xml" value="0.317" />
         <entry key="..\:/Users/Wesley/Desktop/balancefy/android-balancefy/app/src/main/res/drawable/ic_comment.xml" value="0.1935" />
@@ -76,15 +77,20 @@
         <entry key="..\:/Users/Wesley/Desktop/balancefy/android-balancefy/app/src/main/res/layout/fragment_onboarding_step2.xml" value="0.20471014492753623" />
         <entry key="..\:/Users/Wesley/Desktop/balancefy/android-balancefy/app/src/main/res/layout/fragment_onboarding_step3.xml" value="0.20471014492753623" />
         <entry key="..\:/Users/Wesley/Desktop/balancefy/android-balancefy/app/src/main/res/layout/fragment_profile.xml" value="0.33" />
+        <entry key="..\:/Users/Wesley/Desktop/balancefy/android-balancefy/app/src/main/res/layout/fragment_profile_alternative.xml" value="0.35833333333333334" />
         <entry key="..\:/Users/Wesley/Desktop/balancefy/android-balancefy/app/src/main/res/layout/fragment_rank.xml" value="0.17603850050658562" />
         <entry key="..\:/Users/Wesley/Desktop/balancefy/android-balancefy/app/src/main/res/layout/goal_bottom_sheet.xml" value="0.24479166666666666" />
         <entry key="..\:/Users/Wesley/Desktop/balancefy/android-balancefy/app/src/main/res/layout/goal_card.xml" value="0.24479166666666666" />
         <entry key="..\:/Users/Wesley/Desktop/balancefy/android-balancefy/app/src/main/res/layout/login_bottom_sheet.xml" value="0.33" />
         <entry key="..\:/Users/Wesley/Desktop/balancefy/android-balancefy/app/src/main/res/layout/onboarding_container.xml" value="0.20471014492753623" />
         <entry key="..\:/Users/Wesley/Desktop/balancefy/android-balancefy/app/src/main/res/layout/password_requirments_bottom_sheet.xml" value="0.24479166666666666" />
+        <entry key="..\:/Users/Wesley/Desktop/balancefy/android-balancefy/app/src/main/res/layout/post_bottom_sheet.xml" value="0.3392210144927536" />
+        <entry key="..\:/Users/Wesley/Desktop/balancefy/android-balancefy/app/src/main/res/layout/profile_alternative_post_card.xml" value="0.35833333333333334" />
         <entry key="..\:/Users/Wesley/Desktop/balancefy/android-balancefy/app/src/main/res/layout/profile_post_card.xml" value="0.39745403111739747" />
         <entry key="..\:/Users/Wesley/Desktop/balancefy/android-balancefy/app/src/main/res/layout/res_goal_card.xml" value="0.1933876811594203" />
+        <entry key="..\:/Users/Wesley/Desktop/balancefy/android-balancefy/app/src/main/res/layout/res_tip_component.xml" value="0.3392210144927536" />
         <entry key="..\:/Users/Wesley/Desktop/balancefy/android-balancefy/app/src/main/res/layout/res_transaction.xml" value="0.24479166666666666" />
+        <entry key="..\:/Users/Wesley/Desktop/balancefy/android-balancefy/app/src/main/res/layout/transaction_bottom_sheet.xml" value="0.3392210144927536" />
         <entry key="..\:/Users/Wesley/Desktop/balancefy/android-balancefy/app/src/main/res/menu/aaaa.xml" value="0.5" />
         <entry key="..\:/Users/Wesley/Desktop/balancefy/android-balancefy/app/src/main/res/menu/menu.xml" value="0.3614583333333333" />
         <entry key="..\:/Users/Wesley/Desktop/balancefy/android-balancefy/app/src/main/res/menu/nav_bar.xml" value="0.3614583333333333" />
