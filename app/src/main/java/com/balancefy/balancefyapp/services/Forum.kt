@@ -1,6 +1,7 @@
 package com.balancefy.balancefyapp.services
 
 import com.balancefy.balancefyapp.models.request.PostRequest
+import com.balancefy.balancefyapp.models.response.ListaFeedCommentReplyResponse
 import com.balancefy.balancefyapp.models.response.ListaFeedTopicoResponse
 import com.balancefy.balancefyapp.models.response.TopicoResponseDto
 import retrofit2.Call
@@ -25,4 +26,7 @@ interface Forum {
 
     @PATCH("/forum/unlike/{topicId}")
     fun unlike(@Header("Authorization") token: String, @Path("topicId") topicId:Int): Call<TopicoResponseDto>
+
+    @GET("/comentario/{idTopico}")
+    fun getComments(@Header("Authorization") token: String, @Path("idTopico") topicId:Int): Call<ListaFeedCommentReplyResponse>
 }

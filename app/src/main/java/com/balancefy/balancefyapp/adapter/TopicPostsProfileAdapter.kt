@@ -2,18 +2,16 @@ package com.balancefy.balancefyapp.adapter
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.content.SharedPreferences
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.recyclerview.widget.RecyclerView
 import com.balancefy.balancefyapp.R
 import com.balancefy.balancefyapp.databinding.ProfilePostCardBinding
+import com.balancefy.balancefyapp.frames.CommentReplyFragment
 import com.balancefy.balancefyapp.frames.ProfileAlternativeFragment
-import com.balancefy.balancefyapp.frames.ProfileFragment
 import com.balancefy.balancefyapp.models.response.FeedTopicoResponseDto
 import com.balancefy.balancefyapp.models.response.TopicoResponseDto
 import com.balancefy.balancefyapp.rest.Rest
@@ -93,6 +91,21 @@ class TopicPostsProfileAdapter(
                     unlikePost(topicPosts.topicoResponseDto.id)
                     binding.tvPostLikes.text = (topicPosts.topicoResponseDto.likes).toString()
                 }
+            }
+
+            binding.icPostComments.setOnClickListener {
+                val editor = preferences.edit()
+                editor.putString("alternativeAccountName", topicPosts.autor.fkUsuario.name)
+                editor.putInt("alternativeAccountId", topicPosts.autor.fkUsuario.id)
+                editor.apply()
+
+                val activity = it.context as AppCompatActivity
+
+                activity.supportFragmentManager.beginTransaction()
+                    .replace(
+                        R.id.fragmentContainerView,
+                        CommentReplyFragment()
+                    ).commitNow()
             }
         }
     }
