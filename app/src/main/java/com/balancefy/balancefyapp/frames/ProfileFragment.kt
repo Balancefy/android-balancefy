@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.net.toFile
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.balancefy.balancefyapp.R
@@ -15,9 +16,13 @@ import com.balancefy.balancefyapp.adapter.TopicPostsProfileAdapter
 import com.balancefy.balancefyapp.databinding.FragmentProfileBinding
 import com.balancefy.balancefyapp.models.response.*
 import com.balancefy.balancefyapp.rest.Rest
+import okhttp3.MediaType
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.io.File
 
 class ProfileFragment : Fragment() {
     private lateinit var binding: FragmentProfileBinding
@@ -37,6 +42,30 @@ class ProfileFragment : Fragment() {
         ActivityResultContracts.GetContent()
     ) { uri ->
         binding.avatarProfile.setImageURI(uri)
+        val file = uri!!.path?.let { File(it) }
+        val multipart = MultipartBody.Part.createFormData(
+            "file",
+            file?.name,
+            RequestBody.create(
+                MediaType.parse("image/*"),
+                file!!
+            )
+        )
+        Rest.getUploadInstance().uploadAvatar("Bearer ${arguments?.getString("token")}", multipart)
+            .enqueue(object: Callback<Unit> {
+                override fun onResponse(call: Call<Unit>, response: Response<Unit>) {
+                    when(response.code()) {
+                        200 -> {
+                            Toast.makeText(context, "Upload bem sucedido", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                }
+
+                override fun onFailure(call: Call<Unit>, t: Throwable) {
+                    println(t.message)
+                    Toast.makeText(context, t.message, Toast.LENGTH_SHORT).show()
+                }
+            })
     }
 
     private val background = registerForActivityResult(
@@ -56,6 +85,7 @@ class ProfileFragment : Fragment() {
 
         binding.avatarProfile.setOnClickListener {
             pegarFoto.launch("image/*")
+
         }
 
         binding.backgroundProfile.setOnClickListener {

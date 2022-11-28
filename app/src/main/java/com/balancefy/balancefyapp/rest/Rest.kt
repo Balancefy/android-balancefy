@@ -36,4 +36,6 @@ object Rest {
 
     fun getTipsInstance() = getInstance().create(Tip::class.java)
 
+    fun getUploadInstance() = getInstance().create(Upload::class.java)
+
 }
