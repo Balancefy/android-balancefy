@@ -123,17 +123,19 @@
     <string name="title">Título</string>
     <string name="publish">Publicar</string>
     <string name="created_post">Tópico criado!</string>
-    <string name="score_suffix">xp</string>
-    <string name="score_prefix">+</string>
     <string name="no_transactions">Não há transações no momento</string>
     <string name="error_complete_task">Erro ao completar, tente novamente!</string>
     <string name="complete_task">Task finalizada!</string>
     <string name="no_tasks">Suas tarefas já foram concluídas!</string>
+    <string name="score_suffix">xp</string>
+    <string name="score_prefix">+</string>
     <string name="background_avatar_image_post" >Imagem de Fundo do Avatar</string>
     <string name="profile_editable_icon">Ícone editável de perfil</string>
     <string name="name_of_the_one_who_created_the_post" translatable="false">Name of the one who created the post</string>
     <string name="titulo_aleatorio">Titulo aleatorio</string>
     <string name="texto_aleatorio">Texto aleatorio</string>
     <string name="comment_icon" translatable="false">comment icon</string>
-    <!-- TODO: Remove or change this placeholder text -->
+    <string name="dicas">Dicas</string>
+    <string name="default_post_value" translatable="false">11</string>
+    <string name="icon_post_likes" translatable="false">icon post likes</string>
 </resources>

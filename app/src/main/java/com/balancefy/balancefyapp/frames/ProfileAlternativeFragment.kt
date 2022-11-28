@@ -11,7 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.balancefy.balancefyapp.R
 import com.balancefy.balancefyapp.adapter.TopicPostsProfileAdapter
-import com.balancefy.balancefyapp.databinding.FragmentForumRecomendadosBinding
+import com.balancefy.balancefyapp.databinding.FragmentProfileAlternativeBinding
 import com.balancefy.balancefyapp.models.response.FeedTopicoResponseDto
 import com.balancefy.balancefyapp.models.response.ListaFeedTopicoResponse
 import com.balancefy.balancefyapp.rest.Rest
@@ -19,16 +19,19 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class ForumRecomendadosFragment : Fragment() {
-    private lateinit var binding: FragmentForumRecomendadosBinding
+class ProfileAlternativeFragment : Fragment() {
+    private lateinit var binding: FragmentProfileAlternativeBinding
     private lateinit var preferences: SharedPreferences
     private lateinit var token: String
+    private var accountId: Int = 0
+    private lateinit var accountName: String
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentForumRecomendadosBinding.inflate(layoutInflater)
+        binding = FragmentProfileAlternativeBinding.inflate(inflater)
         return binding.root
     }
 
@@ -36,14 +39,23 @@ class ForumRecomendadosFragment : Fragment() {
 
         preferences = requireContext().getSharedPreferences("Auth", AppCompatActivity.MODE_PRIVATE)
 
-        token = preferences.getString("token", null)!!
+        token = preferences.getString("token", "")!!
+        accountName = preferences.getString("alternativeAccountName", "Ze Ninguem")!!
+        accountId = preferences.getInt("alternativeAccountId", 0)
+        println(accountName)
+        println(accountId)
+        println(token)
 
-        recyclerViewConfigurationMostLiked()
-        super.onViewCreated(view, savedInstanceState)
+        binding.nameProfile.text = accountName
+        recyclerViewConfiguration()
+
     }
 
-    private fun recyclerViewConfigurationMostLiked() {
-        Rest.getForumInstance().getMostLike("Bearer $token")
+    private fun recyclerViewConfiguration() {
+        Rest.getForumInstance().getListTopicById(
+            "Bearer $token",
+            accountId
+        )
             .enqueue(object : Callback<ListaFeedTopicoResponse> {
                 override fun onResponse(
                     call: Call<ListaFeedTopicoResponse>,
@@ -61,13 +73,15 @@ class ForumRecomendadosFragment : Fragment() {
                                 context,
                                 getString(R.string.connection_error),
                                 Toast.LENGTH_SHORT
-                            ).show()
+                            )
+                                .show()
                         }
                     }
                 }
 
                 override fun onFailure(call: Call<ListaFeedTopicoResponse>, t: Throwable) {
                     Toast.makeText(context, t.message, Toast.LENGTH_SHORT).show()
+                    binding.emptyListOfTopics.text = getString(R.string.no_posts)
                 }
             })
     }

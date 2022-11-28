@@ -118,20 +118,19 @@
     <string name="transaction_amount">Cantidad de Transacción</string>
     <string name="general">Todos</string>
     <string name="for_you">Recomendado</string>
-    <string name="score_suffix">xp</string>
-    <string name="score_prefix">+</string>
-    <string name="title">Título</string>
     <string name="no_transactions">Actualmente no hay transacciones</string>
-    <string name="created_post">" ¡Tema creado!"</string>
-    <string name="publish">" Publicar"</string>
-    <string name="error_empty_value">" Introduzca un valor mayor que 0"</string>
-    <string name="error_transaction_type">" El tipo de transacción no puede estar vacío"</string>
-    <string name="created_transaction">" ¡Transacción creada!"</string>
     <string name="error_complete_task">¡Error al completar, inténtalo de nuevo!</string>
     <string name="complete_task">¡Tarea terminada!</string>
     <string name="no_tasks">" ¡Tus tareas ya han sido completadas!"</string>
+    <string name="created_transaction">Transacción creada</string>
+    <string name="error_transaction_type">El tipo de transacción no puede estar vacío</string>
+    <string name="error_empty_value">El valor debe ser mayor que 0</string>
+    <string name="title">Título</string>
+    <string name="publish">Publicar</string>
+    <string name="created_post">¡Tema creado!</string>
     <string name="background_avatar_image_post">imagen de fondo de avatar</string>
     <string name="profile_editable_icon">icono de perfil editable</string>
     <string name="titulo_aleatorio">Titulo aleatorio</string>
     <string name="texto_aleatorio">Texto aleatorio</string>
+    <string name="dicas">Puntas</string>
 </resources>

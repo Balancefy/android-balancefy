@@ -13,9 +13,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.balancefy.balancefyapp.R
+import com.balancefy.balancefyapp.adapter.TipCardAdapter
 import com.balancefy.balancefyapp.adapter.TransactionCardsAdapter
 import com.balancefy.balancefyapp.databinding.FragmentHomeBinding
-import com.balancefy.balancefyapp.models.response.*
+import com.balancefy.balancefyapp.models.response.BalanceResponse
+import com.balancefy.balancefyapp.models.response.TipsResponse
+import com.balancefy.balancefyapp.models.response.TransactionResponse
 import com.balancefy.balancefyapp.rest.Rest
 import com.github.mikephil.charting.charts.PieChart
 import com.github.mikephil.charting.data.PieData
@@ -25,7 +28,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.lang.Float
-import java.util.*
+import kotlin.Int
 import kotlin.String
 import kotlin.Throwable
 import kotlin.intArrayOf
@@ -33,14 +36,13 @@ import kotlin.toString
 
 class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
-
+    lateinit var preferences : SharedPreferences
     private lateinit var chart: PieChart
 
-    private lateinit var preferences : SharedPreferences
     private var token: String? = null
     private var accountId : Int? = null
 
-        override fun onCreateView(
+    override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -64,6 +66,7 @@ class HomeFragment : Fragment() {
         initChart()
         getBalances()
         getTransactionsFixed()
+        getTips()
 
     }
 
@@ -94,9 +97,9 @@ class HomeFragment : Fragment() {
                 when(response.code()){
                     200 -> {
 
-                        binding.saldoAtual.text = data?.saldo.toString()
-                        binding.receitaAtual.text = data?.entrada.toString()
-                        binding.despesaAtual.text = data?.saida.toString()
+                        binding.saldoAtual.text = String.format("%.2f", data?.saldo)
+                        binding.receitaAtual.text = String.format("%.2f", data?.entrada)
+                        binding.despesaAtual.text = String.format("%.2f", data?.saida)
 
                         var dataChart = kotlin.collections.mutableListOf<PieEntry>()
                         dataChart.add(PieEntry(Float.parseFloat(data?.saldo.toString())))
@@ -115,7 +118,7 @@ class HomeFragment : Fragment() {
                         )
 
                         chart.data = PieData(pieDataSet)
-                        chart.rotationAngle = 90f
+                        chart.rotationAngle = -90f
 
                     }
                 }
@@ -137,7 +140,7 @@ class HomeFragment : Fragment() {
             ) {
                 when(response.code()){
                     200 -> {
-                        configRecyclerView(response.body()!!)
+                        configRecyclerViewTransactions(response.body() ?: emptyList())
                     }
                     else -> {
                         Toast.makeText(context, R.string.connection_error, Toast.LENGTH_SHORT).show()
@@ -152,7 +155,7 @@ class HomeFragment : Fragment() {
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
-    private fun configRecyclerView(transaction: List<TransactionResponse>) {
+    private fun configRecyclerViewTransactions(transaction: List<TransactionResponse>) {
         val recyclerContainer = binding.recyclerContainer
         recyclerContainer.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
 
@@ -162,4 +165,33 @@ class HomeFragment : Fragment() {
         )
     }
 
+    private fun getTips() {
+
+        Rest.getTipsInstance().getAllTips("Bearer $token").enqueue(object: Callback<List<TipsResponse>>{
+            override fun onResponse(
+                call: Call<List<TipsResponse>>,
+                response: Response<List<TipsResponse>>
+            ) {
+                when(response.code()) {
+                    200 -> {
+                        configRecyclerViewTips(response.body() ?: emptyList())
+                    }
+                    else -> {
+                        Toast.makeText(context, R.string.connection_error, Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<List<TipsResponse>>, t: Throwable) {
+                Toast.makeText(context, R.string.connection_error, Toast.LENGTH_SHORT).show()
+            }
+
+        } )
+    }
+
+    fun configRecyclerViewTips(list: List<TipsResponse>) {
+        val recyclerContainer = binding.recyclerContainerTips
+        recyclerContainer.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        recyclerContainer.adapter = TipCardAdapter(list)
+    }
 }

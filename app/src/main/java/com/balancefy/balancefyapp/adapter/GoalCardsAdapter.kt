@@ -5,13 +5,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.balancefy.balancefyapp.databinding.ResGoalCardBinding
 import com.balancefy.balancefyapp.models.response.GoalsResponse
-import java.sql.Timestamp
-import java.text.SimpleDateFormat
-import java.time.LocalDate
 import java.time.LocalDate.*
 import java.time.format.DateTimeFormatter
-import java.time.temporal.ChronoUnit
-import java.util.*
 
 class GoalCardsAdapter(
     private val goalList: List<GoalsResponse>,

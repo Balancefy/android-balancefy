@@ -33,7 +33,6 @@ import retrofit2.Response
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.time.temporal.ChronoUnit
-import java.util.*
 
 class GoalDetailsFragment : Fragment() {
     private lateinit var binding: FragmentGoalDetailsBinding
@@ -50,7 +49,6 @@ class GoalDetailsFragment : Fragment() {
         binding = FragmentGoalDetailsBinding.inflate(layoutInflater)
         return binding.root
     }
-    // Falta o get das transações
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         preferences = context?.getSharedPreferences("Auth", AppCompatActivity.MODE_PRIVATE)!!

@@ -1,290 +1,325 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/black_balancefy"
-    tools:context=".frames.HomeFragment">
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:id="@+id/textHelloUser"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="100dp"
-            android:text="@string/greetings"
-            android:textColor="@color/white"
-            android:textSize="12sp" />
-
-        <TextView
-            android:id="@+id/nameUser"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="2dp"
-            android:layout_marginTop="100dp"
-            android:text=""
-            android:textColor="@color/white"
-            android:textFontWeight="900"
-            android:textSize="12sp" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="180dp"
-        android:layout_marginTop="150dp">
-
-        <com.github.mikephil.charting.charts.PieChart
-            android:id="@+id/chart_massa"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
-            android:layout_marginLeft="-95dp"
-            android:backgroundTint="@color/black_balancefy"
-            />
-
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginStart="5dp"
-            android:fillViewport="false"
-            android:scrollbars="none">
-
-            <LinearLayout
-                android:id="@+id/scroll_filter_chart"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="10dp">
-
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/card_saldo_atual"
-                    android:layout_width="250dp"
-                    android:layout_height="100dp"
-                    android:layout_marginTop="35dp"
-                    android:layout_marginBottom="25dp"
-                    android:backgroundTint="@color/grey_balancefy"
-                    android:checkable="true"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:minHeight="150dp">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginHorizontal="30dp"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/descricao_saldo_atual"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="30dp"
-                            android:text="@string/description_current_balance"
-                            android:textColor="@color/white"
-                            android:textFontWeight="900"
-                            android:textSize="10sp" />
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="5dp"
-                                android:text="@string/money"
-                                android:textColor="@color/white"
-                                android:textFontWeight="900"
-                                android:textSize="18sp" />
-
-                            <TextView
-                                android:id="@+id/saldo_atual"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="5dp"
-                                android:layout_marginTop="5dp"
-                                android:text="00,00"
-                                android:textColor="@color/green_balancefy"
-                                android:textFontWeight="900"
-                                android:textSize="18sp" />
-
-                        </LinearLayout>
-
-                    </LinearLayout>
-
-                </com.google.android.material.card.MaterialCardView>
-
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/card_receita_atual"
-                    android:layout_width="250dp"
-                    android:layout_height="100dp"
-                    android:layout_marginBottom="25dp"
-                    android:backgroundTint="@color/grey_balancefy"
-                    android:checkable="true"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:minHeight="150dp">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginHorizontal="30dp"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/descricao_receita_atual"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="30dp"
-                            android:text="@string/description_total_incoming"
-                            android:textColor="@color/white"
-                            android:textFontWeight="900"
-                            android:textSize="10sp" />
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="5dp"
-                                android:text="@string/money"
-                                android:textColor="@color/white"
-                                android:textFontWeight="900"
-                                android:textSize="18sp" />
-
-                            <TextView
-                                android:id="@+id/receita_atual"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="5dp"
-                                android:layout_marginTop="5dp"
-                                android:text="00,00"
-                                android:textColor="@color/green_money"
-                                android:textFontWeight="900"
-                                android:textSize="18sp" />
-
-                        </LinearLayout>
-
-                    </LinearLayout>
-
-                </com.google.android.material.card.MaterialCardView>
-
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/card_despesa_atual"
-                    android:layout_width="250dp"
-                    android:layout_height="100dp"
-                    android:layout_marginBottom="25dp"
-                    android:backgroundTint="@color/grey_balancefy"
-                    android:checkable="true"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:minHeight="150dp"
-                    android:paddingTop="50dp"
-                    tools:context=".frames.HomeFragment">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginHorizontal="30dp"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:id="@+id/descricao_despesa_atual"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="30dp"
-                            android:text="@string/description_amount_expenses"
-                            android:textColor="@color/white"
-                            android:textFontWeight="900"
-                            android:textSize="10sp" />
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="5dp"
-                                android:text="@string/money"
-                                android:textColor="@color/white"
-                                android:textFontWeight="900"
-                                android:textSize="18sp" />
-
-                            <TextView
-                                android:id="@+id/despesa_atual"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginStart="5dp"
-                                android:layout_marginTop="5dp"
-                                android:text="00,00"
-                                android:textColor="@color/red_balancefy"
-                                android:textFontWeight="900"
-                                android:textSize="18sp" />
-
-                        </LinearLayout>
-
-                    </LinearLayout>
-
-                </com.google.android.material.card.MaterialCardView>
-
-            </LinearLayout>
-
-        </ScrollView>
-
-    </LinearLayout>
-
-    <LinearLayout
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="370dp"
-        android:orientation="vertical">
+        android:background="@color/black_balancefy"
+        tools:context=".frames.HomeFragment">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:text="@string/last_transaction"
-            android:textColor="@color/white"
-            android:textFontWeight="900"
-            android:textSize="12sp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <HorizontalScrollView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fillViewport="false"
-            android:scrollbars="none"
-            tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck">
-
-            <LinearLayout
+            <TextView
+                android:id="@+id/textHelloUser"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="20dp"
-                android:orientation="horizontal">
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="100dp"
+                android:text="@string/greetings"
+                android:textColor="@color/white"
+                android:textSize="12sp" />
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recyclerContainer"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+            <TextView
+                android:id="@+id/nameUser"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="2dp"
+                android:layout_marginTop="100dp"
+                android:text=""
+                android:textColor="@color/white"
+                android:textFontWeight="900"
+                android:textSize="12sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:layout_marginTop="150dp">
+
+            <com.github.mikephil.charting.charts.PieChart
+                android:id="@+id/chart_massa"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_marginLeft="-95dp"
+                android:backgroundTint="@color/black_balancefy" />
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="5dp"
+                android:fillViewport="false"
+                android:scrollbars="none">
+
+                <LinearLayout
+                    android:id="@+id/scroll_filter_chart"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="10dp">
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/card_saldo_atual"
+                        android:layout_width="250dp"
+                        android:layout_height="100dp"
+                        android:layout_marginTop="35dp"
+                        android:layout_marginBottom="25dp"
+                        android:backgroundTint="@color/grey_balancefy"
+                        android:checkable="true"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:minHeight="150dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginHorizontal="30dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/descricao_saldo_atual"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="30dp"
+                                android:text="@string/description_current_balance"
+                                android:textColor="@color/white"
+                                android:textFontWeight="900"
+                                android:textSize="10sp" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="5dp"
+                                    android:text="@string/money"
+                                    android:textColor="@color/white"
+                                    android:textFontWeight="900"
+                                    android:textSize="18sp" />
+
+                                <TextView
+                                    android:id="@+id/saldo_atual"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="5dp"
+                                    android:layout_marginTop="5dp"
+                                    android:text="17,00"
+                                    android:textColor="@color/green_balancefy"
+                                    android:textFontWeight="900"
+                                    android:textSize="18sp" />
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/card_receita_atual"
+                        android:layout_width="250dp"
+                        android:layout_height="100dp"
+                        android:layout_marginBottom="25dp"
+                        android:backgroundTint="@color/grey_balancefy"
+                        android:checkable="true"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:minHeight="150dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginHorizontal="30dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/descricao_receita_atual"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="30dp"
+                                android:text="@string/description_total_incoming"
+                                android:textColor="@color/white"
+                                android:textFontWeight="900"
+                                android:textSize="10sp" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="5dp"
+                                    android:text="@string/money"
+                                    android:textColor="@color/white"
+                                    android:textFontWeight="900"
+                                    android:textSize="18sp" />
+
+                                <TextView
+                                    android:id="@+id/receita_atual"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="5dp"
+                                    android:layout_marginTop="5dp"
+                                    android:text="50,00"
+                                    android:textColor="@color/green_money"
+                                    android:textFontWeight="900"
+                                    android:textSize="18sp" />
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/card_despesa_atual"
+                        android:layout_width="250dp"
+                        android:layout_height="100dp"
+                        android:layout_marginBottom="25dp"
+                        android:backgroundTint="@color/grey_balancefy"
+                        android:checkable="true"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:minHeight="150dp"
+                        android:paddingTop="50dp"
+                        tools:context=".frames.HomeFragment">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginHorizontal="30dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/descricao_despesa_atual"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="30dp"
+                                android:text="@string/description_amount_expenses"
+                                android:textColor="@color/white"
+                                android:textFontWeight="900"
+                                android:textSize="10sp" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="5dp"
+                                    android:text="@string/money"
+                                    android:textColor="@color/white"
+                                    android:textFontWeight="900"
+                                    android:textSize="18sp" />
+
+                                <TextView
+                                    android:id="@+id/despesa_atual"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="5dp"
+                                    android:layout_marginTop="5dp"
+                                    android:text="33,00"
+                                    android:textColor="@color/red_balancefy"
+                                    android:textFontWeight="900"
+                                    android:textSize="18sp" />
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+                </LinearLayout>
+
+            </ScrollView>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="360dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:text="@string/last_transaction"
+                android:textColor="@color/white"
+                android:textFontWeight="900"
+                android:textSize="12sp" />
+
+            <HorizontalScrollView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fillViewport="false"
+                android:scrollbars="none"
+                tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="20dp">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recyclerContainer"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        tools:listitem="@layout/res_transaction"
+                        tools:itemCount="1"
+                        />
+
+                </LinearLayout>
+            </HorizontalScrollView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/tv_error"
-                    android:layout_marginTop="50dp"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textAlignment="center"
-                    android:textColor="@color/grey"/>
+                    android:layout_marginStart="20dp"
+                    android:text="@string/dicas"
+                    android:textColor="@color/white"
+                    android:textFontWeight="900"
+                    android:textSize="12sp" />
 
+                <HorizontalScrollView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fillViewport="false"
+                    android:scrollbars="none"
+                    tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="20dp">
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/recyclerContainerTips"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            tools:listitem="@layout/res_tip_component"
+                            tools:itemCount="2"
+                            />
+
+                    </LinearLayout>
+                </HorizontalScrollView>
             </LinearLayout>
-        </HorizontalScrollView>
-    </LinearLayout>
-
-
-</FrameLayout>
+        </LinearLayout>
+    </FrameLayout>
+</ScrollView>
