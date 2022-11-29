@@ -107,4 +107,5 @@
     <string name="created_goal">Objetivo Criado!</string>
     <string name="estimated_date_title">Data Estimada:</string>
     <string name="invalid_login">Senha ou Email inválidos</string>
+    <string name="rank">Bom dia, </string>
 </resources>

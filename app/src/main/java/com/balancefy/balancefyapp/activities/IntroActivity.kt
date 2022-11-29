@@ -4,6 +4,7 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.WindowManager
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.balancefy.balancefyapp.R
 import com.balancefy.balancefyapp.databinding.ActivityIntroBinding

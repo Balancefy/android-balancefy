@@ -54,7 +54,7 @@
         android:id="@+id/rank_fragment"
         android:name="com.balancefy.balancefyapp.frames.RankFragment"
         android:label="fragment_rank"
-        tools:layout="@layout/fragment_rank" >
+        tools:layout="@layout/res_ranking" >
         <action
             android:id="@+id/action_rank_to_home"
             app:destination="@id/home_fragment" />
