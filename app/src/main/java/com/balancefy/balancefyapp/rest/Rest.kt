@@ -26,8 +26,6 @@ object Rest {
 
     fun getBalanceInstance() = getInstance().create(Balance::class.java)
 
-    fun getPostInstance() = getInstance().create(Forum::class.java)
-
     fun getForumInstance() = getInstance().create(Forum::class.java)
 
     fun getRepeatedTransactionInstance() = getInstance().create(RepeatedTransaction::class.java)
@@ -37,5 +35,7 @@ object Rest {
     fun getTipsInstance() = getInstance().create(Tip::class.java)
 
     fun getUploadInstance() = getInstance().create(Upload::class.java)
+
+    fun getUserInstance() = getInstance().create(Users::class.java)
 
 }
