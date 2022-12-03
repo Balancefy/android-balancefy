@@ -2,18 +2,15 @@ package com.balancefy.balancefyapp.adapter
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.content.SharedPreferences
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.recyclerview.widget.RecyclerView
 import com.balancefy.balancefyapp.R
 import com.balancefy.balancefyapp.databinding.ProfilePostCardBinding
 import com.balancefy.balancefyapp.frames.ProfileAlternativeFragment
-import com.balancefy.balancefyapp.frames.ProfileFragment
 import com.balancefy.balancefyapp.models.response.FeedTopicoResponseDto
 import com.balancefy.balancefyapp.models.response.TopicoResponseDto
 import com.balancefy.balancefyapp.rest.Rest
@@ -109,7 +106,7 @@ class TopicPostsProfileAdapter(
         if (liked) {
             card.setImageResource(R.drawable.ic_post_likes_enable)
         } else {
-            card.setImageResource(R.drawable.ic_post_likes)
+            card.setImageResource(R.drawable.ic_new_joia)
         }
     }
 

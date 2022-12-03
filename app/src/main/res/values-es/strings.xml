@@ -133,4 +133,8 @@
     <string name="titulo_aleatorio">Titulo aleatorio</string>
     <string name="texto_aleatorio">Texto aleatorio</string>
     <string name="dicas">Puntas</string>
+    <string name="insert_your_email">Inserta tu email</string>
+    <string name="insert_your_name">Inserta tu nombre</string>
+    <string name="confirm">Confirmar</string>
+    <string name="email_name_changed">Email y nombre cambiados con éxito</string>
 </resources>
