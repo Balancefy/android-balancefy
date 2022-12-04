@@ -10,18 +10,18 @@ import retrofit2.http.*
 import java.util.*
 
 interface Goal {
-    @GET("/api/accounts/goals")
+    @GET("/accounts/goals")
     fun listGoals(@Header("Authorization") token: String): Call<List<GoalsResponse>>
 
-    @GET("/api/accounts/goals/done")
+    @GET("/accounts/goals/done")
     fun listDoneGoals(@Header("Authorization") token: String): Call<List<GoalsResponse>>
 
-    @POST("/api/accounts/goals")
+    @POST("/accounts/goals")
     fun createGoal(@Header("Authorization") token: String, @Body body: CreateGoal): Call<Unit>
 
-    @GET("/api/accounts/goals/{id}")
+    @GET("/accounts/goals/{id}")
     fun findById(@Header("Authorization") token: String, @Path("id") id: Int): Call<GoalsDetailsResponse>
 
-    @PATCH("/api/accounts/goals/tasks/")
+    @PATCH("/accounts/goals/tasks/")
     fun completeTask(@Header("Authorization") token: String, @Body body: TaskGoalKey): Call<Unit>
 }

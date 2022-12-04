@@ -8,9 +8,9 @@ import retrofit2.http.*
 import java.util.*
 
 interface Transaction {
-    @POST("/api/transactions")
+    @POST("/transactions")
     fun create(@Header("Authorization") token: String, @Body body: TransactionRequest): Call<Unit>
 
-    @GET("/api/transactions/goal/{id}")
+    @GET("/transactions/goal/{id}")
     fun getTransactionByGoal(@Header("Authorization") token: String,  @Path("id") id: Int): Call<List<TransactionResponse>>
 }

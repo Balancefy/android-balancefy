@@ -7,9 +7,9 @@ import retrofit2.http.*
 
 interface RepeatedTransaction {
 
-    @GET("/api/transactionFixed/{id}")
+    @GET("/transactionFixed/{id}")
     fun getList(@Header("Authorization") token: String, @Path("id") id: Int): Call<List<TransactionResponse>>
 
-    @POST("/api/transactionFixed")
+    @POST("/transactionFixed")
     fun create(@Header("Authorization") token: String, @Body body: RepeatedTransactionRequest): Call<Unit>
 }

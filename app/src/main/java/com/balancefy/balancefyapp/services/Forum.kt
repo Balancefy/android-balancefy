@@ -8,21 +8,21 @@ import retrofit2.http.*
 
 interface Forum {
 
-    @GET("/api/forum")
+    @GET("/forum")
     fun getListTopic(@Header("Authorization") token: String): Call<ListaFeedTopicoResponse>
 
-    @POST("/api/forum")
+    @POST("/forum")
     fun create(@Header("Authorization") token: String, @Body body: PostRequest): Call<Unit>
 
-    @GET("/api/forum/accounts/{accountId}")
+    @GET("/forum/accounts/{accountId}")
     fun getListTopicById(@Header("Authorization") token: String, @Path("accountId") accountId:Int): Call<ListaFeedTopicoResponse>
 
-    @GET("/api/forum/mostLike")
+    @GET("/forum/mostLike")
     fun getMostLike(@Header("Authorization") token: String): Call<ListaFeedTopicoResponse>
 
-    @PATCH("/api/forum/like/{topicId}")
+    @PATCH("/forum/like/{topicId}")
     fun addLike(@Header("Authorization") token: String, @Path("topicId") topicId:Int): Call<TopicoResponseDto>
 
-    @PATCH("/api/forum/unlike/{topicId}")
+    @PATCH("/forum/unlike/{topicId}")
     fun unlike(@Header("Authorization") token: String, @Path("topicId") topicId:Int): Call<TopicoResponseDto>
 }
