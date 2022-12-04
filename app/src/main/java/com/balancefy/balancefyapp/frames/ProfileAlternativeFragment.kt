@@ -15,6 +15,7 @@ import com.balancefy.balancefyapp.databinding.FragmentProfileAlternativeBinding
 import com.balancefy.balancefyapp.models.response.FeedTopicoResponseDto
 import com.balancefy.balancefyapp.models.response.ListaFeedTopicoResponse
 import com.balancefy.balancefyapp.rest.Rest
+import com.squareup.picasso.Picasso
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -23,8 +24,10 @@ class ProfileAlternativeFragment : Fragment() {
     private lateinit var binding: FragmentProfileAlternativeBinding
     private lateinit var preferences: SharedPreferences
     private lateinit var token: String
-    private var accountId: Int = 0
-    private lateinit var accountName: String
+    private var altAccountId: Int = 0
+    private lateinit var altAccountName: String
+    private lateinit var altAccountAvatar: String
+    private lateinit var altAccountBanner: String
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -40,13 +43,28 @@ class ProfileAlternativeFragment : Fragment() {
         preferences = requireContext().getSharedPreferences("Auth", AppCompatActivity.MODE_PRIVATE)
 
         token = preferences.getString("token", "")!!
-        accountName = preferences.getString("alternativeAccountName", "Ze Ninguem")!!
-        accountId = preferences.getInt("alternativeAccountId", 0)
-        println(accountName)
-        println(accountId)
-        println(token)
 
-        binding.nameProfile.text = accountName
+        altAccountId = preferences.getInt("altAccountId", 0)
+        altAccountName = preferences.getString("altAccountName", "Ze Ninguem")!!
+        altAccountAvatar = preferences.getString("altAccountAvatar", "")!!
+        altAccountBanner = preferences.getString("altAccountBanner", "")!!
+
+        println("avatar: "  + altAccountAvatar)
+        println("banner: " + altAccountBanner)
+
+        if (altAccountAvatar != "") {
+            Picasso.get().load(altAccountAvatar).into(binding.avatarProfile)
+        }else{
+            binding.avatarProfile.setImageResource(R.drawable.ic_account)
+        }
+
+        if (altAccountBanner != "") {
+            Picasso.get().load(altAccountAvatar).into(binding.backgroundProfile)
+        }else{
+            binding.backgroundProfile.setImageResource(R.drawable.fundo_perfil)
+        }
+
+        binding.nameProfile.text = altAccountName
         recyclerViewConfiguration()
 
     }
@@ -54,7 +72,7 @@ class ProfileAlternativeFragment : Fragment() {
     private fun recyclerViewConfiguration() {
         Rest.getForumInstance().getListTopicById(
             "Bearer $token",
-            accountId
+            altAccountId
         )
             .enqueue(object : Callback<ListaFeedTopicoResponse> {
                 override fun onResponse(
@@ -73,8 +91,7 @@ class ProfileAlternativeFragment : Fragment() {
                                 context,
                                 getString(R.string.connection_error),
                                 Toast.LENGTH_SHORT
-                            )
-                                .show()
+                            ).show()
                         }
                     }
                 }

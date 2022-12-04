@@ -3,7 +3,6 @@ package com.balancefy.balancefyapp.adapter
 import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
@@ -66,9 +65,12 @@ class TopicPostsProfileAdapter(
 
             binding.tvPostsCreateProfileName.setOnClickListener {
                 val editor = preferences.edit()
-                editor.putString("alternativeAccountName", topicPosts.autor.fkUsuario.name)
-                editor.putInt("alternativeAccountId", topicPosts.autor.fkUsuario.id)
+                editor.putString("altAccountName", topicPosts.autor.fkUsuario.name)
+                editor.putInt("altAccountId", topicPosts.autor.fkUsuario.id)
+                editor.putString("altAccountAvatar", topicPosts.autor.fkUsuario.avatar)
+                editor.putString("altAccountBanner", topicPosts.autor.fkUsuario.banner)
                 editor.apply()
+
                 ProfileAlternativeFragment()
 
                 //Mudar de fragment :)
@@ -148,13 +150,5 @@ class TopicPostsProfileAdapter(
                     return
                 }
             })
-    }
-
-    private fun setDefaultImage(avatarImg: String, card: View) {
-        if (avatarImg.isEmpty()) {
-        }
-        //else {
-//            card.background = avatarImg.toUri()
-//        }
     }
 }
