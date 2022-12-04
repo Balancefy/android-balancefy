@@ -2,6 +2,10 @@ package com.balancefy.balancefyapp.activities
 
 import android.content.Intent
 import android.content.SharedPreferences
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.graphics.drawable.BitmapDrawable
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
@@ -30,9 +34,15 @@ import com.google.android.material.datepicker.MaterialDatePicker
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.io.IOException
+import java.io.InputStream
+import java.net.HttpURLConnection
+import java.net.MalformedURLException
+import java.net.URL
 import java.sql.Timestamp
 import java.text.SimpleDateFormat
 import java.util.*
+
 
 class MainActivity : AppCompatActivity() {
     // Bindings
@@ -43,16 +53,27 @@ class MainActivity : AppCompatActivity() {
 
     // Goal creation
     private var date: String? = null
+
     // Transaction creation
     private var typeSelected = false
 
     // Preferences
-    lateinit var preferences : SharedPreferences
+    lateinit var preferences: SharedPreferences
     private var token: String? = ""
 
     // Animation
-    private val fromBottom: Animation by lazy { AnimationUtils.loadAnimation(this, R.anim.from_bottom_anim) }
-    private val toBottom: Animation by lazy { AnimationUtils.loadAnimation(this, R.anim.to_bottom_anim) }
+    private val fromBottom: Animation by lazy {
+        AnimationUtils.loadAnimation(
+            this,
+            R.anim.from_bottom_anim
+        )
+    }
+    private val toBottom: Animation by lazy {
+        AnimationUtils.loadAnimation(
+            this,
+            R.anim.to_bottom_anim
+        )
+    }
     private var clicked = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -65,7 +86,7 @@ class MainActivity : AppCompatActivity() {
 
         initHome()
 
-        binding.topAppBar.setOnMenuItemClickListener(){
+        binding.topAppBar.setOnMenuItemClickListener() {
             swapFragment(it.itemId)
             true
         }
@@ -97,7 +118,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        if(supportFragmentManager.backStackEntryCount >= 1) {
+        if (supportFragmentManager.backStackEntryCount >= 1) {
             super.onBackPressed()
         }
     }
@@ -109,10 +130,10 @@ class MainActivity : AppCompatActivity() {
         val bundle = bundleOf(
             "token" to preferences.getString("token", null),
             "accountId" to preferences.getInt("accountId", 0),
-            "nameUser" to preferences.getString("nameUser", null),
-            "avatar" to preferences.getString("avatar", null),
-            "banner" to preferences.getString("banner", null),
-            "type" to preferences.getString("type", null)
+            "nameUser" to preferences.getString("nameUser", ""),
+            "avatar" to preferences.getString("avatar", ""),
+            "banner" to preferences.getString("banner", ""),
+            "type" to preferences.getString("type", "")
         )
 
         homeFragment.arguments = bundle
@@ -122,10 +143,19 @@ class MainActivity : AppCompatActivity() {
             homeFragment
         ).commit()
 
-        binding.topAppBar.title =  getString(R.string.description_home)
+        binding.topAppBar.title = getString(R.string.description_home)
+
+        val avatarImg = preferences.getString("avatar", "")
+
+        if (avatarImg == "" || !avatarImg!!.startsWith("http://") || !avatarImg.startsWith("https://")) {
+            binding.topAppBar.menu.getItem(0).icon = getDrawable(R.drawable.ic_account)
+        } else {
+            val d: Drawable = BitmapDrawable(resources, drawableFromUrl(avatarImg))
+            binding.topAppBar.menu.getItem(0).icon = d
+        }
     }
 
-    private fun swapFragment(fragmentId : Int){
+    private fun swapFragment(fragmentId: Int) {
         val transaction = supportFragmentManager.beginTransaction()
         val container = binding.fragmentContainerView.id
         val bundle = bundleOf(
@@ -134,25 +164,25 @@ class MainActivity : AppCompatActivity() {
             "token" to token
         )
 
-        val fragment = when(fragmentId){
+        val fragment = when (fragmentId) {
             R.id.home_fragment -> {
-                binding.topAppBar.title =  getString(R.string.description_home)
+                binding.topAppBar.title = getString(R.string.description_home)
                 HomeFragment()
             }
             R.id.goal_fragment -> {
-                binding.topAppBar.title =  getString(R.string.description_goal)
+                binding.topAppBar.title = getString(R.string.description_goal)
                 GoalPagesFragment()
             }
             R.id.forum_fragment -> {
-                binding.topAppBar.title =  getString(R.string.description_forum)
+                binding.topAppBar.title = getString(R.string.description_forum)
                 ForumFragment()
             }
             R.id.rank_fragment -> {
-                binding.topAppBar.title =  getString(R.string.description_rank)
+                binding.topAppBar.title = getString(R.string.description_rank)
                 RankFragment()
             }
             R.id.profile_fragment -> {
-                binding.topAppBar.title =  getString(R.string.description_profile)
+                binding.topAppBar.title = getString(R.string.description_profile)
                 ProfileFragment()
             }
             else -> return
@@ -207,7 +237,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         sheetGoalBinding.btnCreate.setOnClickListener {
-            if(createGoal()) {
+            if (createGoal()) {
                 dialog.dismiss()
             }
         }
@@ -244,7 +274,7 @@ class MainActivity : AppCompatActivity() {
     private fun createGoal(): Boolean {
         val initialValue = sheetGoalBinding.etGoalInitialValue.text.toString()
 
-        if(validateGoalFields()) {
+        if (validateGoalFields()) {
             val body = CreateGoal(
                 goal = GoalCategory(getCategory()),
                 description = sheetGoalBinding.etDescription.text.toString(),
@@ -253,25 +283,35 @@ class MainActivity : AppCompatActivity() {
                 estimatedTime = date!!
             )
 
-            Rest.getGoalInstance().createGoal("Bearer $token", body).enqueue(object : Callback<Unit> {
-                override fun onResponse(
-                    call: Call<Unit>,
-                    response: Response<Unit>
-                ) {
-                    when(response.code()){
-                        201 -> {
-                            Toast.makeText(baseContext, R.string.created_goal, Toast.LENGTH_SHORT).show()
-                        }
-                        else -> {
-                            Toast.makeText(baseContext, R.string.register_error, Toast.LENGTH_SHORT).show()
+            Rest.getGoalInstance().createGoal("Bearer $token", body)
+                .enqueue(object : Callback<Unit> {
+                    override fun onResponse(
+                        call: Call<Unit>,
+                        response: Response<Unit>
+                    ) {
+                        when (response.code()) {
+                            201 -> {
+                                Toast.makeText(
+                                    baseContext,
+                                    R.string.created_goal,
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            }
+                            else -> {
+                                Toast.makeText(
+                                    baseContext,
+                                    R.string.register_error,
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            }
                         }
                     }
-                }
 
-                override fun onFailure(call: Call<Unit>, t: Throwable) {
-                    Toast.makeText(baseContext, R.string.connection_error, Toast.LENGTH_SHORT).show()
-                }
-            })
+                    override fun onFailure(call: Call<Unit>, t: Throwable) {
+                        Toast.makeText(baseContext, R.string.connection_error, Toast.LENGTH_SHORT)
+                            .show()
+                    }
+                })
 
             return true
         }
@@ -279,14 +319,14 @@ class MainActivity : AppCompatActivity() {
         return false
     }
 
-    private fun getCategory(): Int = when(sheetGoalBinding.goalCategory.text.toString()) {
-            getString(R.string.goal_category_internacional_trip) -> 1
-            getString(R.string.goal_category_nacional_trip) -> 2
-            getString(R.string.goal_category_purchase_house) -> 3
-            getString(R.string.goal_category_purchase_car) -> 4
-            getString(R.string.goal_category_college) -> 5
-            getString(R.string.goal_category_debt_discharge) -> 6
-            else -> 7
+    private fun getCategory(): Int = when (sheetGoalBinding.goalCategory.text.toString()) {
+        getString(R.string.goal_category_internacional_trip) -> 1
+        getString(R.string.goal_category_nacional_trip) -> 2
+        getString(R.string.goal_category_purchase_house) -> 3
+        getString(R.string.goal_category_purchase_car) -> 4
+        getString(R.string.goal_category_college) -> 5
+        getString(R.string.goal_category_debt_discharge) -> 6
+        else -> 7
     }
 
     private fun validateGoalFields(): Boolean {
@@ -333,7 +373,7 @@ class MainActivity : AppCompatActivity() {
         sheetTransactionBinding.btnIncoming.setOnClickListener {
             changeColor(sheetTransactionBinding.btnIncoming)
 
-            if(type.isNotEmpty()) {
+            if (type.isNotEmpty()) {
                 changeColor(sheetTransactionBinding.btnSpending)
             }
 
@@ -343,7 +383,7 @@ class MainActivity : AppCompatActivity() {
         sheetTransactionBinding.btnSpending.setOnClickListener {
             changeColor(sheetTransactionBinding.btnSpending)
 
-            if(type.isNotEmpty()) {
+            if (type.isNotEmpty()) {
                 changeColor(sheetTransactionBinding.btnIncoming)
             }
 
@@ -351,14 +391,14 @@ class MainActivity : AppCompatActivity() {
         }
 
         sheetTransactionBinding.btnCreate.setOnClickListener {
-            if(createTransaction(type)) {
+            if (createTransaction(type)) {
                 dialog.dismiss()
             }
         }
     }
 
     private fun createTransaction(type: String): Boolean {
-        if(validateTransactionFields(type)) {
+        if (validateTransactionFields(type)) {
             val body = RepeatedTransactionRequest(
                 value = sheetTransactionBinding.etValue.text.toString().toDouble(),
                 category = sheetTransactionBinding.transactionCategory.text.toString(),
@@ -366,25 +406,35 @@ class MainActivity : AppCompatActivity() {
                 type = type
             )
 
-            Rest.getRepeatedTransactionInstance().create("Bearer $token", body).enqueue(object : Callback<Unit> {
-                override fun onResponse(
-                    call: Call<Unit>,
-                    response: Response<Unit>
-                ) {
-                    when(response.code()){
-                        201 -> {
-                            Toast.makeText(baseContext, R.string.created_transaction, Toast.LENGTH_SHORT).show()
-                        }
-                        else -> {
-                            Toast.makeText(baseContext, R.string.register_error, Toast.LENGTH_SHORT).show()
+            Rest.getRepeatedTransactionInstance().create("Bearer $token", body)
+                .enqueue(object : Callback<Unit> {
+                    override fun onResponse(
+                        call: Call<Unit>,
+                        response: Response<Unit>
+                    ) {
+                        when (response.code()) {
+                            201 -> {
+                                Toast.makeText(
+                                    baseContext,
+                                    R.string.created_transaction,
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            }
+                            else -> {
+                                Toast.makeText(
+                                    baseContext,
+                                    R.string.register_error,
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            }
                         }
                     }
-                }
 
-                override fun onFailure(call: Call<Unit>, t: Throwable) {
-                    Toast.makeText(baseContext, R.string.connection_error, Toast.LENGTH_SHORT).show()
-                }
-            })
+                    override fun onFailure(call: Call<Unit>, t: Throwable) {
+                        Toast.makeText(baseContext, R.string.connection_error, Toast.LENGTH_SHORT)
+                            .show()
+                    }
+                })
 
             return true
         }
@@ -407,11 +457,13 @@ class MainActivity : AppCompatActivity() {
                 false
             }
             sheetTransactionBinding.transactionCategory.text.toString().isEmpty() -> {
-                sheetTransactionBinding.transactionCategory.error = getString(R.string.error_empty_field)
+                sheetTransactionBinding.transactionCategory.error =
+                    getString(R.string.error_empty_field)
                 false
             }
             type.isEmpty() -> {
-                Toast.makeText(baseContext, R.string.error_transaction_type, Toast.LENGTH_SHORT).show()
+                Toast.makeText(baseContext, R.string.error_transaction_type, Toast.LENGTH_SHORT)
+                    .show()
                 false
             }
             else -> true
@@ -419,7 +471,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun changeColor(btn: MaterialButton) {
-        if(btn.strokeColor.equals(getColorStateList(R.color.green_balancefy))) {
+        if (btn.strokeColor.equals(getColorStateList(R.color.green_balancefy))) {
             btn.strokeColor = getColorStateList(R.color.grey).withAlpha(24)
             btn.setTextColor(getColor(R.color.grey))
         } else {
@@ -442,14 +494,14 @@ class MainActivity : AppCompatActivity() {
         dialog.show()
 
         sheetPostBottomSheetBinding.btnCreate.setOnClickListener {
-            if(createPost()) {
+            if (createPost()) {
                 dialog.dismiss()
             }
         }
     }
 
     private fun createPost(): Boolean {
-        if(validatePostFields()) {
+        if (validatePostFields()) {
             val body = PostRequest(
                 title = sheetPostBottomSheetBinding.etTitle.text.toString(),
                 content = sheetPostBottomSheetBinding.etDescription.text.toString()
@@ -460,18 +512,21 @@ class MainActivity : AppCompatActivity() {
                     call: Call<Unit>,
                     response: Response<Unit>
                 ) {
-                    when(response.code()){
+                    when (response.code()) {
                         201 -> {
-                            Toast.makeText(baseContext, R.string.created_post, Toast.LENGTH_SHORT).show()
+                            Toast.makeText(baseContext, R.string.created_post, Toast.LENGTH_SHORT)
+                                .show()
                         }
                         else -> {
-                            Toast.makeText(baseContext, R.string.register_error, Toast.LENGTH_SHORT).show()
+                            Toast.makeText(baseContext, R.string.register_error, Toast.LENGTH_SHORT)
+                                .show()
                         }
                     }
                 }
 
                 override fun onFailure(call: Call<Unit>, t: Throwable) {
-                    Toast.makeText(baseContext, R.string.connection_error, Toast.LENGTH_SHORT).show()
+                    Toast.makeText(baseContext, R.string.connection_error, Toast.LENGTH_SHORT)
+                        .show()
                 }
             })
 
@@ -488,7 +543,8 @@ class MainActivity : AppCompatActivity() {
                 false
             }
             sheetPostBottomSheetBinding.etDescription.text.toString().isEmpty() -> {
-                sheetPostBottomSheetBinding.etDescription.error = getString(R.string.error_empty_field)
+                sheetPostBottomSheetBinding.etDescription.error =
+                    getString(R.string.error_empty_field)
                 false
             }
             else -> true
@@ -505,5 +561,14 @@ class MainActivity : AppCompatActivity() {
         editor.putString("type", null)
         editor.apply()
         startActivity(Intent(this, IntroActivity::class.java))
+    }
+
+    @Throws(MalformedURLException::class, IOException::class)
+    fun drawableFromUrl(url: String?): Bitmap? {
+        val connection: HttpURLConnection = URL(url).openConnection() as HttpURLConnection
+        connection.setRequestProperty("User-agent", "Mozilla/4.0")
+        connection.connect()
+        val input: InputStream = connection.getInputStream()
+        return BitmapFactory.decodeStream(input)
     }
 }

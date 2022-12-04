@@ -49,9 +49,6 @@ class ProfileAlternativeFragment : Fragment() {
         altAccountAvatar = preferences.getString("altAccountAvatar", "")!!
         altAccountBanner = preferences.getString("altAccountBanner", "")!!
 
-        println("avatar: "  + altAccountAvatar)
-        println("banner: " + altAccountBanner)
-
         if (altAccountAvatar != "") {
             Picasso.get().load(altAccountAvatar).into(binding.avatarProfile)
         }else{

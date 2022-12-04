@@ -38,7 +38,7 @@ class ProfileFragment : Fragment() {
     private lateinit var binding: FragmentProfileBinding
     private lateinit var preferences: SharedPreferences
     private lateinit var token: String
-    private lateinit var avatarIMG: String
+    private lateinit var avatarImg: String
     private lateinit var avatarBackgroundIMG: String
     private var selectedImage: Uri? = null
 
@@ -79,14 +79,14 @@ class ProfileFragment : Fragment() {
 
         token = preferences.getString("token", "")!!
 
-        avatarIMG = preferences.getString("avatar", "")!!
+        avatarImg = preferences.getString("avatar", "")!!
 
         avatarBackgroundIMG = preferences.getString("banner", "")!!
 
         binding.nameProfile.text = preferences.getString("nameUser", "Ze ninguem")
 
-        if (avatarIMG != "") {
-            Picasso.get().load(avatarIMG).into(binding.avatarProfile)
+        if (avatarImg != "") {
+            Picasso.get().load(avatarImg).into(binding.avatarProfile)
         } else {
             binding.avatarProfile.setImageResource(R.drawable.ic_account)
         }
