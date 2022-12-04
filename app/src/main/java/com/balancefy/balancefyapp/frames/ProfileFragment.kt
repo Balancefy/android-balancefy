@@ -1,6 +1,9 @@
 package com.balancefy.balancefyapp.frames
 
+import android.app.Activity
+import android.content.Intent
 import android.content.SharedPreferences
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -18,6 +21,7 @@ import com.balancefy.balancefyapp.models.request.UserEdit
 import com.balancefy.balancefyapp.models.response.FeedTopicoResponseDto
 import com.balancefy.balancefyapp.models.response.ListaFeedTopicoResponse
 import com.balancefy.balancefyapp.rest.Rest
+import com.balancefy.balancefyapp.utils.getFileName
 import com.squareup.picasso.Picasso
 import okhttp3.MediaType
 import okhttp3.MultipartBody
@@ -26,13 +30,16 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.io.File
+import java.io.FileInputStream
+import java.io.FileOutputStream
 
 class ProfileFragment : Fragment() {
     private lateinit var binding: FragmentProfileBinding
     private lateinit var preferences: SharedPreferences
     private lateinit var token: String
-    private lateinit var avatarIMG : String
-    private lateinit var avatarBackgroundIMG : String
+    private lateinit var avatarIMG: String
+    private lateinit var avatarBackgroundIMG: String
+    private var selectedImage: Uri? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -58,11 +65,12 @@ class ProfileFragment : Fragment() {
             )
         )
         Rest.getUploadInstance().uploadAvatar("Bearer ${arguments?.getString("token")}", multipart)
-            .enqueue(object: Callback<Unit> {
+            .enqueue(object : Callback<Unit> {
                 override fun onResponse(call: Call<Unit>, response: Response<Unit>) {
-                    when(response.code()) {
+                    when (response.code()) {
                         200 -> {
-                            Toast.makeText(context, "Upload bem sucedido", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(context, "Upload bem sucedido", Toast.LENGTH_SHORT)
+                                .show()
                         }
                     }
                 }
@@ -92,20 +100,20 @@ class ProfileFragment : Fragment() {
 
         binding.nameProfile.text = preferences.getString("nameUser", "Ze ninguem")
 
-        if (avatarIMG != ""){
+        if (avatarIMG != "") {
             Picasso.get().load(avatarIMG).into(binding.avatarProfile)
         } else {
             binding.avatarProfile.setImageResource(R.drawable.ic_account)
         }
 
-        if (avatarBackgroundIMG != ""){
+        if (avatarBackgroundIMG != "") {
             Picasso.get().load(avatarBackgroundIMG).into(binding.backgroundProfile)
         } else {
             binding.backgroundProfile.setImageResource(R.drawable.fundo_perfil)
         }
 
         binding.avatarProfile.setOnClickListener {
-            pegarFoto.launch("image/*")
+            openImagePicker()
 
         }
 
@@ -141,6 +149,67 @@ class ProfileFragment : Fragment() {
 
         recyclerViewConfiguration()
     }
+
+    fun openImagePicker() {
+        Intent(Intent.ACTION_PICK).also {
+            it.type = "image/*"
+            val mimeTypes = arrayOf("image/jpeg", "image/png")
+            it.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes)
+            startActivityForResult(it, 101)
+        }
+    }
+
+    private fun uploadImage() {
+        if (selectedImage == null) {
+            println("IMAGE IS NULL")
+            return
+        }
+        val parcelFileDescriptor = requireContext().contentResolver.openFileDescriptor(
+            selectedImage!!,
+            "r",
+            null
+        ) ?: return
+        val inputStream = FileInputStream(parcelFileDescriptor.fileDescriptor)
+        val file = File(
+            requireContext().cacheDir,
+            requireContext().contentResolver.getFileName(selectedImage!!)
+        )
+        val outputStream = FileOutputStream(file)
+
+        inputStream.copyTo(outputStream)
+
+        val multipart = MultipartBody.Part.createFormData(
+            "image",
+            file.name,
+            RequestBody.create(
+                MediaType.parse("image/*"),
+                file
+            )
+        )
+
+        Rest.getUploadInstance().uploadAvatar("Bearer ${arguments?.getString("token")}", multipart)
+            .enqueue(object : Callback<Unit> {
+                override fun onResponse(call: Call<Unit>, response: Response<Unit>) {
+                    when (response.code()) {
+                        200 -> {
+                            Toast.makeText(context, "Upload bem sucedido", Toast.LENGTH_SHORT)
+                                .show()
+                        }
+                        else -> {
+                            println(response.code())
+                        }
+                    }
+                }
+
+                override fun onFailure(call: Call<Unit>, t: Throwable) {
+                    println(t.message)
+                    Toast.makeText(context, t.message, Toast.LENGTH_SHORT).show()
+                }
+            })
+
+
+    }
+
 
     private fun validateFields(): Boolean {
         val name = binding.etName.text.toString()
@@ -261,6 +330,19 @@ class ProfileFragment : Fragment() {
     private fun validateEmail(email: String) =
         email.length < 3 || !email.contains("@") || !email.contains(".com")
 
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == Activity.RESULT_OK) {
+            when (requestCode) {
+                101 -> {
+                    selectedImage = data?.data
+                    binding.avatarProfile.setImageURI(selectedImage)
+                    uploadImage()
+                }
+            }
+        }
+    }
 //    private fun validatePass(pass: String) =
 //        !pass.contains(regex = "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[$*&@#])[0-9a-zA-Z$*&@#]{8,}$".toRegex())
 
