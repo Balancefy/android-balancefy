@@ -41,6 +41,7 @@ class HomeFragment : Fragment() {
 
     private var token: String? = null
     private var accountId : Int? = null
+    private var filterType: String? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -63,11 +64,41 @@ class HomeFragment : Fragment() {
 
         binding.nameUser.text = arguments?.getString("nameUser") ?: "Ze ninguem"
 
+        listenScroll()
         initChart()
         getBalances()
         getTransactionsFixed()
         getTips()
 
+    }
+
+    fun listenScroll() {
+        binding.scrollFilterChart.setOnScrollChangeListener { view, i, atual, i3, antigo ->
+            val scrollValue = Float.parseFloat(1.5.toString())
+
+            if(atual < antigo) {
+                chart.rotationAngle = chart.rotationAngle + scrollValue
+                this.controlFilterTransactions(atual)
+                chart.invalidate()
+            } else {
+                chart.rotationAngle = chart.rotationAngle - scrollValue
+                this.controlFilterTransactions(atual)
+                chart.invalidate()
+            }
+        }
+    }
+
+    fun controlFilterTransactions(atual: Int) {
+        when(atual){
+            in 320..450 -> if (filterType != "Entrada") filterTransactions("Entrada")
+            in 451..690 -> if (filterType != "Saida") filterTransactions("Saida")
+            else -> filterTransactions("")
+        }
+    }
+
+    fun filterTransactions(typeTransaction: String) {
+        filterType = typeTransaction;
+        getTransactionsFixed()
     }
 
     fun initChart() {
@@ -79,8 +110,7 @@ class HomeFragment : Fragment() {
         chart.description.isEnabled = false
         chart.holeRadius = 85f
         chart.transparentCircleRadius = 0f
-        chart.rotationAngle = -25f
-        chart.isRotationEnabled = false
+        chart.isRotationEnabled = true
         chart.isHighlightPerTapEnabled = false
 
     }
@@ -118,7 +148,7 @@ class HomeFragment : Fragment() {
                         )
 
                         chart.data = PieData(pieDataSet)
-                        chart.rotationAngle = -90f
+                        chart.rotationAngle = -85f
 
                     }
                 }
@@ -126,6 +156,31 @@ class HomeFragment : Fragment() {
 
             override fun onFailure(call: Call<BalanceResponse>, t: Throwable) {
                 println("balance error: "+context?.getString(R.string.connection_error))
+
+                val zero = 0.0
+
+                binding.saldoAtual.text = String.format("%.2f", zero)
+                binding.receitaAtual.text = String.format("%.2f", zero)
+                binding.despesaAtual.text = String.format("%.2f", zero)
+
+                var dataChart = kotlin.collections.mutableListOf<PieEntry>()
+                dataChart.add(PieEntry(Float.parseFloat(zero.toString())))
+                dataChart.add(PieEntry(Float.parseFloat(zero.toString())))
+                dataChart.add(PieEntry(Float.parseFloat(zero.toString())))
+
+                var pieDataSet: PieDataSet = PieDataSet(dataChart, "")
+                pieDataSet.setDrawValues(false)
+                pieDataSet.setColors(
+                    intArrayOf(
+                        Color.rgb(8, 248, 225),
+                        Color.rgb(62, 183, 67),
+                        Color.rgb(239, 51, 51)
+                    ),
+                    100
+                )
+
+                chart.data = PieData(pieDataSet)
+                chart.rotationAngle = 0f
             }
         })
     }
@@ -140,7 +195,7 @@ class HomeFragment : Fragment() {
             ) {
                 when(response.code()){
                     200 -> {
-                        configRecyclerViewTransactions(response.body() ?: emptyList())
+                        configRecyclerViewTransactions(response.body() ?: emptyList(), filterType)
                     }
                     else -> {
                         Toast.makeText(context, R.string.connection_error, Toast.LENGTH_SHORT).show()
@@ -155,14 +210,18 @@ class HomeFragment : Fragment() {
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
-    private fun configRecyclerViewTransactions(transaction: List<TransactionResponse>) {
+    private fun configRecyclerViewTransactions(transactions: List<TransactionResponse>, type: String?) {
         val recyclerContainer = binding.recyclerContainer
         recyclerContainer.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
 
-        recyclerContainer.adapter = TransactionCardsAdapter(
-            transaction,
-            requireContext()
-        )
+        if (!type.isNullOrBlank()) {
+            recyclerContainer.adapter = TransactionCardsAdapter(
+                transactions.filter{ it.type == type },
+                requireContext()
+            )
+        } else {
+            recyclerContainer.adapter = TransactionCardsAdapter(transactions, requireContext())
+        }
     }
 
     private fun getTips() {
