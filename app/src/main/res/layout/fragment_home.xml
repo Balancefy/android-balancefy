@@ -52,6 +52,7 @@
                 android:backgroundTint="@color/black_balancefy" />
 
             <ScrollView
+                android:id="@+id/scroll_filter_chart"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginStart="5dp"
@@ -59,7 +60,6 @@
                 android:scrollbars="none">
 
                 <LinearLayout
-                    android:id="@+id/scroll_filter_chart"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
