@@ -6,9 +6,9 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.create
 
 object Rest {
-    // private val baseURL = "http://balancefy.ddns.net:8080/"
+    private val baseURL = "http://balancefy.ddns.net:8080/"
     // Mudar todos os endpoints para /api/...
-    private val baseURL = "https://api-balancefy.ddns.net/"
+    // private val baseURL = "https://api-balancefy.ddns.net/"
 
     fun getInstance(): Retrofit {
         return Retrofit

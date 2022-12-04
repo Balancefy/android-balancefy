@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="5dp"
@@ -23,9 +24,9 @@
             android:paddingBottom="8dp">
 
             <androidx.cardview.widget.CardView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                app:cardCornerRadius="24dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                app:cardCornerRadius="20dp"
                 >
                 <ImageView
                     android:id="@+id/ic_posts_profile_image"
@@ -33,7 +34,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:contentDescription="@string/background_avatar_image_post"
-                    android:src="@drawable/bruno" />
+                    tools:src="@drawable/lux_agiota" />
             </androidx.cardview.widget.CardView>
 
             <TextView

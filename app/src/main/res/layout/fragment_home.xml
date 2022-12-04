@@ -259,6 +259,17 @@
                 android:textFontWeight="900"
                 android:textSize="12sp" />
 
+            <TextView
+                android:layout_marginTop="40dp"
+                android:layout_gravity="center"
+                android:id="@+id/tv_error"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/no_transactions"
+                android:textColor="@color/white"
+                android:visibility="gone"
+                android:textSize="12sp" />
+
             <HorizontalScrollView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

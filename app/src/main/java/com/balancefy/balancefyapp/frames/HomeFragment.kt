@@ -209,18 +209,24 @@ class HomeFragment : Fragment() {
         })
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     private fun configRecyclerViewTransactions(transactions: List<TransactionResponse>, type: String?) {
-        val recyclerContainer = binding.recyclerContainer
-        recyclerContainer.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-
-        if (!type.isNullOrBlank()) {
-            recyclerContainer.adapter = TransactionCardsAdapter(
-                transactions.filter{ it.type == type },
-                requireContext()
-            )
+        if(transactions.isEmpty()) {
+            binding.tvError.visibility = View.VISIBLE
         } else {
-            recyclerContainer.adapter = TransactionCardsAdapter(transactions, requireContext())
+            binding.tvError.visibility = View.GONE
+            binding.recyclerContainer.visibility = View.VISIBLE
+
+            val recyclerContainer = binding.recyclerContainer
+            recyclerContainer.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+
+            if (!type.isNullOrBlank()) {
+                recyclerContainer.adapter = TransactionCardsAdapter(
+                    transactions.filter{ it.type == type },
+                    requireContext()
+                )
+            } else {
+                recyclerContainer.adapter = TransactionCardsAdapter(transactions, requireContext())
+            }
         }
     }
 

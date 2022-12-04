@@ -147,12 +147,12 @@ class MainActivity : AppCompatActivity() {
 
         val avatarImg = preferences.getString("avatar", "")
 
-        if (avatarImg == "" || !avatarImg!!.startsWith("http://") || !avatarImg.startsWith("https://")) {
-            binding.topAppBar.menu.getItem(0).icon = getDrawable(R.drawable.ic_account)
-        } else {
-            val d: Drawable = BitmapDrawable(resources, drawableFromUrl(avatarImg))
-            binding.topAppBar.menu.getItem(0).icon = d
-        }
+//        if (avatarImg != "" && (avatarImg!!.startsWith("https://") || avatarImg.startsWith("http://"))) {
+//            val d: Drawable = BitmapDrawable(resources, drawableFromUrl(avatarImg))
+//            binding.topAppBar.menu.getItem(0).icon = d
+//        } else {
+//            binding.topAppBar.menu.getItem(0).icon = getDrawable(R.drawable.ic_account)
+//        }
     }
 
     private fun swapFragment(fragmentId: Int) {
