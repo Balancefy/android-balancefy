@@ -14,6 +14,7 @@ import com.balancefy.balancefyapp.frames.ProfileAlternativeFragment
 import com.balancefy.balancefyapp.models.response.FeedTopicoResponseDto
 import com.balancefy.balancefyapp.models.response.TopicoResponseDto
 import com.balancefy.balancefyapp.rest.Rest
+import com.squareup.picasso.Picasso
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -44,7 +45,13 @@ class TopicPostsProfileAdapter(
         @SuppressLint("SetTextI18n")
         fun attach(topicPosts: FeedTopicoResponseDto?) {
 
-            setDefaultImage(topicPosts?.autor?.fkUsuario!!.avatar, binding.postsProfileImage)
+            val avatarImg = topicPosts!!.autor.fkUsuario.avatar
+
+            if (avatarImg != "") {
+                Picasso.get().load(avatarImg).into(binding.icPostsProfileImage)
+            }else{
+                binding.icPostsProfileImage.setBackgroundResource(R.drawable.ic_account)
+            }
 
             binding.tvPostsCreateProfileName.text = topicPosts.autor.fkUsuario.name
             binding.tvTitlePost.text = topicPosts.topicoResponseDto.titulo
@@ -145,7 +152,6 @@ class TopicPostsProfileAdapter(
 
     private fun setDefaultImage(avatarImg: String, card: View) {
         if (avatarImg.isEmpty()) {
-            card.setBackgroundResource(R.drawable.ic_account)
         }
         //else {
 //            card.background = avatarImg.toUri()
