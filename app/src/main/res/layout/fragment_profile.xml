@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="@color/black_balancefy"
     android:paddingTop="70dp"
-    android:paddingBottom="5mm"
     tools:context=".frames.ProfileFragment">
 
     <LinearLayout
@@ -195,13 +194,18 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerContainer"
             android:layout_width="match_parent"
-            android:layout_height="240dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"
             android:paddingStart="12dp"
             android:paddingEnd="12dp"
             android:visibility="gone"
-            tools:itemCount="4"
+            tools:itemCount="2"
             tools:listitem="@layout/profile_post_card" />
-
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_gravity="bottom"
+            />
         <TextView
             android:id="@+id/tv_error"
             android:layout_width="match_parent"
@@ -214,4 +218,4 @@
 
     </LinearLayout>
 
-</ScrollView>
+</LinearLayout>
