@@ -43,11 +43,13 @@
         <attr name="tip_description" format="string"/>
     </declare-styleable>
 
-    <declare-styleable name="ForumCard">
-        <attr name="forum_card_avatar" format="integer"/>
-        <attr name="forum_card_name" format="string" />
-        <attr name="forum_card_title" format="string" />
-        <attr name="forum_card_description" format="string" />
-        <attr name="forum_card_likes" format="string" />
+    <declare-styleable name="Rank">
+        <attr name="from_user" format="boolean"/>
+        <attr name="name" format="string" />
+        <attr name="position" format="string"/>
+        <attr name="tasks_completed" format="string"/>
+        <attr name="goals_completed" format="string" />
+        <attr name="image" format="string"/>
     </declare-styleable>
+
 </resources>

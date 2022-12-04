@@ -127,8 +127,8 @@
     <string name="error_complete_task">Erro ao completar, tente novamente!</string>
     <string name="complete_task">Task finalizada!</string>
     <string name="no_tasks">Suas tarefas já foram concluídas!</string>
-    <string name="score_suffix">xp</string>
-    <string name="score_prefix">+</string>
+    <string name="score_suffix" translatable="false">xp</string>
+    <string name="score_prefix" translatable="false">+</string>
     <string name="background_avatar_image_post" >Imagem de Fundo do Avatar</string>
     <string name="profile_editable_icon">Ícone editável de perfil</string>
     <string name="name_of_the_one_who_created_the_post" translatable="false">Name of the one who created the post</string>
@@ -138,5 +138,8 @@
     <string name="dicas">Dicas</string>
     <string name="default_post_value" translatable="false">11</string>
     <string name="icon_post_likes" translatable="false">icon post likes</string>
-    <string name="like_action" translatable="false">Like</string>
+    <string name="confirm">Confirmar</string>
+    <string name="insert_your_name">Insira seu Nome...</string>
+    <string name="insert_your_email">Insira seu Email</string>
+    <string name="email_name_changed">Email e Nome alterado com Sucesso</string>
 </resources>

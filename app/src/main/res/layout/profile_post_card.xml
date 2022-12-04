@@ -13,9 +13,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/black_balancefy"
+        android:backgroundTint="@color/grey_balancefy"
         android:orientation="vertical"
-        android:padding="10dp"
-        android:paddingStart="15dp">
+        android:padding="14dp">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -24,8 +24,8 @@
 
             <ImageView
                 android:id="@+id/posts_profile_image"
-                android:layout_width="31dp"
-                android:layout_height="match_parent"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
                 android:layout_gravity="center"
                 android:background="@drawable/bg_profile_image"
                 android:contentDescription="@string/background_avatar_image_post"
@@ -37,9 +37,10 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:paddingStart="8dp"
+                android:paddingTop="2dp"
                 android:text="@string/name_of_the_one_who_created_the_post"
                 android:textColor="@color/white"
-                android:textSize="16sp" />
+                android:textSize="14sp" />
 
         </LinearLayout>
 
@@ -47,10 +48,10 @@
             android:id="@+id/tv_titlePost"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="8dp"
             android:text="@string/titulo_aleatorio"
             android:textColor="@color/green_balancefy"
-            android:textSize="18sp"
+            android:textSize="14sp"
             android:textStyle="bold" />
 
         <TextView
@@ -59,7 +60,7 @@
             android:layout_height="wrap_content"
             android:text="@string/texto_aleatorio"
             android:textColor="@color/white"
-            android:textSize="14sp" />
+            android:textSize="12sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -68,63 +69,77 @@
             android:layout_weight="1"
             android:orientation="horizontal">
 
-            <ImageView
-                android:id="@+id/ic_post_comments"
-                android:layout_width="0dp"
+            <LinearLayout
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:contentDescription="@string/comment_icon"
-                android:src="@drawable/ic_post_comments" />
+                android:layout_gravity="start"
+                android:layout_weight="1">
 
-            <TextView
-                android:id="@+id/tv_post_comments"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/default_post_value"
-                android:textColor="@color/white"
-                android:textSize="16sp" />
+                <ImageView
+                    android:id="@+id/ic_post_comments"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="@string/comment_icon"
+                    android:src="@drawable/ic_new_comment" />
 
-            <ImageView
-                android:id="@+id/ic_post_likes"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:contentDescription="@string/icon_post_likes"
-                android:src="@drawable/ic_post_likes" />
+                <TextView
+                    android:id="@+id/tv_post_comments"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/default_post_value"
+                    android:textColor="@color/white"
+                    android:paddingStart="16dp"
+                    android:textSize="14sp" />
+            </LinearLayout>
 
-            <TextView
-                android:id="@+id/tv_post_likes"
-                android:layout_width="0dp"
+            <LinearLayout
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/default_post_value"
-                android:textColor="@color/white"
-                android:textSize="16sp" />
+                android:layout_gravity="start"
+                android:layout_weight="1">
 
-            <ImageView
-                android:id="@+id/ic_post_timer"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:contentDescription="icon post timer"
-                android:src="@drawable/ic_post_timer" />
+                <ImageView
+                    android:id="@+id/ic_post_likes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="@string/icon_post_likes"
+                    android:src="@drawable/ic_new_joia" />
 
-            <TextView
-                android:id="@+id/tv_post_timer"
-                android:layout_width="0dp"
+                <TextView
+                    android:id="@+id/tv_post_likes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/default_post_value"
+                    android:textColor="@color/white"
+                    android:paddingStart="16dp"
+                    android:textSize="14sp" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="3"
-                android:text="@string/default_post_value"
-                android:textColor="@color/white"
-                android:textSize="16sp" />
+                android:layout_gravity="start"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:id="@+id/ic_post_timer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="icon post timer"
+                    android:src="@drawable/ic_new_time" />
+
+                <TextView
+                    android:id="@+id/tv_post_timer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/default_post_value"
+                    android:textColor="@color/white"
+                    android:paddingStart="16dp"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
         </LinearLayout>
-
-        <View
-            android:layout_width="wrap_content"
-            android:layout_height="1dp"
-            android:layout_marginTop="40sp"
-            android:layout_marginBottom="40sp"
-            android:background="@color/gray_line" />
     </LinearLayout>
 </androidx.cardview.widget.CardView>

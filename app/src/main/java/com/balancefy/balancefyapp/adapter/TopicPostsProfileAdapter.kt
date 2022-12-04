@@ -122,7 +122,7 @@ class TopicPostsProfileAdapter(
         if (liked) {
             card.setImageResource(R.drawable.ic_post_likes_enable)
         } else {
-            card.setImageResource(R.drawable.ic_post_likes)
+            card.setImageResource(R.drawable.ic_new_joia)
         }
     }
 
