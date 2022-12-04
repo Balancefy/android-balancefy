@@ -20,6 +20,7 @@ import com.balancefy.balancefyapp.databinding.FragmentProfileBinding
 import com.balancefy.balancefyapp.models.request.UserEdit
 import com.balancefy.balancefyapp.models.response.FeedTopicoResponseDto
 import com.balancefy.balancefyapp.models.response.ListaFeedTopicoResponse
+import com.balancefy.balancefyapp.models.response.UploadResponse
 import com.balancefy.balancefyapp.rest.Rest
 import com.balancefy.balancefyapp.utils.getFileName
 import com.squareup.picasso.Picasso
@@ -64,22 +65,6 @@ class ProfileFragment : Fragment() {
                 file!!
             )
         )
-        Rest.getUploadInstance().uploadAvatar("Bearer ${arguments?.getString("token")}", multipart)
-            .enqueue(object : Callback<Unit> {
-                override fun onResponse(call: Call<Unit>, response: Response<Unit>) {
-                    when (response.code()) {
-                        200 -> {
-                            Toast.makeText(context, "Upload bem sucedido", Toast.LENGTH_SHORT)
-                                .show()
-                        }
-                    }
-                }
-
-                override fun onFailure(call: Call<Unit>, t: Throwable) {
-                    println(t.message)
-                    Toast.makeText(context, t.message, Toast.LENGTH_SHORT).show()
-                }
-            })
     }
 
     private val background = registerForActivityResult(
@@ -188,10 +173,11 @@ class ProfileFragment : Fragment() {
         )
 
         Rest.getUploadInstance().uploadAvatar("Bearer ${arguments?.getString("token")}", multipart)
-            .enqueue(object : Callback<Unit> {
-                override fun onResponse(call: Call<Unit>, response: Response<Unit>) {
+            .enqueue(object : Callback<UploadResponse> {
+                override fun onResponse(call: Call<UploadResponse>, response: Response<UploadResponse>) {
                     when (response.code()) {
                         200 -> {
+                            println(response.body())
                             Toast.makeText(context, "Upload bem sucedido", Toast.LENGTH_SHORT)
                                 .show()
                         }
@@ -201,13 +187,12 @@ class ProfileFragment : Fragment() {
                     }
                 }
 
-                override fun onFailure(call: Call<Unit>, t: Throwable) {
+                override fun onFailure(call: Call<UploadResponse>, t: Throwable) {
                     println(t.message)
                     Toast.makeText(context, t.message, Toast.LENGTH_SHORT).show()
                 }
-            })
-
-
+            }
+        )
     }
 
 
