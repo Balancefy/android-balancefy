@@ -18,6 +18,8 @@ class Rank(context: Context, attrs: AttributeSet) : LinearLayout(context, attrs)
     )
 
     init {
+
+
         val attributes = context.obtainStyledAttributes(attrs, R.styleable.Rank)
 
         if(attributes.getBoolean(R.styleable.Rank_from_user, false)){
@@ -29,8 +31,9 @@ class Rank(context: Context, attrs: AttributeSet) : LinearLayout(context, attrs)
         binding.name.text = attributes.getString(R.styleable.Rank_name)
         binding.position.text = "${attributes.getString(R.styleable.Rank_position)} º"
 
-
-        Picasso.get().load(attributes.getString(R.styleable.Rank_image)).into(binding.image)
+        if(!isInEditMode){
+            Picasso.get().load(attributes.getString(R.styleable.Rank_image)).into(binding.image)
+        }
     }
 
 
