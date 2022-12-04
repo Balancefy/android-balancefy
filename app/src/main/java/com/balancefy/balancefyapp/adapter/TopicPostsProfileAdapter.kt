@@ -95,8 +95,14 @@ class TopicPostsProfileAdapter(
 
             binding.icPostComments.setOnClickListener {
                 val editor = preferences.edit()
-                editor.putString("alternativeAccountName", topicPosts.autor.fkUsuario.name)
-                editor.putInt("alternativeAccountId", topicPosts.autor.fkUsuario.id)
+                editor.putInt("postId", topicPosts.topicoResponseDto.id)
+                editor.putString("postAccountName", topicPosts.autor.fkUsuario.name)
+                editor.putInt("postAccountId", topicPosts.autor.fkUsuario.id)
+                editor.putString("postAccountTitle", topicPosts.topicoResponseDto.titulo)
+                editor.putString("postAccountContent", topicPosts.topicoResponseDto.descricao)
+                editor.putInt("postAccountLikes", topicPosts.topicoResponseDto.likes)
+                editor.putString("postAccountCreatedAt", topicPosts.topicoResponseDto.createdAt)
+                editor.putInt("postAccountComments", topicPosts.commentSize)
                 editor.apply()
 
                 val activity = it.context as AppCompatActivity

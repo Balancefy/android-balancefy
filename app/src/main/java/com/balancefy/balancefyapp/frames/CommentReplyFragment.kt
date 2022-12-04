@@ -12,19 +12,28 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.balancefy.balancefyapp.R
 import com.balancefy.balancefyapp.adapter.CommentReplyAdapter
 import com.balancefy.balancefyapp.databinding.FragmentCommentReplyBinding
+import com.balancefy.balancefyapp.models.request.CommentReplyRequest
 import com.balancefy.balancefyapp.models.response.FeedCommentReplyResponseDto
 import com.balancefy.balancefyapp.models.response.ListaFeedCommentReplyResponse
-import com.balancefy.balancefyapp.models.response.ListaFeedTopicoResponse
 import com.balancefy.balancefyapp.rest.Rest
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.time.format.DateTimeFormatter
 
 class CommentReplyFragment : Fragment() {
     private lateinit var binding: FragmentCommentReplyBinding
     private lateinit var preferences: SharedPreferences
     private lateinit var token: String
-    private var topicId: Int? = null
+    private var accountId: Int = 0
+    private lateinit var accountName: String
+    private lateinit var accountTitle: String
+    private lateinit var accountContent: String
+    private lateinit var accountLikes: String
+    private lateinit var accountCreatedAt: String
+    private lateinit var accountComments: String
+
+    private var topicIdPost: Int? = null
 
 
     override fun onCreateView(
@@ -38,14 +47,32 @@ class CommentReplyFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         preferences = requireContext().getSharedPreferences("Auth", AppCompatActivity.MODE_PRIVATE)
         token = preferences.getString("token", null)!!
-        topicId = preferences.getInt("topicId", 0)
+        topicIdPost = preferences.getInt("postId", 3)
+        accountName = preferences.getString("postAccountName", "")!!
+        accountId = preferences.getInt("postAccountId", 0)
+        accountTitle = preferences.getString("postAccountTitle", "")!!
+        accountContent = preferences.getString("postAccountContent", "")!!
+        accountLikes = preferences.getInt("postAccountLikes", 0).toString()!!
+        accountCreatedAt = preferences.getString("postAccountCreatedAt", "")!!
+        accountComments = preferences.getInt("postAccountComments", 0).toString()!!
 
         recyclerViewConfigurationGeral()
         super.onViewCreated(view, savedInstanceState)
+
+        binding.forumCard.setTitle(accountTitle)
+        binding.forumCard.setName(accountName)
+        binding.forumCard.setDescription(accountContent)
+        binding.forumCard.setLikes(accountLikes)
+        binding.forumCard.setCreated(accountCreatedAt)
+        binding.forumCard.setComments(accountComments)
+
+        binding.sendIcon.setOnClickListener {
+            createComment()
+        }
     }
 
     private fun recyclerViewConfigurationGeral() {
-        Rest.getForumInstance().getComments("Bearer $token", topicId!!)
+        Rest.getForumInstance().getComments("Bearer $token", topicIdPost!!)
             .enqueue(object : Callback<ListaFeedCommentReplyResponse> {
                 override fun onResponse(
                     call: Call<ListaFeedCommentReplyResponse>,
@@ -62,12 +89,10 @@ class CommentReplyFragment : Fragment() {
                                 context,
                                 getString(R.string.connection_error),
                                 Toast.LENGTH_SHORT
-                            )
-                                .show()
+                            ).show()
                         }
                     }
                 }
-
                 override fun onFailure(call: Call<ListaFeedCommentReplyResponse>, t: Throwable) {
                     Toast.makeText(context, t.message, Toast.LENGTH_SHORT).show()
                 }
@@ -77,25 +102,42 @@ class CommentReplyFragment : Fragment() {
     private fun configRecycleView(posts: List<FeedCommentReplyResponseDto>?) {
         if (posts!!.isEmpty()) {
             binding.emptyListOfTopics.visibility = View.VISIBLE
-
             binding.recyclerContainerReply.visibility = View.GONE
         } else {
             binding.emptyListOfTopics.visibility = View.GONE
-
             binding.recyclerContainerReply.visibility = View.VISIBLE
-
             val recyclerContainer = binding.recyclerContainerReply
-
             recyclerContainer.layoutManager = LinearLayoutManager(context)
-
             recyclerContainer.adapter = CommentReplyAdapter(
-                posts,
-                token
-            ) { mensagem -> showMessageTest(mensagem as String) }
+                posts
+            )
         }
     }
 
-    private fun showMessageTest(message: String) {
-        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+    private fun createComment() {
+        val body = CommentReplyRequest(
+            content = binding.etContent.text.toString(),
+            post = topicIdPost!!
+        )
+        Rest.getForumInstance().createComment("Bearer $token", body).enqueue(object : Callback<Unit> {
+            override fun onResponse(
+                call: Call<Unit>,
+                response: Response<Unit>
+            ) {
+                when(response.code()){
+                    201 -> {
+                        Toast.makeText(context, R.string.created_post, Toast.LENGTH_SHORT).show()
+                    }
+                    else -> {
+                        Toast.makeText(context, R.string.register_error, Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<Unit>, t: Throwable) {
+                Toast.makeText(context, R.string.connection_error, Toast.LENGTH_SHORT).show()
+            }
+        })
     }
+
 }

@@ -1,5 +1,6 @@
 package com.balancefy.balancefyapp.services
 
+import com.balancefy.balancefyapp.models.request.CommentReplyRequest
 import com.balancefy.balancefyapp.models.request.PostRequest
 import com.balancefy.balancefyapp.models.response.ListaFeedCommentReplyResponse
 import com.balancefy.balancefyapp.models.response.ListaFeedTopicoResponse
@@ -29,4 +30,7 @@ interface Forum {
 
     @GET("/comentario/{idTopico}")
     fun getComments(@Header("Authorization") token: String, @Path("idTopico") topicId:Int): Call<ListaFeedCommentReplyResponse>
+
+    @POST("/comentario")
+    fun createComment(@Header("Authorization") token: String, @Body body: CommentReplyRequest): Call<Unit>
 }

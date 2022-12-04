@@ -9,23 +9,15 @@ import android.widget.LinearLayout
 import com.balancefy.balancefyapp.R
 import com.balancefy.balancefyapp.databinding.ProfilePostCardBinding
 import java.net.URL
+import java.time.format.DateTimeFormatter
 
 class ForumCard(context: Context, attrs: AttributeSet) : LinearLayout(context, attrs) {
+
+    val formatter = DateTimeFormatter.ofPattern("dd 'de' MMMM',' yyyy")
 
     private val binding: ProfilePostCardBinding = ProfilePostCardBinding.inflate(
         LayoutInflater.from(context), this, true
     )
-
-    init {
-        val attributes = context.obtainStyledAttributes(attrs, R.styleable.ForumCard)
-        /*val imageUrl = URL(attributes.getString(R.styleable.ForumCard_forum_card_avatar))
-        val photo = BitmapFactory.decodeStream(imageUrl.openConnection().getInputStream());
-        binding.postsProfileImage.setImageBitmap(photo)*/
-        setName(attributes.getString(R.styleable.ForumCard_forum_card_name) ?: "sem nome")
-        setTitle(attributes.getString(R.styleable.ForumCard_forum_card_title) ?: "sem titulo")
-        setDescription(attributes.getString(R.styleable.ForumCard_forum_card_description) ?: "sem descricao")
-        setLikes(attributes.getString(R.styleable.ForumCard_forum_card_likes) ?: "0")
-    }
 
     fun setName(name: String) {
         binding.tvPostsCreateProfileName.text = name
@@ -41,5 +33,13 @@ class ForumCard(context: Context, attrs: AttributeSet) : LinearLayout(context, a
 
     fun setLikes(likes: String) {
         binding.tvPostLikes.text = likes
+    }
+
+    fun setCreated(date: String) {
+        binding.tvPostTimer.text = date.format(formatter)
+    }
+
+    fun setComments(comment: String) {
+        binding.tvPostComments.text = comment
     }
 }
