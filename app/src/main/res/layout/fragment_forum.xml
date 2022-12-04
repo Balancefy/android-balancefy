@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/black_balancefy"
     android:paddingTop="50dp"
+    android:paddingBottom="5mm"
     tools:context=".frames.ForumFragment">
 
     <LinearLayout

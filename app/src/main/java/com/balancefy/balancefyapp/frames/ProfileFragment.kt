@@ -9,10 +9,8 @@ import android.view.WindowManager
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.net.toFile
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.balancefy.balancefyapp.R
 import com.balancefy.balancefyapp.adapter.TopicPostsProfileAdapter
 import com.balancefy.balancefyapp.databinding.FragmentProfileBinding
@@ -20,6 +18,7 @@ import com.balancefy.balancefyapp.models.request.UserEdit
 import com.balancefy.balancefyapp.models.response.FeedTopicoResponseDto
 import com.balancefy.balancefyapp.models.response.ListaFeedTopicoResponse
 import com.balancefy.balancefyapp.rest.Rest
+import com.squareup.picasso.Picasso
 import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -32,6 +31,8 @@ class ProfileFragment : Fragment() {
     private lateinit var binding: FragmentProfileBinding
     private lateinit var preferences: SharedPreferences
     private lateinit var token: String
+    private lateinit var avatarIMG : String
+    private lateinit var avatarBackgroundIMG : String
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -85,7 +86,23 @@ class ProfileFragment : Fragment() {
 
         token = preferences.getString("token", "")!!
 
+        avatarIMG = preferences.getString("avatar", "")!!
+
+        avatarBackgroundIMG = preferences.getString("banner", "")!!
+
         binding.nameProfile.text = preferences.getString("nameUser", "Ze ninguem")
+
+        if (avatarIMG != ""){
+            Picasso.get().load(avatarIMG).into(binding.avatarProfile)
+        } else {
+            binding.avatarProfile.setImageResource(R.drawable.ic_account)
+        }
+
+        if (avatarBackgroundIMG != ""){
+            Picasso.get().load(avatarBackgroundIMG).into(binding.backgroundProfile)
+        } else {
+            binding.backgroundProfile.setImageResource(R.drawable.fundo_perfil)
+        }
 
         binding.avatarProfile.setOnClickListener {
             pegarFoto.launch("image/*")
