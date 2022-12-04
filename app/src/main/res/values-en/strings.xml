@@ -137,4 +137,5 @@
     <string name="confirm">Confirm</string>
     <string name="insert_your_email">Insert your email</string>
     <string name="insert_your_name">Insert your name</string>
+    <string name="like_action">Like</string>
 </resources>
