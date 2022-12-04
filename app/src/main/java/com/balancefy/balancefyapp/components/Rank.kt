@@ -8,6 +8,7 @@ import android.widget.LinearLayout
 import com.balancefy.balancefyapp.R
 import com.balancefy.balancefyapp.databinding.ResRankBinding
 import com.balancefy.balancefyapp.databinding.ResTipComponentBinding
+import com.squareup.picasso.Picasso
 import java.net.URL
 
 class Rank(context: Context, attrs: AttributeSet) : LinearLayout(context, attrs) {
@@ -15,6 +16,7 @@ class Rank(context: Context, attrs: AttributeSet) : LinearLayout(context, attrs)
     private val binding: ResRankBinding =  ResRankBinding.inflate(
         LayoutInflater.from(context), this, true
     )
+
     init {
         val attributes = context.obtainStyledAttributes(attrs, R.styleable.Rank)
 
@@ -27,10 +29,8 @@ class Rank(context: Context, attrs: AttributeSet) : LinearLayout(context, attrs)
         binding.name.text = attributes.getString(R.styleable.Rank_name)
         binding.position.text = "${attributes.getString(R.styleable.Rank_position)} º"
 
-        val imageUrl = URL(attributes.getString(R.styleable.Rank_image))
-        val photo = BitmapFactory.decodeStream(imageUrl.openConnection().getInputStream());
-        binding.image.setImageBitmap(photo)
 
+        Picasso.get().load(attributes.getString(R.styleable.Rank_image)).into(binding.image)
     }
 
 
