@@ -75,15 +75,12 @@ class HomeFragment : Fragment() {
 
     fun listenScroll() {
         binding.scrollFilterChart.setOnScrollChangeListener { view, i, atual, i3, antigo ->
-            val scrollValue = Float.parseFloat(100.toString())
 
             if(atual < antigo) {
                 this.controlFilterTransactions(atual)
-                chart.rotationAngle = chart.rotationAngle + scrollValue
                 chart.invalidate()
             } else {
                 this.controlFilterTransactions(atual)
-                chart.rotationAngle = chart.rotationAngle - scrollValue
                 chart.invalidate()
             }
         }
@@ -91,10 +88,10 @@ class HomeFragment : Fragment() {
 
     fun controlFilterTransactions(atual: Int) {
         when(atual){
-            in 320..450 -> {
+            in 305..450 -> {
                 if (filterType != "Entrada") filterTransactions("Entrada")
             }
-            in 451..690 -> {
+            in 451..750 -> {
                 if (filterType != "Saida") filterTransactions("Saida")
             }
             else -> {
@@ -118,7 +115,8 @@ class HomeFragment : Fragment() {
         chart.holeRadius = 85f
         chart.transparentCircleRadius = 0f
         chart.isRotationEnabled = false
-        chart.isHighlightPerTapEnabled = false
+        chart.isHighlightPerTapEnabled = true
+        chart.rotation = 65f
 
     }
 
