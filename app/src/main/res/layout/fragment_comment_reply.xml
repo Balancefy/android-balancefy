@@ -76,6 +76,7 @@
                     android:layout_marginLeft="15dp"
                     android:hint="Escreva um comentário..."
                     android:textSize="14sp"
+                    android:textColor="@color/white"
                     android:textColorHint="@color/gray_line"
                     android:background="@android:color/transparent"
                     android:layout_weight="1"/>

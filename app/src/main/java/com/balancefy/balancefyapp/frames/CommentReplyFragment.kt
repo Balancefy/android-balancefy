@@ -1,12 +1,16 @@
 package com.balancefy.balancefyapp.frames
 
+import android.content.Context
+import android.content.Context.INPUT_METHOD_SERVICE
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.balancefy.balancefyapp.R
@@ -131,6 +135,7 @@ class CommentReplyFragment : Fragment() {
                     201 -> {
                         Toast.makeText(context, R.string.created_post, Toast.LENGTH_SHORT).show()
                         recyclerViewConfigurationGeral()
+                        closeKeyboard()
                     }
                     else -> {
                         Toast.makeText(context, R.string.register_error, Toast.LENGTH_SHORT).show()
@@ -142,6 +147,16 @@ class CommentReplyFragment : Fragment() {
                 Toast.makeText(context, R.string.connection_error, Toast.LENGTH_SHORT).show()
             }
         })
+    }
+
+    private fun closeKeyboard() {
+        binding.etContent.text.clear()
+        val view: View? = binding.etContent
+        view?.let {
+            val imm = requireContext().getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
+
+            imm.hideSoftInputFromWindow(it.windowToken, 0)
+        }
     }
 
 }
