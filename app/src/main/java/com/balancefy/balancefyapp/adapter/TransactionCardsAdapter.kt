@@ -32,7 +32,9 @@ class TransactionCardsAdapter(
                 transaction.createdAt
             )
 
-            binding.tvValue.text = "%.2f".format(transaction.value)
+            if (transaction.value < 0) binding.tvValue.text = "%.2f".format(transaction.value * -1)
+            else binding.tvValue.text = "%.2f".format(transaction.value)
+
             binding.tvCategory.text = transaction.category
             binding.tvDescription.text = transaction.description
             binding.tvDate.text = date.format(formatter)
