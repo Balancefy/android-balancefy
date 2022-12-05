@@ -130,6 +130,7 @@ class CommentReplyFragment : Fragment() {
                 when(response.code()){
                     201 -> {
                         Toast.makeText(context, R.string.created_post, Toast.LENGTH_SHORT).show()
+                        recyclerViewConfigurationGeral()
                     }
                     else -> {
                         Toast.makeText(context, R.string.register_error, Toast.LENGTH_SHORT).show()

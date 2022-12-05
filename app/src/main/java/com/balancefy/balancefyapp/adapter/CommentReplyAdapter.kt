@@ -27,14 +27,12 @@ class CommentReplyAdapter(
         private val binding: CommentReplyCardBinding,
         val context: Context
     ) : RecyclerView.ViewHolder(binding.root) {
-        private var postLiked = false
-
         @SuppressLint("SetTextI18n")
         fun attach(topicPosts: FeedCommentReplyResponseDto?) {
             println(topicPosts)
-            setDefaultImage(topicPosts?.autor?.fkUsuario!!.avatar, binding.postsProfileImage)
-            binding.tvName.text = topicPosts.autor.fkUsuario.name
-            binding.tvTextPost.text = topicPosts.commentReplyDto.description
+            setDefaultImage(topicPosts?.autor?.usuario!!.avatar, binding.postsProfileImage)
+            binding.tvName.text = topicPosts.autor.usuario.name
+            binding.tvTextPost.text = topicPosts.description
             //isLiked(topicPosts.liked, binding.icPostLikes)
             //postLiked = topicPosts.liked
         }
@@ -95,7 +93,7 @@ class CommentReplyAdapter(
             card.setBackgroundResource(R.drawable.ic_account)
         }
         else {
-            card.setBackgroundResource(R.drawable.background)
+            card.setBackgroundResource(R.drawable.ic_account)
         }
     }
 }
