@@ -2,6 +2,7 @@ package com.balancefy.balancefyapp.adapter
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.graphics.BitmapFactory
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,11 +11,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.balancefy.balancefyapp.R
 import com.balancefy.balancefyapp.databinding.CommentReplyCardBinding
 import com.balancefy.balancefyapp.models.response.FeedCommentReplyResponseDto
+import java.net.URL
 
 class CommentReplyAdapter(
     private val listTopics: List<FeedCommentReplyResponseDto>,
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val inflater =
             CommentReplyCardBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -30,11 +31,12 @@ class CommentReplyAdapter(
 
         @SuppressLint("SetTextI18n")
         fun attach(topicPosts: FeedCommentReplyResponseDto?) {
+            println(topicPosts)
             setDefaultImage(topicPosts?.autor?.fkUsuario!!.avatar, binding.postsProfileImage)
             binding.tvName.text = topicPosts.autor.fkUsuario.name
             binding.tvTextPost.text = topicPosts.commentReplyDto.description
-            isLiked(topicPosts.liked, binding.icPostLikes)
-            postLiked = topicPosts.liked
+            //isLiked(topicPosts.liked, binding.icPostLikes)
+            //postLiked = topicPosts.liked
         }
     }
 
@@ -88,11 +90,12 @@ class CommentReplyAdapter(
     }*/
 
     private fun setDefaultImage(avatarImg: String, card: View) {
+        println(avatarImg)
         if (avatarImg.isEmpty()) {
             card.setBackgroundResource(R.drawable.ic_account)
         }
-        //else {
-//            card.background = avatarImg.toUri()
-//        }
+        else {
+            card.setBackgroundResource(R.drawable.background)
+        }
     }
 }

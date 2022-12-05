@@ -57,7 +57,6 @@ class CommentReplyFragment : Fragment() {
         accountComments = preferences.getInt("postAccountComments", 0).toString()!!
 
         recyclerViewConfigurationGeral()
-        super.onViewCreated(view, savedInstanceState)
 
         binding.forumCard.setTitle(accountTitle)
         binding.forumCard.setName(accountName)
@@ -81,6 +80,8 @@ class CommentReplyFragment : Fragment() {
                     val data = response.body()?.listTopic
                     when (response.code()) {
                         200 -> {
+                            println(response.body())
+                            println(topicIdPost)
                             configRecycleView(data)
                         }
                         else -> {
@@ -92,9 +93,11 @@ class CommentReplyFragment : Fragment() {
                             ).show()
                         }
                     }
+                    println(response.code())
                 }
                 override fun onFailure(call: Call<ListaFeedCommentReplyResponse>, t: Throwable) {
                     Toast.makeText(context, t.message, Toast.LENGTH_SHORT).show()
+                    println(t.message)
                 }
             })
     }
