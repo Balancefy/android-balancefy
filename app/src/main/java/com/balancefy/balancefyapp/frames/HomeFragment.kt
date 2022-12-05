@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.balancefy.balancefyapp.R
@@ -74,15 +75,15 @@ class HomeFragment : Fragment() {
 
     fun listenScroll() {
         binding.scrollFilterChart.setOnScrollChangeListener { view, i, atual, i3, antigo ->
-            val scrollValue = Float.parseFloat(1.5.toString())
+            val scrollValue = Float.parseFloat(100.toString())
 
             if(atual < antigo) {
-                chart.rotationAngle = chart.rotationAngle + scrollValue
                 this.controlFilterTransactions(atual)
+                chart.rotationAngle = chart.rotationAngle + scrollValue
                 chart.invalidate()
             } else {
-                chart.rotationAngle = chart.rotationAngle - scrollValue
                 this.controlFilterTransactions(atual)
+                chart.rotationAngle = chart.rotationAngle - scrollValue
                 chart.invalidate()
             }
         }
@@ -90,9 +91,15 @@ class HomeFragment : Fragment() {
 
     fun controlFilterTransactions(atual: Int) {
         when(atual){
-            in 320..450 -> if (filterType != "Entrada") filterTransactions("Entrada")
-            in 451..690 -> if (filterType != "Saida") filterTransactions("Saida")
-            else -> filterTransactions("")
+            in 320..450 -> {
+                if (filterType != "Entrada") filterTransactions("Entrada")
+            }
+            in 451..690 -> {
+                if (filterType != "Saida") filterTransactions("Saida")
+            }
+            else -> {
+                filterTransactions("")
+            }
         }
     }
 
@@ -110,7 +117,7 @@ class HomeFragment : Fragment() {
         chart.description.isEnabled = false
         chart.holeRadius = 85f
         chart.transparentCircleRadius = 0f
-        chart.isRotationEnabled = true
+        chart.isRotationEnabled = false
         chart.isHighlightPerTapEnabled = false
 
     }
@@ -148,7 +155,6 @@ class HomeFragment : Fragment() {
                         )
 
                         chart.data = PieData(pieDataSet)
-                        chart.rotationAngle = -85f
 
                     }
                 }
@@ -180,7 +186,6 @@ class HomeFragment : Fragment() {
                 )
 
                 chart.data = PieData(pieDataSet)
-                chart.rotationAngle = 0f
             }
         })
     }

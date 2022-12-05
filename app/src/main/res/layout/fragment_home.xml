@@ -42,22 +42,23 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="180dp"
-            android:layout_marginTop="150dp">
+            android:layout_marginTop="135dp">
 
             <com.github.mikephil.charting.charts.PieChart
                 android:id="@+id/chart_massa"
                 android:layout_width="200dp"
                 android:layout_height="200dp"
-                android:layout_marginLeft="-95dp"
+                android:layout_marginLeft="-100dp"
+                android:layout_marginTop="5dp"
                 android:backgroundTint="@color/black_balancefy" />
 
             <ScrollView
                 android:id="@+id/scroll_filter_chart"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginStart="5dp"
                 android:fillViewport="false"
-                android:scrollbars="none">
+                android:scrollbars="none"
+                android:layout_marginStart="5dp">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -247,7 +248,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="360dp"
+            android:layout_marginTop="340dp"
+            android:paddingBottom="30dp"
             android:orientation="vertical">
 
             <TextView
@@ -270,13 +272,6 @@
                 android:visibility="gone"
                 android:textSize="12sp" />
 
-            <HorizontalScrollView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fillViewport="false"
-                android:scrollbars="none"
-                tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck">
-
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -291,7 +286,6 @@
                         />
 
                 </LinearLayout>
-            </HorizontalScrollView>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -308,13 +302,6 @@
                     android:textFontWeight="900"
                     android:textSize="12sp" />
 
-                <HorizontalScrollView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fillViewport="false"
-                    android:scrollbars="none"
-                    tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck">
-
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -329,7 +316,6 @@
                             />
 
                     </LinearLayout>
-                </HorizontalScrollView>
             </LinearLayout>
         </LinearLayout>
     </FrameLayout>
