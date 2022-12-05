@@ -2,7 +2,7 @@ package com.balancefy.balancefyapp.activities
 
 import android.content.Intent
 import android.content.SharedPreferences
-import android.graphics.Bitmap
+import android.content.res.Resources
 import android.graphics.BitmapFactory
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
@@ -13,6 +13,7 @@ import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory
 import androidx.core.os.bundleOf
 import com.balancefy.balancefyapp.R
 import com.balancefy.balancefyapp.databinding.ActivityMainBinding
@@ -147,12 +148,22 @@ class MainActivity : AppCompatActivity() {
 
         val avatarImg = preferences.getString("avatar", "")
 
-//        if (avatarImg != "" && (avatarImg!!.startsWith("https://") || avatarImg.startsWith("http://"))) {
-//            val d: Drawable = BitmapDrawable(resources, drawableFromUrl(avatarImg))
-//            binding.topAppBar.menu.getItem(0).icon = d
-//        } else {
-//            binding.topAppBar.menu.getItem(0).icon = getDrawable(R.drawable.ic_account)
-//        }
+        if (avatarImg != "" && (avatarImg!!.startsWith("https://") || avatarImg.startsWith("http://"))) {
+
+            drawableFromUrl(avatarImg) {
+                val decodedStream = BitmapFactory.decodeStream(it)
+                runOnUiThread {
+                    val cornerRadius: Float = 2f * 300
+                    val roundedTileDrawable =
+                        RoundedBitmapDrawableFactory.create(getResources(), decodedStream);
+                    roundedTileDrawable.cornerRadius = cornerRadius
+                    binding.topAppBar.menu.getItem(0).icon = roundedTileDrawable
+
+                }
+            }
+        } else {
+            binding.topAppBar.menu.getItem(0).icon = getDrawable(R.drawable.ic_account)
+        }
     }
 
     private fun swapFragment(fragmentId: Int) {
@@ -564,11 +575,13 @@ class MainActivity : AppCompatActivity() {
     }
 
     @Throws(MalformedURLException::class, IOException::class)
-    fun drawableFromUrl(url: String?): Bitmap? {
-        val connection: HttpURLConnection = URL(url).openConnection() as HttpURLConnection
-        connection.setRequestProperty("User-agent", "Mozilla/4.0")
-        connection.connect()
-        val input: InputStream = connection.getInputStream()
-        return BitmapFactory.decodeStream(input)
+    fun drawableFromUrl(url: String?, callback: (bitmap: InputStream) -> Unit) {
+        Thread {
+            val connection: HttpURLConnection = URL(url).openConnection() as HttpURLConnection
+            connection.setRequestProperty("User-agent", "Mozilla/4.0")
+            connection.connect()
+            val input: InputStream = connection.getInputStream()
+            callback(input)
+        }.start()
     }
 }
