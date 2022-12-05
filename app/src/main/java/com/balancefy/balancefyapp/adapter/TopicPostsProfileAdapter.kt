@@ -3,7 +3,6 @@ package com.balancefy.balancefyapp.adapter
 import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
@@ -15,6 +14,7 @@ import com.balancefy.balancefyapp.frames.ProfileAlternativeFragment
 import com.balancefy.balancefyapp.models.response.FeedTopicoResponseDto
 import com.balancefy.balancefyapp.models.response.TopicoResponseDto
 import com.balancefy.balancefyapp.rest.Rest
+import com.squareup.picasso.Picasso
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -45,7 +45,13 @@ class TopicPostsProfileAdapter(
         @SuppressLint("SetTextI18n")
         fun attach(topicPosts: FeedTopicoResponseDto?) {
 
-            setDefaultImage(topicPosts?.autor?.fkUsuario!!.avatar, binding.postsProfileImage)
+            val avatarImg = topicPosts!!.autor.fkUsuario.avatar
+
+            if (avatarImg != "") {
+                Picasso.get().load(avatarImg).into(binding.icPostsProfileImage)
+            }else{
+                binding.icPostsProfileImage.setBackgroundResource(R.drawable.ic_account)
+            }
 
             binding.tvPostsCreateProfileName.text = topicPosts.autor.fkUsuario.name
             binding.tvTitlePost.text = topicPosts.topicoResponseDto.titulo
@@ -60,9 +66,12 @@ class TopicPostsProfileAdapter(
 
             binding.tvPostsCreateProfileName.setOnClickListener {
                 val editor = preferences.edit()
-                editor.putString("alternativeAccountName", topicPosts.autor.fkUsuario.name)
-                editor.putInt("alternativeAccountId", topicPosts.autor.fkUsuario.id)
+                editor.putString("altAccountName", topicPosts.autor.fkUsuario.name)
+                editor.putInt("altAccountId", topicPosts.autor.fkUsuario.id)
+                editor.putString("altAccountAvatar", topicPosts.autor.fkUsuario.avatar)
+                editor.putString("altAccountBanner", topicPosts.autor.fkUsuario.banner)
                 editor.apply()
+
                 ProfileAlternativeFragment()
 
                 //Mudar de fragment :)
@@ -163,14 +172,5 @@ class TopicPostsProfileAdapter(
                     return
                 }
             })
-    }
-
-    private fun setDefaultImage(avatarImg: String, card: View) {
-        if (avatarImg.isEmpty()) {
-            card.setBackgroundResource(R.drawable.ic_account)
-        }
-        //else {
-//            card.background = avatarImg.toUri()
-//        }
     }
 }

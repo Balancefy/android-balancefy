@@ -12,12 +12,17 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerContainer"
             android:layout_width="match_parent"
-            android:layout_height="85mm"
+            android:layout_height="0dp"
+            android:layout_weight="1"
             android:layout_gravity="center"
             tools:itemCount="2"
             tools:listitem="@layout/profile_post_card"
-            android:layout_marginBottom="50dp"
             />
+        <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_gravity="bottom"
+        />
     </LinearLayout>
     <TextView
         android:id="@+id/emptyListOfTopics"
@@ -26,4 +31,6 @@
         android:layout_gravity="center"
         android:text="@string/no_posts"
         android:textColor="@color/white" />
+
+
 </FrameLayout>
