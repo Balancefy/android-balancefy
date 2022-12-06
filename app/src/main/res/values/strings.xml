@@ -144,4 +144,5 @@
     <string name="email_name_changed">Email e Nome alterado com Sucesso</string>
     <string name="like_action">Curtir</string>
     <string name="no_comments_reply" translatable="false">Não há comentários nesta publicação</string>
+    <string name="you_position">Sua posição</string>
 </resources>

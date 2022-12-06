@@ -3,7 +3,6 @@ package com.balancefy.balancefyapp.rest
 import com.balancefy.balancefyapp.services.*
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.create
 
 object Rest {
     // private val baseURL = "http://balancefy.ddns.net:8080/"
@@ -37,5 +36,7 @@ object Rest {
     fun getUploadInstance() = getInstance().create(Upload::class.java)
 
     fun getUserInstance() = getInstance().create(Users::class.java)
+
+    fun getAccountInstance() = getInstance().create(Accounts::class.java)
 
 }

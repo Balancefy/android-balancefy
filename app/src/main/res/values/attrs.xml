@@ -47,7 +47,7 @@
         <attr name="from_user" format="boolean"/>
         <attr name="name" format="string" />
         <attr name="position" format="string"/>
-        <attr name="tasks_completed" format="string"/>
+        <attr name="progress_value" format="string"/>
         <attr name="goals_completed" format="string" />
         <attr name="image" format="string"/>
     </declare-styleable>
