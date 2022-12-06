@@ -29,9 +29,10 @@
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     android:layout_gravity="center"
-                    app:cardCornerRadius="65dp">
+                    app:cardCornerRadius="30dp">
 
                     <ImageView
+                        android:id="@+id/iv_third_user_img"
                         android:layout_width="60dp"
                         android:layout_height="60dp"
                         android:layout_gravity="center"
@@ -41,7 +42,7 @@
                 </androidx.cardview.widget.CardView>
 
                 <TextView
-                    android:id="@+id/name_profile"
+                    android:id="@+id/tv_third_user"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/user_name"
@@ -62,9 +63,10 @@
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:layout_gravity="center"
-                    app:cardCornerRadius="65dp">
+                    app:cardCornerRadius="50dp">
 
                     <ImageView
+                        android:id="@+id/iv_first_user_img"
                         android:layout_width="100dp"
                         android:layout_height="100dp"
                         android:layout_gravity="center"
@@ -75,6 +77,7 @@
                 </androidx.cardview.widget.CardView>
 
                 <TextView
+                    android:id="@+id/tv_first_user_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/user_name"
@@ -95,9 +98,10 @@
                     android:layout_width="80dp"
                     android:layout_height="80dp"
                     android:layout_gravity="center"
-                    app:cardCornerRadius="65dp">
+                    app:cardCornerRadius="40dp">
 
                     <ImageView
+                        android:id="@+id/iv_second_user_img"
                         android:layout_width="80dp"
                         android:layout_height="80dp"
                         android:layout_gravity="center"
@@ -108,6 +112,7 @@
                 </androidx.cardview.widget.CardView>
 
                 <TextView
+                    android:id="@+id/tv_second_user_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/user_name"
@@ -126,10 +131,12 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:orientation="vertical">
 
+
                 <com.balancefy.balancefyapp.components.Rank
+                    android:id="@+id/accountUser"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:from_user="true"
@@ -137,9 +144,10 @@
                     app:image="https://ovicio.com.br/wp-content/uploads/2021/07/20210712-one-piece-zoro-wano-postcover-555x555.jpg"
                     app:name="Sua posição"
                     app:position="1º"
-                    app:tasks_completed="1" />
+                    app:progress_value="1" />
 
                 <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycler_view_rank_list"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     tools:listitem="@layout/res_rank" />
