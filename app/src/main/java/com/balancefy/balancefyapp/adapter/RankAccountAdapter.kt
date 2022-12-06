@@ -10,6 +10,7 @@ import com.balancefy.balancefyapp.R
 import com.balancefy.balancefyapp.databinding.ResRankBinding
 import com.balancefy.balancefyapp.frames.ProfileAlternativeFragment
 import com.balancefy.balancefyapp.models.response.*
+import com.squareup.picasso.Picasso
 
 class RankAccountAdapter(
     private val listTopics: List<AccountRankResponseDto>,
@@ -37,12 +38,13 @@ class RankAccountAdapter(
             binding.name.text = actualRank.name
             binding.progress.text = actualRank.progress.toString()
             binding.goalsCompleted.text = actualRank.goal.toString()
-            binding.image.setImageResource(R.drawable.bruno)
+            Picasso.get().load(actualRank.avatar).into(binding.image)
 
             binding.name.setOnClickListener {
                 val editor = preferences.edit()
                 editor.putString("altAccountName", actualRank.name)
                 editor.putInt("altAccountId", actualRank.id)
+                editor.putString("altAccountAvatar", actualRank.avatar)
                 editor.apply()
 
                 ProfileAlternativeFragment()

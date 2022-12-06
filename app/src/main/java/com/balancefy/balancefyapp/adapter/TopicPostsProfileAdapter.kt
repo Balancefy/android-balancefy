@@ -112,6 +112,8 @@ class TopicPostsProfileAdapter(
                 editor.putInt("postAccountLikes", topicPosts.topicoResponseDto.likes)
                 editor.putString("postAccountCreatedAt", topicPosts.topicoResponseDto.createdAt)
                 editor.putInt("postAccountComments", topicPosts.commentSize)
+                editor.putString("postAccountAvatar", topicPosts.autor.fkUsuario.avatar)
+                editor.putBoolean("postLiked", topicPosts.liked)
                 editor.apply()
 
                 val activity = it.context as AppCompatActivity

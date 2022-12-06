@@ -9,7 +9,7 @@ import retrofit2.http.PUT
 
 interface Users {
 
-    @PUT("/users")
+    @PUT("/api/users")
     fun editProfile(@Header("Authorization") token: String, @Body body: UserEdit): Call<UserEdit>
 
 }

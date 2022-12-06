@@ -6,6 +6,6 @@ import retrofit2.http.GET
 import retrofit2.http.Header
 
 interface Balance {
-    @GET("/accounts/balance")
+    @GET("/api/accounts/balance")
     fun getBalance(@Header("Authorization") token: String): Call<BalanceResponse>
 }

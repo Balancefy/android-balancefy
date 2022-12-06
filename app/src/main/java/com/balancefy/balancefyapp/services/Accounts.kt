@@ -9,10 +9,10 @@ import retrofit2.http.Path
 
 interface Accounts {
 
-    @GET("/accounts/{id}")
+    @GET("/api/accounts/{id}")
     fun getAccountById(@Header("Authorization") token: String, @Path("id") id : Int): Call<AccountResponseDto>
 
-    @GET("/accounts/rank")
+    @GET("/api/accounts/rank")
     fun getRank(@Header("Authorization") token: String): Call<RankResponse>
 
 }

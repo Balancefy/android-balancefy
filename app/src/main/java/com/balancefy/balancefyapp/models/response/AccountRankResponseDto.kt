@@ -10,7 +10,5 @@ data class AccountRankResponseDto(
     val progress: Double,
     @SerializedName("objetivo")
     val goal: Int,
-//    var avatar: String = ""
+    var avatar: String = ""
 )
-
-//TODO("add avatar aqui dps verdinha")

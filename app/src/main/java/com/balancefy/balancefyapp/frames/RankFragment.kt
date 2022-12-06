@@ -26,7 +26,6 @@ class RankFragment : Fragment() {
     private lateinit var preferences: SharedPreferences
     private var accountId: Int = 0
     private lateinit var token: String
-    private var accountRank: Pair<AccountRankResponseDto, Int>? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,7 +43,6 @@ class RankFragment : Fragment() {
         accountId = preferences.getInt("accountId", 0)
 
         recyclerViewConfiguration()
-        restAccountUserData()
     }
 
     private fun filterUserRankData(listrank: List<AccountRankResponseDto>): Pair<AccountRankResponseDto, Int> {
@@ -63,15 +61,13 @@ class RankFragment : Fragment() {
                 when (response.code()) {
                     200 -> {
                         configRecycleView(data)
-                        accountRank = filterUserRankData(data)
-                        //TODO("add imagens aqui verdinha!")
-//                        Picasso.get().load(data[0].).into(binding.ivFirstUserImg)
+                        setUserRank(filterUserRankData(data))
+                        Picasso.get().load(data[0].avatar).into(binding.ivFirstUserImg)
                         binding.tvFirstUserName.text = data[0].name
-//                        Picasso.get().load(data[1].).into(binding.ivFirstUserImg)
+                        Picasso.get().load(data[1].avatar).into(binding.ivSecondUserImg)
                         binding.tvSecondUserName.text = data[1].name
-//                        Picasso.get().load(data[2].).into(binding.ivFirstUserImg)
+                        Picasso.get().load(data[2].avatar).into(binding.ivThirdUserImg)
                         binding.tvThirdUser.text = data[2].name
-
                     }
                     else -> {
                         println(response.code())
@@ -107,40 +103,11 @@ class RankFragment : Fragment() {
         ) { mensagem -> showMessageTest(mensagem) }
     }
 
-    private fun restAccountUserData(): AccountResponseDto? {
-        var accountData: AccountResponseDto? = null
-        Rest.getAccountInstance().getAccountById(
-            "Bearer $token",
-            accountId
-        ).enqueue(object : Callback<AccountResponseDto?> {
-            override fun onResponse(
-                call: Call<AccountResponseDto?>,
-                response: Response<AccountResponseDto?>
-            ) {
-                when (response.code()) {
-                    200 -> {
-                        accountData = response.body()!!
-
-                        if (accountData != null && accountRank != null) {
-                            binding.accountUser.setImg(accountData!!.user.avatar)
-                            binding.accountUser.setPosition((accountRank!!.second + 1).toString())
-                            binding.accountUser.setName(resources.getString(R.string.you_position))
-                            binding.accountUser.setProgress(accountRank!!.first.progress.toString())
-                            binding.accountUser.setGoal(accountRank!!.first.goal.toString())
-
-                        }
-                    }
-                    else ->{
-                        println("cai no else: ${response.body()}")
-                    }
-                }
-            }
-
-            override fun onFailure(call: Call<AccountResponseDto?>, t: Throwable) {
-                Toast.makeText(context, t.message, Toast.LENGTH_SHORT).show()
-            }
-        })
-
-        return accountData
+    private fun setUserRank(accountRank: Pair<AccountRankResponseDto, Int>) {
+        preferences.getString("avatar", "")?.let { binding.accountUser.setImg(it) }
+        binding.accountUser.setPosition((accountRank.second + 1).toString())
+        binding.accountUser.setName(resources.getString(R.string.you_position))
+        binding.accountUser.setProgress(accountRank.first.progress.toString())
+        binding.accountUser.setGoal(accountRank.first.goal.toString())
     }
 }

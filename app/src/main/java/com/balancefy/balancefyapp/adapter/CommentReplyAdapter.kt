@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.balancefy.balancefyapp.R
 import com.balancefy.balancefyapp.databinding.CommentReplyCardBinding
 import com.balancefy.balancefyapp.models.response.FeedCommentReplyResponseDto
+import com.squareup.picasso.Picasso
 import java.net.URL
 
 class CommentReplyAdapter(
@@ -29,12 +30,14 @@ class CommentReplyAdapter(
     ) : RecyclerView.ViewHolder(binding.root) {
         @SuppressLint("SetTextI18n")
         fun attach(topicPosts: FeedCommentReplyResponseDto?) {
-            println(topicPosts)
-            setDefaultImage(topicPosts?.autor?.usuario!!.avatar, binding.postsProfileImage)
+            if(topicPosts?.autor?.usuario?.avatar!!.isEmpty()) {
+                binding.postsProfileImage.setBackgroundResource(R.drawable.ic_account)
+            } else {
+                Picasso.get().load(topicPosts.autor.usuario.avatar).into(binding.postsProfileImage)
+            }
+
             binding.tvName.text = topicPosts.autor.usuario.name
             binding.tvTextPost.text = topicPosts.description
-            //isLiked(topicPosts.liked, binding.icPostLikes)
-            //postLiked = topicPosts.liked
         }
     }
 
@@ -44,56 +47,5 @@ class CommentReplyAdapter(
 
     override fun getItemCount(): Int {
         return listTopics.size
-    }
-
-    private fun isLiked(liked: Boolean, card: ImageView) {
-        if (liked) {
-            card.setImageResource(R.drawable.ic_post_likes_enable)
-        } else {
-            card.setImageResource(R.drawable.ic_post_likes)
-        }
-    }
-
-    /*private fun likeAPost(idTopic: Int) {
-        Rest.getForumInstance().addLike("Bearer $token", idTopic)
-            .enqueue(object : Callback<TopicoResponseDto> {
-                override fun onResponse(
-                    call: Call<TopicoResponseDto>,
-                    response: Response<TopicoResponseDto>
-                ) {
-                    println(response.code())
-                    return
-                }
-
-                override fun onFailure(call: Call<TopicoResponseDto>, t: Throwable) {
-                    return
-                }
-            })
-    }*/
-
-    /*private fun unlikePost(idTopic: Int) {
-        Rest.getForumInstance().unlike("Bearer $token", idTopic)
-            .enqueue(object : Callback<TopicoResponseDto> {
-                override fun onResponse(
-                    call: Call<TopicoResponseDto>,
-                    response: Response<TopicoResponseDto>
-                ) {
-                    println(response.code())
-                    return
-                }
-                override fun onFailure(call: Call<TopicoResponseDto>, t: Throwable) {
-                    return
-                }
-            })
-    }*/
-
-    private fun setDefaultImage(avatarImg: String, card: View) {
-        println(avatarImg)
-        if (avatarImg.isEmpty()) {
-            card.setBackgroundResource(R.drawable.ic_account)
-        }
-        else {
-            card.setBackgroundResource(R.drawable.ic_account)
-        }
     }
 }

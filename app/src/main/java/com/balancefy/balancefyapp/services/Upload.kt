@@ -8,7 +8,7 @@ import retrofit2.http.*
 interface Upload {
 
     @Multipart
-    @PUT("/users/upload/avatar")
+    @PUT("/api/users/upload/avatar")
     fun uploadAvatar(@Header("Authorization") token: String, @Part filePart: MultipartBody.Part): Call<UploadResponse>
 
 }

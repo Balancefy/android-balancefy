@@ -10,27 +10,27 @@ import retrofit2.http.*
 
 interface Forum {
 
-    @GET("/forum")
+    @GET("/api/forum")
     fun getListTopic(@Header("Authorization") token: String): Call<ListaFeedTopicoResponse>
 
-    @POST("/forum")
+    @POST("/api/forum")
     fun create(@Header("Authorization") token: String, @Body body: PostRequest): Call<Unit>
 
-    @GET("/forum/accounts/{accountId}")
+    @GET("/api/forum/accounts/{accountId}")
     fun getListTopicById(@Header("Authorization") token: String, @Path("accountId") accountId:Int): Call<ListaFeedTopicoResponse>
 
-    @GET("/forum/mostLike")
+    @GET("/api/forum/mostLike")
     fun getMostLike(@Header("Authorization") token: String): Call<ListaFeedTopicoResponse>
 
-    @PATCH("/forum/like/{topicId}")
+    @PATCH("/api/forum/like/{topicId}")
     fun addLike(@Header("Authorization") token: String, @Path("topicId") topicId:Int): Call<TopicoResponseDto>
 
-    @PATCH("/forum/unlike/{topicId}")
+    @PATCH("/api/forum/unlike/{topicId}")
     fun unlike(@Header("Authorization") token: String, @Path("topicId") topicId:Int): Call<TopicoResponseDto>
 
-    @GET("/comentario/{idTopico}")
+    @GET("/api/comentario/{idTopico}")
     fun getComments(@Header("Authorization") token: String, @Path("idTopico") topicId:Int): Call<ListaFeedCommentReplyResponse>
 
-    @POST("/comentario")
+    @POST("/api/comentario")
     fun createComment(@Header("Authorization") token: String, @Body body: CommentReplyRequest): Call<Unit>
 }

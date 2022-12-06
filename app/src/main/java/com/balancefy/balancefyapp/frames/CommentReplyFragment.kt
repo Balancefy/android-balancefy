@@ -37,6 +37,8 @@ class CommentReplyFragment : Fragment() {
     private lateinit var accountLikes: String
     private lateinit var accountCreatedAt: String
     private lateinit var accountComments: String
+    private lateinit var accountAvatar: String
+    private var postLiked: Boolean = false
 
     private var topicIdPost: Int? = null
 
@@ -53,13 +55,15 @@ class CommentReplyFragment : Fragment() {
         preferences = requireContext().getSharedPreferences("Auth", AppCompatActivity.MODE_PRIVATE)
         token = preferences.getString("token", null)!!
         topicIdPost = preferences.getInt("postId", 3)
-        accountName = preferences.getString("postAccountName", "")!!
         accountId = preferences.getInt("postAccountId", 0)
+        accountName = preferences.getString("postAccountName", "")!!
         accountTitle = preferences.getString("postAccountTitle", "")!!
         accountContent = preferences.getString("postAccountContent", "")!!
-        accountLikes = preferences.getInt("postAccountLikes", 0).toString()!!
+        accountLikes = preferences.getInt("postAccountLikes", 0).toString()
         accountCreatedAt = preferences.getString("postAccountCreatedAt", "")!!
-        accountComments = preferences.getInt("postAccountComments", 0).toString()!!
+        accountComments = preferences.getInt("postAccountComments", 0).toString()
+        accountAvatar = preferences.getString("postAccountAvatar", "")!!
+        postLiked = preferences.getBoolean("postLiked", false)
 
         recyclerViewConfigurationGeral()
 
@@ -69,6 +73,8 @@ class CommentReplyFragment : Fragment() {
         binding.forumCard.setLikes(accountLikes)
         binding.forumCard.setCreated(accountCreatedAt.take(10))
         binding.forumCard.setComments(accountComments)
+        binding.forumCard.setAvatar(accountAvatar)
+        binding.forumCard.isLiked(postLiked)
 
         binding.sendIcon.setOnClickListener {
             createComment()

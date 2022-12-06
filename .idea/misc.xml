@@ -3,8 +3,14 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Bianca/Downloads/balancefy/android-balancefy/app/src/main/res/layout/comment_reply_card.xml" value="0.1762917933130699" />
+        <entry key="..\:/Users/Bianca/Downloads/balancefy/android-balancefy/app/src/main/res/layout/fragment_comment_reply.xml" value="0.21" />
         <entry key="..\:/Users/Bianca/Downloads/balancefy/android-balancefy/app/src/main/res/layout/fragment_home.xml" value="0.25" />
+        <entry key="..\:/Users/Bianca/Downloads/balancefy/android-balancefy/app/src/main/res/layout/fragment_profile.xml" value="0.1685185185185185" />
+        <entry key="..\:/Users/Bianca/Downloads/balancefy/android-balancefy/app/src/main/res/layout/fragment_profile_alternative.xml" value="0.1762917933130699" />
         <entry key="..\:/Users/Bianca/Downloads/balancefy/android-balancefy/app/src/main/res/layout/fragment_rank.xml" value="0.3625" />
+        <entry key="..\:/Users/Bianca/Downloads/balancefy/android-balancefy/app/src/main/res/layout/profile_post_card.xml" value="0.1762917933130699" />
+        <entry key="..\:/Users/Bianca/Downloads/balancefy/android-balancefy/app/src/main/res/layout/res_rank.xml" value="0.25" />
       </map>
     </option>
   </component>

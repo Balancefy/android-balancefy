@@ -36,7 +36,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
                         android:layout_marginEnd="10dp"
-                        android:text="4º"
+                        tools:text="4º"
                         android:textColor="@color/white"
                         android:textFontWeight="900"
                         android:textSize="16sp" />
@@ -51,7 +51,7 @@
                             android:id="@+id/image"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:background="@drawable/bruno" />
+                            tools:background="@drawable/bruno" />
 
                     </androidx.cardview.widget.CardView>
 
@@ -62,7 +62,7 @@
                         android:layout_marginStart="10dp"
                         android:maxWidth="100dp"
                         android:minWidth="140dp"
-                        android:text="Gustavo Almeida"
+                        tools:text="Gustavo Almeida"
                         android:textColor="@color/white"
                         android:textSize="16sp" />
 
@@ -80,7 +80,7 @@
                     android:id="@+id/progress"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="1"
+                    tools:text="1"
                     android:textColor="@color/white"
                     android:textSize="16sp" />
             </LinearLayout>
@@ -95,7 +95,7 @@
                     android:id="@+id/goals_completed"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="13"
+                    tools:text="13"
                     android:textColor="@color/white"
                     android:textSize="16sp" />
             </LinearLayout>

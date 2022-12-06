@@ -8,6 +8,6 @@ import java.util.*
 
 interface Register {
 
-    @POST("/accounts")
+    @POST("/api/accounts")
     fun register(@Body body: RegisterRequest): Call<Unit>
 }

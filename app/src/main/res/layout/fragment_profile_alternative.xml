@@ -11,8 +11,11 @@
 
     <ImageView
         android:id="@+id/background_profile"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:layout_gravity="center"
         android:contentDescription="@string/background_user_image"
         android:src="@drawable/fundo_perfil" />
