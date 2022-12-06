@@ -30,9 +30,7 @@ class CommentReplyAdapter(
     ) : RecyclerView.ViewHolder(binding.root) {
         @SuppressLint("SetTextI18n")
         fun attach(topicPosts: FeedCommentReplyResponseDto?) {
-            if(topicPosts?.autor?.usuario?.avatar!!.isEmpty()) {
-                binding.postsProfileImage.setBackgroundResource(R.drawable.ic_account)
-            } else {
+            if(topicPosts?.autor?.usuario?.avatar!!.isNotEmpty()) {
                 Picasso.get().load(topicPosts.autor.usuario.avatar).into(binding.postsProfileImage)
             }
 

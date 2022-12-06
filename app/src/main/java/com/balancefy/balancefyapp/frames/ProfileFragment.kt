@@ -88,7 +88,7 @@ class ProfileFragment : Fragment() {
         if (avatarImg != "") {
             Picasso.get().load(avatarImg).into(binding.avatarProfile)
         } else {
-            binding.avatarProfile.setImageResource(R.drawable.ic_account)
+            binding.avatarProfile.setImageResource(R.drawable.ic_account_white)
         }
 
         if (avatarBackgroundIMG != "") {
@@ -177,9 +177,11 @@ class ProfileFragment : Fragment() {
                 override fun onResponse(call: Call<UploadResponse>, response: Response<UploadResponse>) {
                     when (response.code()) {
                         200 -> {
-                            println(response.body())
                             Toast.makeText(context, "Upload bem sucedido", Toast.LENGTH_SHORT)
                                 .show()
+                            val editor = preferences.edit()
+                            editor.putString("avatar", response.body()?.url)
+                            editor.apply()
                         }
                         else -> {
                             println(response.code())
@@ -282,7 +284,6 @@ class ProfileFragment : Fragment() {
 
             override fun onFailure(call: Call<ListaFeedTopicoResponse>, t: Throwable) {
                 Toast.makeText(context, t.message, Toast.LENGTH_SHORT).show()
-                binding.emptyListOfTopics.text = getString(R.string.no_posts)
             }
         })
     }
@@ -293,11 +294,11 @@ class ProfileFragment : Fragment() {
 
     private fun configRecycleView(posts: List<FeedTopicoResponseDto>?) {
         if (posts!!.isEmpty()) {
-            binding.emptyListOfTopics.visibility = View.VISIBLE
+            binding.tvError.visibility = View.VISIBLE
 
             binding.recyclerContainer.visibility = View.GONE
         } else {
-            binding.emptyListOfTopics.visibility = View.GONE
+            binding.tvError.visibility = View.GONE
 
             binding.recyclerContainer.visibility = View.VISIBLE
 

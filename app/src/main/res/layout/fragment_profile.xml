@@ -37,9 +37,9 @@
                 android:layout_width="150dp"
                 android:layout_height="150dp"
                 android:layout_gravity="center"
-                android:background="@drawable/bg_profile_image"
+                android:background="@drawable/bg_profile_black"
                 android:contentDescription="@string/background_avatar_image"
-                android:src="@drawable/ic_account" />
+                android:src="@drawable/ic_account_white" />
 
         </androidx.cardview.widget.CardView>
 
@@ -100,16 +100,6 @@
             android:layout_marginEnd="20sp"
             android:layout_marginBottom="8dp"
             android:background="@color/gray_line" />
-
-        <TextView
-            android:id="@+id/emptyListOfTopics"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="24dp"
-            android:text="@string/no_posts"
-            android:textColor="@color/white"
-            android:visibility="gone" />
     </LinearLayout>
 
     <LinearLayout
@@ -210,8 +200,9 @@
         android:id="@+id/tv_error"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:text="@string/no_goal"
+        android:layout_weight="1"
+        android:text="@string/no_posts"
+        android:gravity="center"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:visibility="gone" />

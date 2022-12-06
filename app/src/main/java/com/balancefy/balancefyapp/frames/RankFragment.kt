@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -13,7 +14,6 @@ import com.balancefy.balancefyapp.R
 import com.balancefy.balancefyapp.adapter.RankAccountAdapter
 import com.balancefy.balancefyapp.databinding.FragmentRankBinding
 import com.balancefy.balancefyapp.models.response.AccountRankResponseDto
-import com.balancefy.balancefyapp.models.response.AccountResponseDto
 import com.balancefy.balancefyapp.models.response.RankResponse
 import com.balancefy.balancefyapp.rest.Rest
 import com.squareup.picasso.Picasso
@@ -62,12 +62,7 @@ class RankFragment : Fragment() {
                     200 -> {
                         configRecycleView(data)
                         setUserRank(filterUserRankData(data))
-                        Picasso.get().load(data[0].avatar).into(binding.ivFirstUserImg)
-                        binding.tvFirstUserName.text = data[0].name
-                        Picasso.get().load(data[1].avatar).into(binding.ivSecondUserImg)
-                        binding.tvSecondUserName.text = data[1].name
-                        Picasso.get().load(data[2].avatar).into(binding.ivThirdUserImg)
-                        binding.tvThirdUser.text = data[2].name
+                        setTop3(data)
                     }
                     else -> {
                         println(response.code())
@@ -103,8 +98,23 @@ class RankFragment : Fragment() {
         ) { mensagem -> showMessageTest(mensagem) }
     }
 
+    private fun setTop3(data: List<AccountRankResponseDto>) {
+        changePhoto(data[0].avatar, binding.ivFirstUserImg)
+        binding.tvFirstUserName.text = data[0].name
+        changePhoto(data[1].avatar, binding.ivSecondUserImg)
+        binding.tvSecondUserName.text = data[1].name
+        changePhoto(data[2].avatar, binding.ivThirdUserImg)
+        binding.tvThirdUser.text = data[2].name
+    }
+
+    private fun changePhoto(avatar: String, view: ImageView) {
+        if(avatar.isNotEmpty()) {
+            Picasso.get().load(avatar).into(view)
+        }
+    }
+
     private fun setUserRank(accountRank: Pair<AccountRankResponseDto, Int>) {
-        preferences.getString("avatar", "")?.let { binding.accountUser.setImg(it) }
+        binding.accountUser.setImg(accountRank.first.avatar)
         binding.accountUser.setPosition((accountRank.second + 1).toString())
         binding.accountUser.setName(resources.getString(R.string.you_position))
         binding.accountUser.setProgress(accountRank.first.progress.toString())

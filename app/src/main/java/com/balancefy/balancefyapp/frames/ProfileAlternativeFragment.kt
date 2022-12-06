@@ -52,7 +52,7 @@ class ProfileAlternativeFragment : Fragment() {
         if (altAccountAvatar != "") {
             Picasso.get().load(altAccountAvatar).into(binding.avatarProfile)
         }else{
-            binding.avatarProfile.setImageResource(R.drawable.ic_account)
+            binding.avatarProfile.setImageResource(R.drawable.ic_account_white)
         }
 
         if (altAccountBanner != "") {

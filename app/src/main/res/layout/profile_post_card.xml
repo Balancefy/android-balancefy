@@ -30,11 +30,12 @@
                 >
                 <ImageView
                     android:id="@+id/ic_posts_profile_image"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_gravity="center"
+                    android:background="@drawable/bg_profile_image"
                     android:contentDescription="@string/background_avatar_image_post"
-                    tools:src="@drawable/lux_agiota" />
+                    android:src="@drawable/ic_account" />
             </androidx.cardview.widget.CardView>
 
             <TextView

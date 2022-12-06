@@ -38,7 +38,9 @@ class RankAccountAdapter(
             binding.name.text = actualRank.name
             binding.progress.text = actualRank.progress.toString()
             binding.goalsCompleted.text = actualRank.goal.toString()
-            Picasso.get().load(actualRank.avatar).into(binding.image)
+            if(actualRank.avatar.isNotEmpty()) {
+                Picasso.get().load(actualRank.avatar).into(binding.image)
+            }
 
             binding.name.setOnClickListener {
                 val editor = preferences.edit()

@@ -45,7 +45,9 @@ class ForumCard(context: Context, attrs: AttributeSet) : LinearLayout(context, a
     }
 
     fun setAvatar(avatar: String) {
-        Picasso.get().load(avatar).into(binding.icPostsProfileImage)
+        if(avatar.isNotEmpty()) {
+            Picasso.get().load(avatar).into(binding.icPostsProfileImage)
+        }
     }
 
     fun isLiked(liked: Boolean) {

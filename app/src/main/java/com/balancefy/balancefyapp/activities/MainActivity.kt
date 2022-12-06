@@ -162,7 +162,7 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         } else {
-            binding.topAppBar.menu.getItem(0).icon = getDrawable(R.drawable.ic_account)
+            binding.topAppBar.menu.getItem(0).icon = getDrawable(R.drawable.ic_account_white)
         }
     }
 

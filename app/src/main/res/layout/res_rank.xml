@@ -51,7 +51,9 @@
                             android:id="@+id/image"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            tools:background="@drawable/bruno" />
+                            android:background="@drawable/bg_profile_image"
+                            android:contentDescription="@string/background_avatar_image_post"
+                            android:src="@drawable/ic_account" />
 
                     </androidx.cardview.widget.CardView>
 
