@@ -70,30 +70,6 @@
                         android:textSize="14sp"
                         android:layout_weight="2"
                         />
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:orientation="horizontal"
-                        android:layout_margin="10dp"
-                        android:layout_weight="1"
-                        >
-
-                        <ImageView
-                            android:id="@+id/ic_post_likes"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:contentDescription="@string/icon_post_likes"
-                            android:src="@drawable/ic_post_likes" />
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:text="@string/like_action"
-                            android:paddingStart="10dp"
-                            android:textColor="@color/white"/>
-                    </LinearLayout>
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
         </LinearLayout>

@@ -9,11 +9,10 @@ import android.widget.LinearLayout
 import com.balancefy.balancefyapp.R
 import com.balancefy.balancefyapp.databinding.ProfilePostCardBinding
 import java.net.URL
+import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
 class ForumCard(context: Context, attrs: AttributeSet) : LinearLayout(context, attrs) {
-
-    val formatter = DateTimeFormatter.ofPattern("dd 'de' MMMM',' yyyy")
 
     private val binding: ProfilePostCardBinding = ProfilePostCardBinding.inflate(
         LayoutInflater.from(context), this, true
@@ -36,7 +35,7 @@ class ForumCard(context: Context, attrs: AttributeSet) : LinearLayout(context, a
     }
 
     fun setCreated(date: String) {
-        binding.tvPostTimer.text = date.format(formatter)
+        binding.tvPostTimer.text = date
     }
 
     fun setComments(comment: String) {

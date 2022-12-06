@@ -23,6 +23,7 @@ import com.balancefy.balancefyapp.rest.Rest
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
 class CommentReplyFragment : Fragment() {
@@ -66,7 +67,7 @@ class CommentReplyFragment : Fragment() {
         binding.forumCard.setName(accountName)
         binding.forumCard.setDescription(accountContent)
         binding.forumCard.setLikes(accountLikes)
-        binding.forumCard.setCreated(accountCreatedAt)
+        binding.forumCard.setCreated(accountCreatedAt.take(10))
         binding.forumCard.setComments(accountComments)
 
         binding.sendIcon.setOnClickListener {
