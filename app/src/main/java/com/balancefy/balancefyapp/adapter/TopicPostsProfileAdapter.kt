@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.balancefy.balancefyapp.R
 import com.balancefy.balancefyapp.databinding.ProfilePostCardBinding
+import com.balancefy.balancefyapp.frames.CommentReplyFragment
 import com.balancefy.balancefyapp.frames.ProfileAlternativeFragment
 import com.balancefy.balancefyapp.models.response.FeedTopicoResponseDto
 import com.balancefy.balancefyapp.models.response.TopicoResponseDto
@@ -99,6 +100,27 @@ class TopicPostsProfileAdapter(
                     unlikePost(topicPosts.topicoResponseDto.id)
                     binding.tvPostLikes.text = (topicPosts.topicoResponseDto.likes).toString()
                 }
+            }
+
+            binding.icPostComments.setOnClickListener {
+                val editor = preferences.edit()
+                editor.putInt("postId", topicPosts.topicoResponseDto.id)
+                editor.putString("postAccountName", topicPosts.autor.fkUsuario.name)
+                editor.putInt("postAccountId", topicPosts.autor.fkUsuario.id)
+                editor.putString("postAccountTitle", topicPosts.topicoResponseDto.titulo)
+                editor.putString("postAccountContent", topicPosts.topicoResponseDto.descricao)
+                editor.putInt("postAccountLikes", topicPosts.topicoResponseDto.likes)
+                editor.putString("postAccountCreatedAt", topicPosts.topicoResponseDto.createdAt)
+                editor.putInt("postAccountComments", topicPosts.commentSize)
+                editor.apply()
+
+                val activity = it.context as AppCompatActivity
+
+                activity.supportFragmentManager.beginTransaction()
+                    .replace(
+                        R.id.fragmentContainerView,
+                        CommentReplyFragment()
+                    ).commitNow()
             }
         }
     }
